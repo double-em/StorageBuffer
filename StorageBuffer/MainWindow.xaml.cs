@@ -25,5 +25,15 @@ namespace StorageBuffer
             InitializeComponent();
             Title = "Storage Buffer";
         }
+
+        private void tbInactive_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var box = (TextBox)sender;
+            if (box.Foreground != Brushes.Black)
+            {
+                box.Clear();
+                box.Foreground = Brushes.Black;
+            }
+        }
     }
 }

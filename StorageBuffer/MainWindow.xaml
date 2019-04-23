@@ -44,18 +44,71 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
+
             <TabItem Header="Søg" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
-                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+                <!-- Standard to fill whole white space Margin="-4,-2,0,0" -->
+                <Grid Background="#FFF" Margin="26,28,30,30">
+                    <ComboBox BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="734,37,0,0" VerticalAlignment="Top" Width="198" Height="50">
+                        <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
+                        <ComboBoxItem>Vare</ComboBoxItem>
+                        <ComboBoxItem>Ordre</ComboBoxItem>
+                        <ComboBoxItem>Kunder</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBox Name="tbSearchBar" Text="navn, ordrenummer, varenummer..." Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="735" PreviewMouseDown="tbInactive_OnMouseDown"/>
+                    <Label Content="Søg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                    <Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="932"/>
+
+                    <Grid Height="263" Margin="0,138,0,527">
+                        <Label Content="Vare" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Width="194"/>
+                        <Button BorderThickness="0" Foreground="White" Background="#A8A1A2" Content="Se alle" HorizontalAlignment="Left" Margin="817,0,0,0" VerticalAlignment="Top" Width="75" Height="38"/>
+                        <Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="1" Margin="30,37,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="862"/>
+                        <ListBox HorizontalAlignment="Left" Height="150" Margin="30,57,0,0" VerticalAlignment="Top" Width="862" >
+                            <ListBoxItem Height="50">Test 1</ListBoxItem>
+                            <ListBoxItem Height="50">Test 2</ListBoxItem>
+                            <ListBoxItem Height="50">Test 3</ListBoxItem>
+                            <ListBoxItem Height="50">Test 4</ListBoxItem>
+                        </ListBox>
+                    </Grid>
+
+                    <Grid Height="263" Margin="0,401,0,264">
+                        <Label Content="Ordre" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Width="194"/>
+                        <Button BorderThickness="0" Foreground="White" Background="#A8A1A2" Content="Se alle" HorizontalAlignment="Left" Margin="817,0,0,0" VerticalAlignment="Top" Width="75" Height="38"/>
+                        <Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="1" Margin="30,37,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="862"/>
+                        <ListBox HorizontalAlignment="Left" Height="150" Margin="30,57,0,0" VerticalAlignment="Top" Width="862" >
+                            <ListBoxItem Height="50">Test 1</ListBoxItem>
+                            <ListBoxItem Height="50">Test 2</ListBoxItem>
+                            <ListBoxItem Height="50">Test 3</ListBoxItem>
+                            <ListBoxItem Height="50">Test 4</ListBoxItem>
+                        </ListBox>
+                    </Grid>
+
+                    <Grid Height="263" Margin="0,664,0,1">
+                        <Label Content="Kunder" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Width="194"/>
+                        <Button BorderThickness="0" Foreground="White" Background="#A8A1A2" Content="Se alle" HorizontalAlignment="Left" Margin="817,0,0,0" VerticalAlignment="Top" Width="75" Height="38"/>
+                        <Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="1" Margin="30,37,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="862"/>
+                        <ListBox HorizontalAlignment="Left" Height="150" Margin="30,57,0,0" VerticalAlignment="Top" Width="862" >
+                            <ListBoxItem Height="50">Test 1</ListBoxItem>
+                            <ListBoxItem Height="50">Test 2</ListBoxItem>
+                            <ListBoxItem Height="50">Test 3</ListBoxItem>
+                            <ListBoxItem Height="50">Test 4</ListBoxItem>
+                        </ListBox>
+                    </Grid>
+                </Grid>
             </TabItem>
+
             <TabItem Header="Indskriv Vare" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
                 <Grid Background="#FFF" Margin="-4,-2,0,0"/>
             </TabItem>
+
             <TabItem Header="Opret Ordre" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
                 <Grid Background="#FFF" Margin="-4,-2,0,0"/>
             </TabItem>
+
             <TabItem Header="Opret Kunde" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
                 <Grid Background="#FFF" Margin="-4,-2,0,0"/>
             </TabItem>
+
         </TabControl>
     </Grid>
 </Window>
