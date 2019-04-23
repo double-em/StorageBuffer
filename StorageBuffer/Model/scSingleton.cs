@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace StorageBuffer
 {
-    public sealed class Singleton
+    public sealed class scSingleton
     {
-        private static Singleton instance = null;
+        private static scSingleton instance = null;
         private static readonly object padlock = new object();
 
-        Singleton()
+        scSingleton()
         {
         }
 
-        public static Singleton Instance {
+        public static scSingleton Instance {
             get
             {
                 lock (padlock)
                 {
                     if (instance == null)
                     {
-                        instance = new Singleton();
+                        instance = new scSingleton();
                     }
                     return instance;
                 }
