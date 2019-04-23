@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageBuffer", "StorageBuffer\StorageBuffer.csproj", "{83DAB026-1230-42B7-8E43-456E1877E982}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageBufferTest", "StorageBufferTest\StorageBufferTest.csproj", "{B1DBE25D-DDAF-4EC6-ADF3-740EC211170C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{83DAB026-1230-42B7-8E43-456E1877E982}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83DAB026-1230-42B7-8E43-456E1877E982}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83DAB026-1230-42B7-8E43-456E1877E982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DBE25D-DDAF-4EC6-ADF3-740EC211170C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DBE25D-DDAF-4EC6-ADF3-740EC211170C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DBE25D-DDAF-4EC6-ADF3-740EC211170C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DBE25D-DDAF-4EC6-ADF3-740EC211170C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
