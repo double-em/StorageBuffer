@@ -23,6 +23,7 @@ namespace StorageBuffer
         public MainWindow()
         {
             InitializeComponent();
+            Title = "Storage Buffer";
         }
     }
 }

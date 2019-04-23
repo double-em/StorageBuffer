@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageBuffer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="989" Width="1280" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="False">
+                    <Setter Property="Background" Value="#2F2F2F"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280"/>
+        <Image Width="221" Margin="30,10,1023,819" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
+
+        <TabControl BorderThickness="0" Height="960" Width="1274" TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      ContentSource="Header"
+                                                      Margin="30,0,0,0"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="#2F2F2F" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="#A8A1A2" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Søg" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
+                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+            </TabItem>
+            <TabItem Header="Indskriv Vare" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
+                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+            </TabItem>
+            <TabItem Header="Opret Ordre" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
+                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+            </TabItem>
+            <TabItem Header="Opret Kunde" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
+                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
