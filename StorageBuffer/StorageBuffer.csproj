@@ -67,6 +67,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Application\Controller.cs" />
+    <Compile Include="Application\CustomerRepo.cs" />
+    <Compile Include="Application\MaterialRepo.cs" />
+    <Compile Include="Application\OrderRepo.cs" />
+    <Compile Include="Domain\Customer.cs" />
+    <Compile Include="Domain\Material.cs" />
+    <Compile Include="Domain\Order.cs" />
     <Compile Include="Model\scSingleton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -100,8 +107,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Domain\" />
     <Folder Include="Persistence\" />
     <Folder Include="Resources\" />
   </ItemGroup>
