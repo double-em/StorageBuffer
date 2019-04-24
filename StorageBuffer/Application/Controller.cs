@@ -12,5 +12,12 @@ namespace StorageBuffer.Application
         private CustomerRepo customerRepo;
         private MaterialRepo materialRepo;
         private OrderRepo orderRepo;
+
+        public Controller()
+        {
+            customerRepo = new CustomerRepo();
+            materialRepo = new MaterialRepo();
+            orderRepo = new OrderRepo();
+        }
     }
 }
