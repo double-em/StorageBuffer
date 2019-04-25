@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace StorageBufferTest
 {
     [TestClass]
-    public class TimeregistreringTest
+    public class FindItems
     {
         [TestMethod]
         public void TestMethod1()
