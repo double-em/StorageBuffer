@@ -72,6 +72,7 @@
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
     <Compile Include="Domain\Customer.cs" />
+    <Compile Include="Domain\IItem.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Model\scSingleton.cs" />

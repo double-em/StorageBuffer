@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace StorageBuffer.Domain
 {
-    public class Material
+    public class Material : IItem
     {
         public int MaterialId { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
-        public Material(int materialId, string name, string comment, string quantity)
+        public Material(int materialId, string name, string comment, int quantity)
         {
             MaterialId = materialId;
             Name = name;

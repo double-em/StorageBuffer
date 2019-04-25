@@ -16,7 +16,7 @@ namespace StorageBuffer.Domain
         Paid,
         Canceled
     }
-    public class Order
+    public class Order : IItem
     {
         public int OrderId { get; set; }
         public Customer CustomerObj { get; set; }
