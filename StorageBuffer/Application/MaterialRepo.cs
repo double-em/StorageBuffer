@@ -9,7 +9,7 @@ namespace StorageBuffer.Model
 {
     public class MaterialRepo
     {
-        private List<Material> materials;
+        public List<Material> materials;
 
         public MaterialRepo()
         {

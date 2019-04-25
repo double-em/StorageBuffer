@@ -7,11 +7,11 @@ using StorageBuffer.Model;
 
 namespace StorageBuffer.Application
 {
-    class Controller
+    public class Controller
     {
-        private CustomerRepo customerRepo;
-        private MaterialRepo materialRepo;
-        private OrderRepo orderRepo;
+        public CustomerRepo customerRepo;
+        public MaterialRepo materialRepo;
+        public OrderRepo orderRepo;
 
         public Controller()
         {

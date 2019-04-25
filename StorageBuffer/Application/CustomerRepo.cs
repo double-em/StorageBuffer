@@ -9,7 +9,7 @@ namespace StorageBuffer.Model
 {
     public class CustomerRepo
     {
-        private List<Customer> customers;
+        public List<Customer> customers;
 
         public CustomerRepo()
         {
