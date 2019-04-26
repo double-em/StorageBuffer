@@ -24,6 +24,7 @@ namespace StorageBuffer.Domain
         public string Name { get; set; }
         public string Date { get; set; }
         public string Deadline { get; set; }
+        public List<Orderline> Orderlines { get; set; }
 
         public Order(int orderId, Customer customerObj, Status orderStatus, string name, string date, string deadline)
         {
@@ -33,6 +34,7 @@ namespace StorageBuffer.Domain
             Name = name;
             Date = date;
             Deadline = deadline;
+            Orderlines = new List<Orderline>();
         }
     }
 }

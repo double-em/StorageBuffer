@@ -43,8 +43,9 @@ namespace StorageBufferTest
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void RegisterUsedMaterialStandard()
         {
+            control.RegisterUsedMaterial(21, )
         }
     }
 }

@@ -75,7 +75,7 @@
     <Compile Include="Domain\IItem.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\Used.cs" />
+    <Compile Include="Domain\Orderline.cs" />
     <Compile Include="Model\scSingleton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
