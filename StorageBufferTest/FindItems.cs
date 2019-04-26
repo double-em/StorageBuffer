@@ -136,5 +136,45 @@ namespace StorageBufferTest
 
             Assert.AreEqual(orders, result);
         }
+
+        [TestMethod]
+        public void GetOrdersByCustomerName()
+        {
+            List<IItem> result = control.FindItems("Orders", "Brian Mariannesen");
+
+            Assert.AreEqual(orders, result);
+        }
+
+        [TestMethod]
+        public void GetOrdersByCustomerPartialName()
+        {
+            List<IItem> result = control.FindItems("Customers", "rian Mar");
+
+            Assert.AreEqual(orders, result);
+        }
+
+        [TestMethod]
+        public void GetOrdersByCustomerNameLowercaseAndUppercaseMixed()
+        {
+            List<IItem> result = control.FindItems("Customers", "bRiAn mArianNesen");
+
+            Assert.AreEqual(orders, result);
+        }
+
+        [TestMethod]
+        public void GetOrdersByCustomerPhone()
+        {
+            List<IItem> result = control.FindItems("Orders", "+4512345678");
+
+            Assert.AreEqual(orders, result);
+        }
+
+        [TestMethod]
+        public void GetOrdersByCustomerPartialPhoneNumber()
+        {
+            List<IItem> result = control.FindItems("Customers", "3456");
+
+            Assert.AreEqual(orders, result);
+        }
     }
 }
