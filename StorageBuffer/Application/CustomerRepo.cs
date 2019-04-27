@@ -15,5 +15,10 @@ namespace StorageBuffer.Model
         {
             customers = new List<Customer>();
         }
+
+        public List<IItem> GetCustomers(string searchQuery)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

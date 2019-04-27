@@ -23,7 +23,28 @@ namespace StorageBuffer.Application
 
         public List<IItem> FindItems(string searchCriteria, string searchQuery = "")
         {
-            throw new NotImplementedException();
+            List<IItem> result = new List<IItem>();
+            switch (searchCriteria)
+            {
+                case "Customers":
+                    result.AddRange(customerRepo.GetCustomers(searchQuery));
+                    break;
+
+                case "Materials":
+                    result.AddRange(materialRepo.GetMaterials(searchQuery));
+                    break;
+
+                case "Orders":
+                    result.AddRange(orderRepo.GetOrders(searchQuery));
+                    break;
+
+                case "All":
+                    result.AddRange(customerRepo.GetCustomers(searchQuery));
+                    result.AddRange(materialRepo.GetMaterials(searchQuery));
+                    result.AddRange(orderRepo.GetOrders(searchQuery));
+                    break;
+            }
+            return result;
         }
 
         public void RegisterUsedMaterial(int orderId, Material material, int amount)

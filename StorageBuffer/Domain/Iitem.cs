@@ -8,5 +8,9 @@ namespace StorageBuffer.Domain
 {
     public interface IItem
     {
+        int Id { get; set; }
+        string Name { get; set; }
+        string Data { get; }
+
     }
 }

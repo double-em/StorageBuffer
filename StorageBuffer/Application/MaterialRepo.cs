@@ -15,5 +15,10 @@ namespace StorageBuffer.Model
         {
             materials = new List<Material>();
         }
+
+        public List<IItem> GetMaterials(string searchQuery)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace StorageBuffer.Model
         {
             throw new NotImplementedException();
         }
+
+        public List<IItem> GetOrders(string searchQuery)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace StorageBuffer.Domain
     }
     public class Order : IItem
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public Customer CustomerObj { get; set; }
         public Status OrderStatus { get; set; }
         public string Name { get; set; }
@@ -26,9 +26,14 @@ namespace StorageBuffer.Domain
         public string Deadline { get; set; }
         public List<Orderline> Orderlines { get; set; }
 
-        public Order(int orderId, Customer customerObj, Status orderStatus, string name, string date, string deadline)
+        public string Data
         {
-            OrderId = orderId;
+            get { return Deadline; }
+        }
+
+        public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline)
+        {
+            Id = id;
             CustomerObj = customerObj;
             OrderStatus = orderStatus;
             Name = name;

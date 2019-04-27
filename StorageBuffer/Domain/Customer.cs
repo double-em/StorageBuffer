@@ -8,7 +8,7 @@ namespace StorageBuffer.Domain
 {
     public class Customer : IItem
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int Zip { get; set; }
@@ -16,9 +16,14 @@ namespace StorageBuffer.Domain
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        public Customer(int customerId, string name, string address, int zip, string city, string phone, string email)
+        public string Data
         {
-            CustomerId = customerId;
+            get { return $"{Address}, {City} {Zip}"; }
+        }
+
+        public Customer(int id, string name, string address, int zip, string city, string phone, string email)
+        {
+            Id = id;
             Name = name;
             Address = address;
             Zip = zip;

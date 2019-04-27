@@ -176,5 +176,13 @@ namespace StorageBufferTest
 
             Assert.AreEqual(orders, result);
         }
+
+        [TestMethod]
+        public void GetAllItems()
+        {
+            List<IItem> result = control.FindItems("All");
+
+            Assert.AreEqual(6, result.Count);
+        }
     }
 }
