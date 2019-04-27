@@ -24,7 +24,7 @@ namespace StorageBuffer.Domain
         public string Name { get; set; }
         public string Date { get; set; }
         public string Deadline { get; set; }
-        public List<Orderline> Orderlines { get; set; }
+        public List<Orderline> orderlines;
 
         public string Data
         {
@@ -39,7 +39,7 @@ namespace StorageBuffer.Domain
             Name = name;
             Date = date;
             Deadline = deadline;
-            Orderlines = new List<Orderline>();
+            orderlines = new List<Orderline>();
         }
 
         public void RegisterUsedMaterial(Material material, int amount)
