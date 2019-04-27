@@ -6,7 +6,7 @@ using StorageBuffer.Domain;
 namespace StorageBufferTest
 {
     [TestClass]
-    public class ChangeStatus
+    public class ChangeStatusTest
     {
         private Controller control;
 

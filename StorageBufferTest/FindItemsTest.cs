@@ -8,7 +8,7 @@ using StorageBuffer.Model;
 namespace StorageBufferTest
 {
     [TestClass]
-    public class FindItems
+    public class FindItemsTest
     {
         private Controller control;
         private List<Customer> customers;
