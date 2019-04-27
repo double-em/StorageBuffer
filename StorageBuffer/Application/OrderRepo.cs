@@ -15,5 +15,10 @@ namespace StorageBuffer.Model
         {
             orders = new List<Order>();
         }
+
+        public void RegisterUsedMaterial(int orderId, Material material, int amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

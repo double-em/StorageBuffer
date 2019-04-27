@@ -25,5 +25,10 @@ namespace StorageBuffer.Application
         {
             throw new NotImplementedException();
         }
+
+        public void RegisterUsedMaterial(int orderId, Material material, int amount)
+        {
+            orderRepo.RegisterUsedMaterial(orderId, material, amount);
+        }
     }
 }
