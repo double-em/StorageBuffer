@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Application\Controller.cs" />
     <Compile Include="Application\CustomerRepo.cs" />
+    <Compile Include="Application\DatabaseRepo.cs" />
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
     <Compile Include="Domain\Customer.cs" />
