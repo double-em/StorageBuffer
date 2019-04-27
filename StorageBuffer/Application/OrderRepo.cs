@@ -25,5 +25,10 @@ namespace StorageBuffer.Model
         {
             throw new NotImplementedException();
         }
+
+        public void ChangeStatusOfOrder(int orderId, Status status)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="FindItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUsedMaterial.cs" />
+    <Compile Include="ChangeStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
