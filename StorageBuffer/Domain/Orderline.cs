@@ -12,7 +12,7 @@ namespace StorageBuffer.Domain
         public int Quantity { get; set; }
         public string Date { get; set; }
 
-        public Orderline(Material materialObj, Order orderObj, int quantity, string date)
+        public Orderline(Material materialObj, int quantity, string date)
         {
             MaterialObj = materialObj;
             Quantity = quantity;

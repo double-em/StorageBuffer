@@ -16,12 +16,12 @@ namespace StorageBuffer.Model
             orders = new List<Order>();
         }
 
-        public void RegisterUsedMaterial(int orderId, Material material, int amount)
+        public List<IItem> GetOrders(string searchQuery)
         {
             throw new NotImplementedException();
         }
 
-        public List<IItem> GetOrders(string searchQuery)
+        public void RegisterUsedMaterial(int orderId, Material material, int amount)
         {
             throw new NotImplementedException();
         }

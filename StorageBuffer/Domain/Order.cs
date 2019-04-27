@@ -41,5 +41,10 @@ namespace StorageBuffer.Domain
             Deadline = deadline;
             Orderlines = new List<Orderline>();
         }
+
+        public void RegisterUsedMaterial(Material material, int amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
