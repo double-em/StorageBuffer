@@ -57,7 +57,16 @@
 
                     <TextBox Name="tbSearchBar" Text="navn, ordrenummer, varenummer..." Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="735" PreviewMouseDown="tbInactive_OnMouseDown"/>
                     <Label Content="Søg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                    <Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="932"/>
+                    <ListView HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" VerticalAlignment="Top" Width="932">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Data}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <!--<Rectangle Fill="#FFF" HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" Stroke="#A8A1A2" VerticalAlignment="Top" Width="932"/>
 
                     <Grid Height="263" Margin="0,138,0,527">
                         <Label Content="Vare" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Width="194"/>
@@ -93,7 +102,7 @@
                             <ListBoxItem Height="50">Test 3</ListBoxItem>
                             <ListBoxItem Height="50">Test 4</ListBoxItem>
                         </ListBox>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
             </TabItem>
 
