@@ -18,7 +18,13 @@ namespace StorageBuffer.Model
 
         public List<IItem> GetCustomers(string searchQuery)
         {
-            throw new NotImplementedException();
+            if (searchQuery != "Customers"){
+                List<IItem> result = customers.Where(customer => customer.Name == searchQuery).ToList();
+                
+
+            }
+            // If searchQuery is Customers, return all customers
+            return customers;
         }
     }
 }
