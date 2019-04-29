@@ -49,5 +49,13 @@ namespace StorageBuffer
                 box.Foreground = Brushes.Black;
             }
         }
+
+        private void TbSearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (IItem item in control.FindItems(cbChoice.SelectedItem.ToString(), tbSearchBar.Text))
+            {
+                lvResult.Items.Add(item);
+            }
+        }
     }
 }
