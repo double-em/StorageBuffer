@@ -39,8 +39,8 @@ namespace StorageBufferTest
             materials.Add(new Material(11, "Bordplade i rustfri", "Ingen", 2));
             materials.Add(new Material(12, "6mm. Plade", "Vejer 300kg", 1));
 
-            orders.Add(new Order(21, customer1, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"));
-            orders.Add(new Order(22, customer1, Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019"));
+            orders.Add(new Order(21, customer1.Id, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"));
+            orders.Add(new Order(22, customer1.Id, Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019"));
         }
 
 

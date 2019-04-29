@@ -57,9 +57,10 @@
 
                     <TextBox Name="tbSearchBar" Text="navn, ordrenummer, varenummer..." Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="735" PreviewMouseDown="tbInactive_OnMouseDown"/>
                     <Label Content="Søg" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                    <ListView HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" VerticalAlignment="Top" Width="932">
+                    <ListView Name="lvResult" HorizontalAlignment="Left" Height="790" Margin="0,108,0,0" VerticalAlignment="Top" Width="932">
                         <ListView.View>
                             <GridView>
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" />
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
                                 <GridViewColumn Header="Data" DisplayMemberBinding="{Binding Data}" />

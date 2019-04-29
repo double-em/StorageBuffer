@@ -12,6 +12,7 @@ namespace StorageBuffer.Domain
         public string Name { get; set; }
         public string Comment { get; set; }
         public int Quantity { get; set; }
+        public string Type { get; } = "Material";
 
         public string Data
         {

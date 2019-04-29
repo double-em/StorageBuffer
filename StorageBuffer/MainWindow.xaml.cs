@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using StorageBuffer.Application;
+using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
@@ -20,10 +22,22 @@ namespace StorageBuffer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Controller control;
         public MainWindow()
         {
             InitializeComponent();
             Title = "Storage Buffer";
+
+            control = new Controller();
+            GetAllItems();
+        }
+
+        private void GetAllItems()
+        {
+            foreach (IItem item in control.FindItems("All"))
+            {
+                lvResult.Items.Add(item);
+            }
         }
 
         private void tbInactive_OnMouseDown(object sender, MouseButtonEventArgs e)
