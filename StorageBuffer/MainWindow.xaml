@@ -48,7 +48,7 @@
             <TabItem Header="Søg" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
                 <!-- Standard to fill whole white space Margin="-4,-2,0,0" -->
                 <Grid Background="#FFF" Margin="26,28,30,30">
-                    <ComboBox Name="cbChoice" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="734,37,0,0" VerticalAlignment="Top" Width="198" Height="50">
+                    <ComboBox Name="cbChoice" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="734,37,0,0" VerticalAlignment="Top" Width="198" Height="50" SelectionChanged="CbChoice_SelectionChanged">
                         <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
                         <ComboBoxItem>Vare</ComboBoxItem>
                         <ComboBoxItem>Ordre</ComboBoxItem>

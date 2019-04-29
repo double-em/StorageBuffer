@@ -15,21 +15,24 @@ namespace StorageBuffer.Application
         public MaterialRepo materialRepo;
         public OrderRepo orderRepo;
 
-        public Controller()
+        public Controller( bool connectToDatabase)
         {
             databaseRepo = new DatabaseRepo();
-            GetAllData();
+            GetAllData(connectToDatabase);
         }
 
-        private void GetAllData()
+        private void GetAllData(bool connectToDatabase)
         {
             customerRepo = new CustomerRepo();
             materialRepo = new MaterialRepo();
             orderRepo = new OrderRepo();
 
-            customerRepo.customers = databaseRepo.GetAllCustomers();
-            materialRepo.materials = databaseRepo.GetAllMaterials();
-            orderRepo.orders = databaseRepo.GetAllOrders();
+            if (connectToDatabase)
+            {
+                customerRepo.customers = databaseRepo.GetAllCustomers();
+                materialRepo.materials = databaseRepo.GetAllMaterials();
+                orderRepo.orders = databaseRepo.GetAllOrders();
+            }
         }
 
         public List<IItem> FindItems(string searchCriteria, string searchQuery = "")

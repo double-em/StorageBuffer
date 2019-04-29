@@ -21,7 +21,7 @@ namespace StorageBufferTest
         [TestInitialize]
         public void SetupTest()
         {
-            control = new Controller();
+            control = new Controller(false);
 
             customers = control.customerRepo.customers;
             materials = control.materialRepo.materials;
@@ -104,7 +104,12 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Materials");
 
-            Assert.AreEqual(materials, result);
+            int i = 0;
+            foreach (Material material in materials)
+            {
+                Assert.AreEqual(material, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
@@ -112,7 +117,7 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Materials", "6mm. Plade");
 
-            Assert.AreEqual(materials[1], result[1]);
+            Assert.AreEqual(materials[1].Id, result[0].Id);
         }
 
         [TestMethod]
@@ -120,7 +125,7 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Materials", "Plade");
 
-            Assert.AreEqual(materials[1], result[1]);
+            Assert.AreEqual(materials[1].Id, result[1].Id);
         }
 
         [TestMethod]
@@ -128,7 +133,7 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Materials", "6MM. plAde");
 
-            Assert.AreEqual(materials[1], result[1]);
+            Assert.AreEqual(materials[1].Id, result[0].Id);
         }
 
 
@@ -138,7 +143,12 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Orders");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]

@@ -18,7 +18,16 @@ namespace StorageBuffer.Model
 
         public List<IItem> GetOrders(string searchQuery)
         {
-            throw new NotImplementedException();
+            List<IItem> result = new List<IItem>();
+            foreach (Order order in orders)
+            {
+                if (order.Name.ToLower().Contains(searchQuery.ToLower()))
+                {
+                    result.Add(order);
+                }
+            }
+
+            return result;
         }
 
         public void RegisterUsedMaterial(int orderId, Material material, int amount)

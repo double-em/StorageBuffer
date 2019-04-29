@@ -28,7 +28,7 @@ namespace StorageBuffer
             InitializeComponent();
             Title = "Storage Buffer";
 
-            control = new Controller();
+            control = new Controller(true);
             GetAllItems();
         }
 
@@ -52,9 +52,43 @@ namespace StorageBuffer
 
         private void TbSearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            foreach (IItem item in control.FindItems(cbChoice.SelectedItem.ToString(), tbSearchBar.Text))
+            Search();
+        }
+
+        private void CbChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Search();
+        }
+
+        private void Search()
+        {
+            if (control != null)
             {
-                lvResult.Items.Add(item);
+                lvResult.Items.Clear();
+                string criteria = "";
+                switch (cbChoice.SelectedIndex)
+                {
+                    case 0:
+                        criteria = "All";
+                        break;
+
+                    case 1:
+                        criteria = "Materials";
+                        break;
+
+                    case 2:
+                        criteria = "Orders";
+                        break;
+
+                    case 3:
+                        criteria = "Customers";
+                        break;
+                }
+
+                foreach (IItem item in control.FindItems(criteria, tbSearchBar.Text))
+                {
+                    lvResult.Items.Add(item);
+                }
             }
         }
     }

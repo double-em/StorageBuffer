@@ -18,7 +18,16 @@ namespace StorageBuffer.Model
 
         public List<IItem> GetMaterials(string searchQuery)
         {
-            throw new NotImplementedException();
+            List<IItem> result = new List<IItem>();
+            foreach (Material material in materials)
+            {
+                if (material.Name.ToLower().Contains(searchQuery.ToLower()))
+                {
+                    result.Add(material);
+                }
+            }
+
+            return result;
         }
     }
 }
