@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -83,7 +84,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public List<Order> GetAllOrders()
+        public List<Order> GetAllOrders(List<Customer> customerRepoCustomers)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -104,9 +105,9 @@ namespace StorageBuffer.Application
                             string date = reader["OrderDate"].ToString();
                             string deadline = reader["Deadline"].ToString();
 
+                            Customer customer = customerRepoCustomers.Find(x => x.Id == id);
 
-
-                            result.Add(new Order(id, customerId, status, name, date, deadline));
+                            result.Add(new Order(id, customer, status, name, date, deadline));
                         }
 
                         return result;

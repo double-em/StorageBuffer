@@ -31,7 +31,7 @@ namespace StorageBuffer.Application
             {
                 customerRepo.customers = databaseRepo.GetAllCustomers();
                 materialRepo.materials = databaseRepo.GetAllMaterials();
-                orderRepo.orders = databaseRepo.GetAllOrders();
+                orderRepo.orders = databaseRepo.GetAllOrders(customerRepo.customers);
             }
         }
 

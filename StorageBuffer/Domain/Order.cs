@@ -19,7 +19,7 @@ namespace StorageBuffer.Domain
     public class Order : IItem
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public Customer CustomerObj { get; set; }
         public Status OrderStatus { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
@@ -32,10 +32,10 @@ namespace StorageBuffer.Domain
             get { return Deadline; }
         }
 
-        public Order(int id, int customerId, Status orderStatus, string name, string date, string deadline)
+        public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline)
         {
             Id = id;
-            CustomerId = customerId;
+            CustomerObj = customerObj;
             OrderStatus = orderStatus;
             Name = name;
             Date = date;
@@ -45,7 +45,19 @@ namespace StorageBuffer.Domain
 
         public void RegisterUsedMaterial(Material material, int amount)
         {
-            throw new NotImplementedException();
+            if (material.Quantity >= amount)
+            {
+                Orderline orderline = orderlines.Find(x => x.MaterialObj == material);
+                if (orderline != null)
+                {
+                    orderline.Quantity += amount;
+                }
+                else
+                {
+                    orderlines.Add(new Orderline(material, amount, DateTime.Now.ToLongDateString()));
+                }
+                material.Quantity -= amount;
+            }
         }
     }
 }

@@ -21,7 +21,9 @@ namespace StorageBuffer.Model
             List<IItem> result = new List<IItem>();
             foreach (Order order in orders)
             {
-                if (order.Name.ToLower().Contains(searchQuery.ToLower()))
+                if (order.Name.ToLower().Contains(searchQuery.ToLower()) || 
+                    order.CustomerObj.Name.ToLower().Contains(searchQuery.ToLower()) || 
+                    order.CustomerObj.Phone.Contains(searchQuery))
                 {
                     result.Add(order);
                 }
@@ -32,12 +34,12 @@ namespace StorageBuffer.Model
 
         public void RegisterUsedMaterial(int orderId, Material material, int amount)
         {
-            throw new NotImplementedException();
+            orders.Find(x => x.Id == orderId).RegisterUsedMaterial(material, amount);
         }
 
         public void ChangeStatusOfOrder(int orderId, Status status)
         {
-            throw new NotImplementedException();
+            orders.Find(x => x.Id == orderId).OrderStatus = status;
         }
     }
 }

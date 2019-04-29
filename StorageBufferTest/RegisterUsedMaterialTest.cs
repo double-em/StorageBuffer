@@ -29,7 +29,8 @@ namespace StorageBufferTest
             material1 = new Material(11, "Bordplade i rustfri", "Ingen", 4);
             material2 = new Material(12, "6mm. Plade", "Vejer 300kg", 1);
 
-            order1 = new Order(21, customer1.Id, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019");
+            order1 = new Order(21, customer1, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019");
+            control.orderRepo.orders.Add(order1);
         }
 
         [TestMethod]

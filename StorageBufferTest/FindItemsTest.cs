@@ -39,8 +39,8 @@ namespace StorageBufferTest
             materials.Add(new Material(11, "Bordplade i rustfri", "Ingen", 2));
             materials.Add(new Material(12, "6mm. Plade", "Vejer 300kg", 1));
 
-            orders.Add(new Order(21, customer1.Id, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"));
-            orders.Add(new Order(22, customer1.Id, Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019"));
+            orders.Add(new Order(21, customer1, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"));
+            orders.Add(new Order(22, customer1, Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019"));
         }
 
 
@@ -152,27 +152,57 @@ namespace StorageBufferTest
         }
 
         [TestMethod]
+        public void GetOrdersByOrderName()
+        {
+            List<IItem> result = control.FindItems("Orders", "Komplet Køkken");
+
+            Assert.AreEqual(orders[0].Id, result[0].Id);
+        }
+
+        [TestMethod]
+        public void GetOrdersByOrderNamePartialAndMixed()
+        {
+            List<IItem> result = control.FindItems("Orders", "hYlde");
+
+            Assert.AreEqual(orders[1].Id, result[0].Id);
+        }
+
         public void GetOrdersByCustomerName()
         {
             List<IItem> result = control.FindItems("Orders", "Brian Mariannesen");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
         public void GetOrdersByCustomerPartialName()
         {
-            List<IItem> result = control.FindItems("Customers", "rian Mar");
+            List<IItem> result = control.FindItems("Orders", "rian Mar");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
         public void GetOrdersByCustomerNameLowercaseAndUppercaseMixed()
         {
-            List<IItem> result = control.FindItems("Customers", "bRiAn mArianNesen");
+            List<IItem> result = control.FindItems("Orders", "bRiAn mArianNesen");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
@@ -180,15 +210,25 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Orders", "+4512345678");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
         public void GetOrdersByCustomerPartialPhoneNumber()
         {
-            List<IItem> result = control.FindItems("Customers", "3456");
+            List<IItem> result = control.FindItems("Orders", "3456");
 
-            Assert.AreEqual(orders, result);
+            int i = 0;
+            foreach (Order order in orders)
+            {
+                Assert.AreEqual(order, result[i]);
+                i++;
+            }
         }
 
         [TestMethod]
