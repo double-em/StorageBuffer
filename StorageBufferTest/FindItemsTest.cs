@@ -49,8 +49,12 @@ namespace StorageBufferTest
         public void GetAllCustomers()
         {
             List<IItem> result = control.FindItems("Customers");
-
-            Assert.AreEqual(customers, result);
+            int I = 0;
+            foreach (Customer customer in customers)
+            {
+                Assert.AreEqual(customer, result[I]);
+                I++;
+            }
         }
 
         [TestMethod]
@@ -82,7 +86,7 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Customers", "+4512345678");
 
-            Assert.AreEqual(customers[0], result[0]);
+            Assert.AreEqual(customers[0].Id, result[0].Id);
         }
 
         [TestMethod]
@@ -90,7 +94,7 @@ namespace StorageBufferTest
         {
             List<IItem> result = control.FindItems("Customers", "3456");
 
-            Assert.AreEqual(customers[0], result[0]);
+            Assert.AreEqual(customers[0].Id, result[0].Id);
         }
 
 

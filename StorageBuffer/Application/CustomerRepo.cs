@@ -18,13 +18,16 @@ namespace StorageBuffer.Model
 
         public List<IItem> GetCustomers(string searchQuery)
         {
-            if (searchQuery != "Customers"){
-                List<IItem> result = customers.Where(customer => customer.Name == searchQuery).ToList();
-                
+            List<IItem> result = new List<IItem>();
+                foreach (Customer customer in customers)
+                {
+                    if (customer.Name.ToLower().Contains(searchQuery.ToLower()) || customer.Phone.Contains(searchQuery))
+                    {
+                        result.Add(customer);
+                    }
+                }
 
-            }
-            // If searchQuery is Customers, return all customers
-            return customers;
+                return result;
         }
     }
 }
