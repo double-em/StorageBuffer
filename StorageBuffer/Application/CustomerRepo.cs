@@ -19,8 +19,7 @@ namespace StorageBuffer.Model
         public List<IItem> GetCustomers(string searchQuery)
         {
             if (searchQuery != "Customers"){
-                List<IItem> result = customers.Where(customer => customer.Name == searchQuery).ToList();
-                
+                List<IItem> result = customers.Where(customer => customer.Name.Contains(searchQuery)).ToList();
 
             }
             // If searchQuery is Customers, return all customers
