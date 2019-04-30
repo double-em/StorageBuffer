@@ -7,43 +7,68 @@
         mc:Ignorable="d"
         Title="Ordre" Height="989" Width="1280" ResizeMode="NoResize">
     <Grid>
-
         <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280"/>
         <Image Width="221" Margin="30,10,1023,819" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
-        <Button FontSize="20" Content="Gem" HorizontalAlignment="Right" Margin="0,860,994,0" VerticalAlignment="Top" Width="280" Height="50">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Foreground" Value="White" />
-                    <Setter Property="Background" Value="#A8A1A2"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#2F2F2F"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="Background" Value="#A8A1A2"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button Name="btnClose" FontSize="20" Content="Luk" HorizontalAlignment="Right" Margin="0,910,994,0" VerticalAlignment="Top" Width="280" Height="50" Click="btnClose_Click">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Foreground" Value="White" />
-                    <Setter Property="Background" Value="#A8A1A2"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#887e80"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="Background" Value="#A8A1A2"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+
+        <Grid HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280" Margin="0">
+            <Button FontSize="20" Content="Gem" HorizontalAlignment="Right" Margin="0,860,0,0" VerticalAlignment="Top" Width="280" Height="50">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Background" Value="#A8A1A2"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid Name="Panel">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="btnClose" FontSize="20" Content="Luk" HorizontalAlignment="Right" Margin="0,910,0,0" VerticalAlignment="Top" Width="280" Height="50" Click="btnClose_Click">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Background" Value="#A8A1A2"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid Name="Panel">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+
         <Grid HorizontalAlignment="Left" Height="960" Margin="280,0,0,0" VerticalAlignment="Top" Width="994">
             <Grid HorizontalAlignment="Left" Height="900" Margin="30,30,30,30" VerticalAlignment="Top" Width="934">
                 <Label Name="lOrderNumber" Content="Ordernummer: 00000000" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="240" Height="50"/>
@@ -68,11 +93,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                
+
             </Grid>
         </Grid>
-
-
-
     </Grid>
 </Window>
