@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,19 @@ namespace StorageBuffer
     public partial class MainWindow : Window
     {
         private Controller control;
+        private List<OrderWindow> orderWindows;
         public MainWindow()
         {
             InitializeComponent();
-            Title = "Storage Buffer";
 
             control = new Controller(true);
+            orderWindows = new List<OrderWindow>();
             GetAllItems();
+            SetupListener();
+        }
+
+        private void SetupListener()
+        {
         }
 
         private void GetAllItems()
@@ -89,6 +96,38 @@ namespace StorageBuffer
                 {
                     lvResult.Items.Add(item);
                 }
+            }
+        }
+
+        private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
+        {
+            var ListItem = (ListViewItem)sender;
+            var item = (IItem)ListItem.Content;
+
+            switch (item.Type)
+            {
+                case "Customer":
+                    break;
+
+                case "Material":
+                    break;
+
+                case "Order":
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        OrderWindow orderWindow = new OrderWindow((Order)item);
+                        orderWindows.Add(orderWindow);
+                        orderWindow.Show();
+                    }));
+                    break;
+            }
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            foreach (OrderWindow window in orderWindows)
+            {
+                window.Close();
             }
         }
     }
