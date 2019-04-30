@@ -32,6 +32,7 @@ namespace StorageBuffer
 
         private void Setup()
         {
+            Title = "Ordre - " + order.Id + " : " + order.Name;
             lOrderNumber.Content = "Ordrenummer: " + order.Id;
             lOrderDate.Content = "Ordredato: " + order.Date;
             lDeadline.Content = "Deadline: " + order.Deadline;
