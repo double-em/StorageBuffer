@@ -22,9 +22,9 @@ namespace StorageBuffer.Model
             foreach (Customer customer in customers)
             {
                 if (customer.Name.ToLower().Contains(searchQuery.ToLower()) || 
-                        customer.Phone.Contains(searchQuery))
+                    customer.Phone.Contains(searchQuery))
                 {
-                        result.Add(customer);
+                    result.Add(customer);
                 }
             }
 
