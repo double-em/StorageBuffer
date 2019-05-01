@@ -35,6 +35,8 @@ namespace StorageBuffer
 
         private void Setup()
         {
+            GetAllOrderlines();
+
             Title = "Ordre - " + order.Id + " : " + order.Name;
             lOrderNumber.Content = "Ordrenummer: " + order.Id;
             lOrderDate.Content = "Ordredato: " + order.Date;
@@ -86,27 +88,53 @@ namespace StorageBuffer
             chooseWindow.Left = this.Left + 8;
             chooseWindow.ShowDialog();
 
-            bool materialAlreadyAdded = false;
-            foreach (Orderline orderline in order.orderlines)
+            if (chooseWindow.DialogResult.Value)
             {
-                if (orderline.MaterialId == chooseWindow.ChoosenMaterial.Id)
+                bool materialAlreadyAdded = false;
+                foreach (Orderline orderline in order.orderlines)
                 {
-                    materialAlreadyAdded = true;
-                    break;
+                    if (orderline.MaterialId == chooseWindow.ChoosenMaterial.Id)
+                    {
+                        materialAlreadyAdded = true;
+                        break;
+                    }
                 }
-            }
 
-            if (!materialAlreadyAdded)
-            {
-                Orderline orderlineNew = new Orderline(chooseWindow.ChoosenMaterial, 0, DateTime.Now.ToShortDateString());
-                order.orderlines.Add(orderlineNew);
-                lvResult.Items.Add(orderlineNew);
+                if (!materialAlreadyAdded)
+                {
+                    Orderline orderlineNew = new Orderline(chooseWindow.ChoosenMaterial, 0, DateTime.Now.ToShortDateString());
+                    order.orderlines.Add(orderlineNew);
+                    lvResult.Items.Add(orderlineNew);
+                }
             }
         }
 
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            var listItem = (ListViewItem)sender;
+            var orderline = (Orderline) listItem.Content;
+
+            ChangeOrderline changeOrderline = new ChangeOrderline(orderline);
+            changeOrderline.Owner = this;
+            changeOrderline.Top = this.Top;
+            changeOrderline.Left = this.Left;
+            changeOrderline.ShowDialog();
+
+            if (changeOrderline.delete)
+            {
+                order.orderlines.Remove(orderline);
+            }
+
+            GetAllOrderlines();
+        }
+
+        private void GetAllOrderlines()
+        {
+            lvResult.Items.Clear();
+            foreach (Orderline orderline in order.orderlines)
+            {
+                lvResult.Items.Add(orderline);
+            }
         }
     }
 }

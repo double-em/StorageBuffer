@@ -34,6 +34,7 @@ namespace StorageBuffer
         {
             var listItem = (ListViewItem) sender;
             ChoosenMaterial = (Material)listItem.Content;
+            DialogResult = true;
             this.Close();
 
         }

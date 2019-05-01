@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ChangeOrderline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +76,9 @@
     <Compile Include="Application\DatabaseRepo.cs" />
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
+    <Compile Include="ChangeOrderline.xaml.cs">
+      <DependentUpon>ChangeOrderline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\IItem.cs" />
     <Compile Include="Domain\Invoice.cs" />
