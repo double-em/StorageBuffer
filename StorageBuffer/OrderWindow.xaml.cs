@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using StorageBuffer.Application;
 using StorageBuffer.Domain;
 
 namespace StorageBuffer
@@ -20,12 +21,14 @@ namespace StorageBuffer
     /// </summary>
     public partial class OrderWindow : Window
     {
+        private Controller control;
         private Order order;
-        public OrderWindow(Order order)
+        public OrderWindow(Controller control, Order order)
         {
             InitializeComponent();
 
             this.order = order;
+            this.control = control;
             Setup();
             this.Show();
         }
@@ -72,6 +75,38 @@ namespace StorageBuffer
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void AddMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            MaterialChooseWindow chooseWindow = new MaterialChooseWindow(control);
+
+            chooseWindow.Owner = this;
+            chooseWindow.Top = this.Top;
+            chooseWindow.Left = this.Left + 8;
+            chooseWindow.ShowDialog();
+
+            bool materialAlreadyAdded = false;
+            foreach (Orderline orderline in order.orderlines)
+            {
+                if (orderline.MaterialId == chooseWindow.ChoosenMaterial.Id)
+                {
+                    materialAlreadyAdded = true;
+                    break;
+                }
+            }
+
+            if (!materialAlreadyAdded)
+            {
+                Orderline orderlineNew = new Orderline(chooseWindow.ChoosenMaterial, 0, DateTime.Now.ToShortDateString());
+                order.orderlines.Add(orderlineNew);
+                lvResult.Items.Add(orderlineNew);
+            }
+        }
+
+        private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
