@@ -21,7 +21,7 @@ namespace StorageBufferTest
         [TestInitialize]
         public void SetupTest()
         {
-            control = new Controller(false);
+            control = Controller.Instance;
 
             customers = control.customerRepo.customers;
             materials = control.materialRepo.materials;

@@ -17,7 +17,7 @@ namespace StorageBufferTest
         [TestInitialize]
         public void SetupTest()
         {
-            control = new Controller(false);
+            control = Controller.Instance;
 
             customer1 = new Customer(1, "Brian Mariannesen", "Odensevej 24", 5000,
                 "Odense C", "+4512345678", "brian.mariannesen@gmail.com");
