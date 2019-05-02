@@ -8,31 +8,50 @@ using StorageBuffer.Model;
 
 namespace StorageBuffer.Application
 {
-    public class Controller
+    public sealed class Controller
     {
+        private static Controller instance = null;
+        private static readonly object padlock = new object();
+
+        public static Controller Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new Controller();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
+
         private DatabaseRepo databaseRepo;
         public CustomerRepo customerRepo;
         public MaterialRepo materialRepo;
         public OrderRepo orderRepo;
 
-        public Controller( bool connectToDatabase)
+        Controller()
         {
-            databaseRepo = new DatabaseRepo();
-            GetAllData(connectToDatabase);
+            databaseRepo = DatabaseRepo.Instance;
+            GetAllData();
         }
 
-        private void GetAllData(bool connectToDatabase)
+        private void GetAllData()
         {
             customerRepo = new CustomerRepo();
             materialRepo = new MaterialRepo();
             orderRepo = new OrderRepo();
 
-            if (connectToDatabase)
-            {
-                customerRepo.customers = databaseRepo.GetAllCustomers();
-                materialRepo.materials = databaseRepo.GetAllMaterials();
-                orderRepo.orders = databaseRepo.GetAllOrders(customerRepo.customers);
-            }
+            customerRepo.customers = databaseRepo.GetAllCustomers();
+            materialRepo.materials = databaseRepo.GetAllMaterials();
+            orderRepo.orders = databaseRepo.GetAllOrders(customerRepo.customers);
         }
 
         public List<IItem> FindItems(string searchCriteria, string searchQuery = "")

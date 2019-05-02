@@ -28,7 +28,7 @@ namespace StorageBuffer.Model
                 }
             }
 
-                return result;
+            return result;
         }
     }
 }

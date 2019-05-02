@@ -13,6 +13,27 @@ namespace StorageBuffer.Application
 {
     public class DatabaseRepo
     {
+        private static DatabaseRepo instance = null;
+        private static readonly object padlock = new object();
+
+        public static DatabaseRepo Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new DatabaseRepo();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
         private readonly string connectionString;
 
         public DatabaseRepo()

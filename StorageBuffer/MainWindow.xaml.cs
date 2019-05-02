@@ -29,7 +29,7 @@ namespace StorageBuffer
         {
             InitializeComponent();
 
-            control = new Controller(true);
+            control = Controller.Instance;
             orderWindows = new List<OrderWindow>();
             GetAllItems();
             SetupListener();
