@@ -136,5 +136,10 @@ namespace StorageBuffer
                 lvResult.Items.Add(orderline);
             }
         }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -11,7 +11,7 @@
         <Image Width="221" Margin="30,10,1023,819" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
 
         <Grid HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280" Margin="0">
-            <Button FontSize="20" Content="Gem" HorizontalAlignment="Right" Margin="0,860,0,0" VerticalAlignment="Top" Width="280" Height="50">
+            <Button Name="btnSave" FontSize="20" Content="Gem" HorizontalAlignment="Right" Margin="0,860,0,0" VerticalAlignment="Top" Width="280" Height="50" Click="BtnSave_Click">
                 <Button.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Foreground" Value="White" />
