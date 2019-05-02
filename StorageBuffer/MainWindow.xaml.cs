@@ -115,7 +115,7 @@ namespace StorageBuffer
                 case "Order":
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        OrderWindow orderWindow = new OrderWindow((Order)item);
+                        OrderWindow orderWindow = new OrderWindow(control, (Order)item);
                         orderWindows.Add(orderWindow);
                         orderWindow.Show();
                     }));

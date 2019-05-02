@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ChangeOrderline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,17 +76,27 @@
     <Compile Include="Application\DatabaseRepo.cs" />
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
+    <Compile Include="ChangeOrderline.xaml.cs">
+      <DependentUpon>ChangeOrderline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\IItem.cs" />
     <Compile Include="Domain\Invoice.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\Orderline.cs" />
+    <Compile Include="MaterialChooseWindow.xaml.cs">
+      <DependentUpon>MaterialChooseWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\scSingleton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MaterialChooseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
