@@ -9,9 +9,31 @@ namespace StorageBuffer.Model
 {
     public class CustomerRepo
     {
+        private static CustomerRepo instance = null;
+        private static readonly object padlock = new object();
+
+        public static CustomerRepo Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new CustomerRepo();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
+
         public List<Customer> customers;
 
-        public CustomerRepo()
+        CustomerRepo()
         {
             customers = new List<Customer>();
         }

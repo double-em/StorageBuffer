@@ -45,9 +45,9 @@ namespace StorageBuffer.Application
 
         private void GetAllData()
         {
-            customerRepo = new CustomerRepo();
-            materialRepo = new MaterialRepo();
-            orderRepo = new OrderRepo();
+            customerRepo = CustomerRepo.Instance;
+            materialRepo = MaterialRepo.Instance;
+            orderRepo = OrderRepo.Instance;
 
             customerRepo.customers = databaseRepo.GetAllCustomers();
             materialRepo.materials = databaseRepo.GetAllMaterials();

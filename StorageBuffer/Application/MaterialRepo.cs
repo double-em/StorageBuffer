@@ -9,9 +9,31 @@ namespace StorageBuffer.Model
 {
     public class MaterialRepo
     {
+        private static MaterialRepo instance = null;
+        private static readonly object padlock = new object();
+
+        public static MaterialRepo Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new MaterialRepo();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
+
         public List<Material> materials;
 
-        public MaterialRepo()
+        MaterialRepo()
         {
             materials = new List<Material>();
         }

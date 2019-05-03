@@ -36,7 +36,7 @@ namespace StorageBuffer.Application
         }
         private readonly string connectionString;
 
-        public DatabaseRepo()
+        DatabaseRepo()
         {
             connectionString = "Server=EALSQL1.eal.local;Database=B_DB24_2018;User Id=B_STUDENT24;Password=B_OPENDB24;";
         }
