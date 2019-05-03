@@ -74,6 +74,7 @@
     <Compile Include="Application\Controller.cs" />
     <Compile Include="Application\CustomerRepo.cs" />
     <Compile Include="Application\DatabaseRepo.cs" />
+    <Compile Include="Application\DatabaseRepoFakey.cs" />
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
     <Compile Include="ChangeOrderline.xaml.cs">
@@ -82,6 +83,7 @@
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\IItem.cs" />
     <Compile Include="Domain\Invoice.cs" />
+    <Compile Include="Domain\IPersistable.cs" />
     <Compile Include="Domain\Material.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\Orderline.cs" />

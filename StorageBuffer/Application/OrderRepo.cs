@@ -7,7 +7,7 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer.Model
 {
-    public class OrderRepo
+    public sealed class OrderRepo
     {
         private static OrderRepo instance = null;
         private static readonly object padlock = new object();
@@ -22,19 +22,33 @@ namespace StorageBuffer.Model
                     {
                         if (instance == null)
                         {
-                            instance = new OrderRepo();
+                            throw new Exception("Object not created!");
                         }
                     }
                 }
-
                 return instance;
             }
         }
+
+        public static void CreateInstance(IPersistable databaseRepo)
+        {
+            if (instance == null)
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OrderRepo(databaseRepo);
+                    }
+                }
+            }
+        }
+
         public List<Order> orders;
 
-        OrderRepo()
+        OrderRepo(IPersistable databaseRepo)
         {
-            orders = new List<Order>();
+            orders = databaseRepo.GetAllOrders();
         }
 
         public List<IItem> GetOrders(string searchQuery)

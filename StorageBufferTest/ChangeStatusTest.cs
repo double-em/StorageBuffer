@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StorageBuffer.Application;
 using StorageBuffer.Domain;
@@ -9,29 +10,27 @@ namespace StorageBufferTest
     public class ChangeStatusTest
     {
         private Controller control;
-
-        private Customer customer1;
-
-        private Order order1;
+        private List<Customer> customers;
+        private List<Material> materials;
+        private List<Order> orders;
 
         [TestInitialize]
         public void SetupTest()
         {
             control = Controller.Instance;
+            control.GetAllData(DatabaseRepoFakey.Instance);
 
-            customer1 = new Customer(1, "Brian Mariannesen", "Odensevej 24", 5000,
-                "Odense C", "+4512345678", "brian.mariannesen@gmail.com");
-
-            order1 = new Order(21, customer1, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019");
-            control.orderRepo.orders.Add(order1);
+            customers = control.customerRepo.customers;
+            materials = control.materialRepo.materials;
+            orders = control.orderRepo.orders;
         }
 
         [TestMethod]
         public void ChangeStateOfOrder()
         {
-            control.ChangeStatusOfOrder(order1.Id, Status.Shipped);
+            control.ChangeStatusOfOrder(orders[0].Id, Status.Shipped);
 
-            Assert.AreEqual(Status.Shipped, order1.OrderStatus);
+            Assert.AreEqual(Status.Shipped, orders[0].OrderStatus);
         }
     }
 }

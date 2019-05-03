@@ -30,6 +30,7 @@ namespace StorageBuffer
             InitializeComponent();
 
             control = Controller.Instance;
+            control.GetAllData(DatabaseRepo.Instance);
             orderWindows = new List<OrderWindow>();
             GetAllItems();
             SetupListener();

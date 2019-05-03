@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StorageBuffer.Domain;
+using StorageBuffer.Model;
 
 namespace StorageBuffer.Application
 {
-    public class DatabaseRepo
+    public class DatabaseRepo : IPersistable
     {
         private static DatabaseRepo instance = null;
         private static readonly object padlock = new object();
@@ -105,7 +106,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public List<Order> GetAllOrders(List<Customer> customerRepoCustomers)
+        public List<Order> GetAllOrders()
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -116,6 +117,7 @@ namespace StorageBuffer.Application
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
+                        List<Customer> customerRepoCustomers = CustomerRepo.Instance.customers;
                         List<Order> result = new List<Order>();
                         while (reader.Read())
                         {

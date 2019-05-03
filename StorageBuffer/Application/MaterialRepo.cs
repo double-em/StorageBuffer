@@ -7,7 +7,7 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer.Model
 {
-    public class MaterialRepo
+    public sealed class MaterialRepo
     {
         private static MaterialRepo instance = null;
         private static readonly object padlock = new object();
@@ -22,20 +22,33 @@ namespace StorageBuffer.Model
                     {
                         if (instance == null)
                         {
-                            instance = new MaterialRepo();
+                            throw new Exception("Object not created!");
                         }
                     }
                 }
-
                 return instance;
+            }
+        }
+
+        public static void CreateInstance(IPersistable databaseRepo)
+        {
+            if (instance == null)
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new MaterialRepo(databaseRepo);
+                    }
+                }
             }
         }
 
         public List<Material> materials;
 
-        MaterialRepo()
+        MaterialRepo(IPersistable databaseRepo)
         {
-            materials = new List<Material>();
+            materials = databaseRepo.GetAllMaterials();
         }
 
         public List<IItem> GetMaterials(string searchQuery)

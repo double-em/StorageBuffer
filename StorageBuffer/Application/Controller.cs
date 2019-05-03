@@ -32,26 +32,24 @@ namespace StorageBuffer.Application
             }
         }
 
-        private DatabaseRepo databaseRepo;
         public CustomerRepo customerRepo;
         public MaterialRepo materialRepo;
         public OrderRepo orderRepo;
 
         Controller()
         {
-            databaseRepo = DatabaseRepo.Instance;
-            GetAllData();
         }
 
-        private void GetAllData()
+        public void GetAllData(IPersistable databaseRepo)
         {
+            CustomerRepo.CreateInstance(databaseRepo);
             customerRepo = CustomerRepo.Instance;
-            materialRepo = MaterialRepo.Instance;
-            orderRepo = OrderRepo.Instance;
 
-            customerRepo.customers = databaseRepo.GetAllCustomers();
-            materialRepo.materials = databaseRepo.GetAllMaterials();
-            orderRepo.orders = databaseRepo.GetAllOrders(customerRepo.customers);
+            MaterialRepo.CreateInstance(databaseRepo);
+            materialRepo = MaterialRepo.Instance;
+
+            OrderRepo.CreateInstance(databaseRepo);
+            orderRepo = OrderRepo.Instance;
         }
 
         public List<IItem> FindItems(string searchCriteria, string searchQuery = "")
