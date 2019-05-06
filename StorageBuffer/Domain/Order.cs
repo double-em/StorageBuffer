@@ -16,6 +16,7 @@ namespace StorageBuffer.Domain
         Paid,
         Canceled
     }
+    public delegate void OrderChanged(Order order);
     public class Order : IItem
     {
         public int Id { get; set; }

@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using StorageBuffer.Application;
 using StorageBuffer.Domain;
 
+public delegate void OrderChanged(Order order);
+
 namespace StorageBuffer
 {
     /// <summary>
@@ -22,12 +24,15 @@ namespace StorageBuffer
     public partial class OrderWindow : Window
     {
         private Controller control;
+        private Order orderBefore;
         private Order order;
         public OrderWindow(Controller control, Order order)
         {
             InitializeComponent();
 
-            this.order = order;
+            this.orderBefore = order;
+            this.order = new Order(order.Id, order.CustomerObj, order.OrderStatus, order.Name, order.Date, order.Deadline);
+            this.order.orderlines.AddRange(order.orderlines);
             this.control = control;
             Setup();
             this.Show();
@@ -139,6 +144,9 @@ namespace StorageBuffer
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            orderBefore.OrderStatus = order.OrderStatus;
+            orderBefore.orderlines = new List<Orderline>();
+            orderBefore.orderlines.AddRange(order.orderlines);
 
         }
     }
