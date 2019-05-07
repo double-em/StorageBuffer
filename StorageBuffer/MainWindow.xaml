@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageBuffer"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Closing="MainWindow_OnClosing"
         Title="Storage Buffer" Height="989" Width="1280" ResizeMode="NoResize">
     <Grid>
