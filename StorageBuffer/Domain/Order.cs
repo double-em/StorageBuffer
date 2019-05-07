@@ -30,7 +30,7 @@ namespace StorageBuffer.Domain
 
         public string Data
         {
-            get { return Deadline; }
+            get { return $"Deadline: {Deadline}, {CustomerObj.Name}"; }
         }
 
         public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline)

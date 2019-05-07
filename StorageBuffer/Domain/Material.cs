@@ -16,7 +16,7 @@ namespace StorageBuffer.Domain
 
         public string Data
         {
-            get { return Quantity.ToString(); }
+            get { return $"Antal: {Quantity}"; }
         }
 
         public Material(int id, string name, string comment, int quantity)
