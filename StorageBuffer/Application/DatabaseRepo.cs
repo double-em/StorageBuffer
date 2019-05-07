@@ -130,11 +130,94 @@ namespace StorageBuffer.Application
 
                             Customer customer = customerRepoCustomers.Find(x => x.Id == id);
 
-                            result.Add(new Order(id, customer, status, name, date, deadline));
+                            Order order = new Order(id, customer, status, name, date, deadline);
+                            order.orderlines = GetOrderlinesForOrder(order);
+                            result.Add(order);
                         }
 
                         return result;
                     }
+                }
+            }
+        }
+
+        private List<Orderline> GetOrderlinesForOrder(Order order)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spGetOrderlinesForOrder", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<Orderline> result = new List<Orderline>();
+                        while (reader.Read())
+                        {
+                            int.TryParse(reader["MaterialId"].ToString(), out int MaterialId);
+                            int.TryParse(reader["Quantity"].ToString(), out int quantity);
+                            Material material = MaterialRepo.Instance.GetMaterial(MaterialId);
+
+                            result.Add(new Orderline(material, quantity));
+                        }
+
+                        return result;
+                    }
+                }
+            }
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spUpdateOrder", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                    cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = order.OrderStatus.ToString();
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void InsertOrderline(int orderId, Orderline orderline)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spInsertOrderline", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
+                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = orderline.MaterialId;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = orderline.Quantity;
+
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void RemoveOrderlines(Order order)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spRemoveOrderline", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

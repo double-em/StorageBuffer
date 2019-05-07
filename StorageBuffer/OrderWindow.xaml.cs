@@ -107,9 +107,8 @@ namespace StorageBuffer
 
                 if (!materialAlreadyAdded)
                 {
-                    Orderline orderlineNew = new Orderline(chooseWindow.ChoosenMaterial, 0, DateTime.Now.ToShortDateString());
-                    order.orderlines.Add(orderlineNew);
-                    lvResult.Items.Add(orderlineNew);
+                    control.RegisterUsedMaterial(order.Id, chooseWindow.ChoosenMaterial, 0);
+                    GetAllOrderlines();
                 }
             }
         }
@@ -148,6 +147,7 @@ namespace StorageBuffer
             orderBefore.orderlines = new List<Orderline>();
             orderBefore.orderlines.AddRange(order.orderlines);
 
+            control.UpdateOrder(orderBefore);
         }
     }
 }

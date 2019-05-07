@@ -55,7 +55,7 @@ namespace StorageBuffer.Domain
                 }
                 else
                 {
-                    orderlines.Add(new Orderline(material, amount, DateTime.Now.ToLongDateString()));
+                    orderlines.Add(new Orderline(material, amount));
                 }
                 material.Quantity -= amount;
             }
