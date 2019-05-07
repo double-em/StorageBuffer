@@ -149,5 +149,39 @@ namespace StorageBuffer
 
             control.UpdateOrder(orderBefore);
         }
+
+        private void CbOrderChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbOrderChoice.SelectedIndex)
+            {
+                case 0:
+                    order.OrderStatus = Status.Received;
+                    break;
+
+                case 1:
+                    order.OrderStatus = Status.InProgress;
+                    break;
+
+                case 2:
+                    order.OrderStatus = Status.Done;
+                    break;
+
+                case 3:
+                    order.OrderStatus = Status.Shipped;
+                    break;
+
+                case 4:
+                    order.OrderStatus = Status.Billed;
+                    break;
+
+                case 5:
+                    order.OrderStatus = Status.Paid;
+                    break;
+
+                case 6:
+                    order.OrderStatus = Status.Canceled;
+                    break;
+            }
+        }
     }
 }

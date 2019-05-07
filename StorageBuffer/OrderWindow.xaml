@@ -83,14 +83,14 @@
                 <Label Name="lOrderDate" Content="Ordredato: 00/00/0000" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="240" Margin="245,0,0,0" Height="50"/>
                 <Label Name="lDeadline" Content="Deadline: 00/00/0000" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="240" Margin="485,0,0,0" Height="50"/>
                 <Label Name="lCustomerName" Content="Kunde: INGEN" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="725" Margin="0,50,0,0" Height="50"/>
-                <ComboBox Name="cbOrderChoice" FontSize="20" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="734,0,0,0" VerticalAlignment="Top" Width="198" Height="50">
-                    <ComboBoxItem>Received</ComboBoxItem>
-                    <ComboBoxItem>InProgress</ComboBoxItem>
-                    <ComboBoxItem>Done</ComboBoxItem>
-                    <ComboBoxItem>Shipped</ComboBoxItem>
-                    <ComboBoxItem>Billed</ComboBoxItem>
-                    <ComboBoxItem>Paid</ComboBoxItem>
-                    <ComboBoxItem>Canceled</ComboBoxItem>
+                <ComboBox Name="cbOrderChoice" FontSize="20" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="734,0,0,0" VerticalAlignment="Top" Width="198" Height="50" SelectionChanged="CbOrderChoice_SelectionChanged">
+                    <ComboBoxItem>Modtaget</ComboBoxItem>
+                    <ComboBoxItem>Igangværende</ComboBoxItem>
+                    <ComboBoxItem>Fuldført</ComboBoxItem>
+                    <ComboBoxItem>Afsendt</ComboBoxItem>
+                    <ComboBoxItem>Faktureret</ComboBoxItem>
+                    <ComboBoxItem>Betalt</ComboBoxItem>
+                    <ComboBoxItem>Anulleret</ComboBoxItem>
                 </ComboBox>
                 <ListView Name="lvResult" FontSize="20" HorizontalAlignment="Left" Height="716" Margin="0,108,0,0" VerticalAlignment="Top" Width="932">
                     <ListView.View>
