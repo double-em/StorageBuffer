@@ -118,6 +118,8 @@ namespace StorageBuffer
                     {
                         OrderWindow orderWindow = new OrderWindow(control, (Order)item);
                         orderWindows.Add(orderWindow);
+                        orderWindow.Top = Top;
+                        orderWindow.Left = Left;
                         orderWindow.Show();
                     }));
                     break;
