@@ -99,5 +99,10 @@ namespace StorageBuffer.Application
                 database.InsertOrderline(order.Id, orderline);
             }
         }
+
+        public bool CreateOrder(Customer customer, string orderName, string orderDescription, string deadline)
+        {
+            return orderRepo.CreateOrder(customer, orderName, orderDescription, deadline);
+        }
     }
 }

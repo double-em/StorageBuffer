@@ -76,5 +76,10 @@ namespace StorageBuffer.Model
         {
             orders.Find(x => x.Id == orderId).OrderStatus = status;
         }
+
+        public bool CreateOrder(Customer customer, string orderName, string orderDescription, string deadline)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

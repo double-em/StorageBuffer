@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUsedMaterialTest.cs" />
     <Compile Include="ChangeStatusTest.cs" />
+    <Compile Include="CreateOrderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
