@@ -81,5 +81,10 @@ namespace StorageBuffer.Model
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateOrder(int orderId, Order order)
+        {
+            orders.Find(x => x.Id == orderId).UpdateOrder(order.OrderStatus);
+        }
     }
 }

@@ -88,15 +88,13 @@ namespace StorageBuffer.Application
             orderRepo.ChangeStatusOfOrder(orderId, status);
         }
 
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(int orderId, Order order)
         {
-            DatabaseRepo database = DatabaseRepo.Instance;
-            database.UpdateOrder(order);
-            database.RemoveOrderlines(order);
+            orderRepo.UpdateOrder(orderId, order);
 
             foreach (Orderline orderline in order.orderlines)
             {
-                database.InsertOrderline(order.Id, orderline);
+                RegisterUsedMaterial(orderId, orderline.MaterialObj, orderline.Quantity);
             }
         }
 
