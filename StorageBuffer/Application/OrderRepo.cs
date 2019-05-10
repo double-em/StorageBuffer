@@ -89,6 +89,8 @@ namespace StorageBuffer.Model
         {
             Order orderResult = orders.Find(x => x.Id == orderId);
 
+            orderResult.OrderStatus = order.OrderStatus;
+
             orderResult.orderlines = new List<Orderline>();
             databaseRepo.RemoveOrderlines(orderResult);
             databaseRepo.UpdateOrder(orderResult);
