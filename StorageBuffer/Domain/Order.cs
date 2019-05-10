@@ -60,10 +60,5 @@ namespace StorageBuffer.Domain
                 material.Quantity -= amount;
             }
         }
-
-        public void UpdateOrder(Status orderStatus)
-        {
-            OrderStatus = orderStatus;
-        }
     }
 }

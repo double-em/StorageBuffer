@@ -32,7 +32,10 @@ namespace StorageBuffer
 
             this.orderBefore = order;
             this.order = new Order(order.Id, order.CustomerObj, order.OrderStatus, order.Name, order.Date, order.Deadline);
-            this.order.orderlines.AddRange(order.orderlines);
+            foreach (Orderline orderline in orderBefore.orderlines)
+            {
+                this.order.orderlines.Add(new Orderline(orderline.MaterialObj, orderline.Quantity));
+            }
             this.control = control;
             Setup();
             this.Show();
@@ -144,14 +147,7 @@ namespace StorageBuffer
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            orderBefore.OrderStatus = order.OrderStatus;
-            orderBefore.orderlines = new List<Orderline>();
-            foreach (Orderline orderline in order.orderlines)
-            {
-                control.RegisterUsedMaterial(order.Id, orderline.MaterialObj, orderline.Quantity);
-            }
-
-            control.UpdateOrder(orderBefore);
+            control.UpdateOrder(orderBefore.Id, order);
         }
 
         private void CbOrderChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)

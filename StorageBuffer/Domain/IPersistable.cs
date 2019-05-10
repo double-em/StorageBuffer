@@ -11,6 +11,8 @@ namespace StorageBuffer.Domain
         List<Customer> GetAllCustomers();
         List<Material> GetAllMaterials();
         List<Order> GetAllOrders();
-
+        void UpdateOrder(Order order);
+        void InsertOrderline(int orderId, Orderline orderline);
+        void RemoveOrderlines(Order order);
     }
 }

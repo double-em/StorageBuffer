@@ -44,10 +44,13 @@ namespace StorageBuffer.Model
             }
         }
 
+        private IPersistable databaseRepo;
+
         public List<Order> orders;
 
         OrderRepo(IPersistable databaseRepo)
         {
+            this.databaseRepo = databaseRepo;
             orders = databaseRepo.GetAllOrders();
         }
 
@@ -84,7 +87,17 @@ namespace StorageBuffer.Model
 
         public void UpdateOrder(int orderId, Order order)
         {
-            orders.Find(x => x.Id == orderId).UpdateOrder(order.OrderStatus);
+            Order orderResult = orders.Find(x => x.Id == orderId);
+
+            orderResult.orderlines = new List<Orderline>();
+            databaseRepo.RemoveOrderlines(orderResult);
+            databaseRepo.UpdateOrder(orderResult);
+
+            foreach (Orderline orderline in order.orderlines)
+            {
+                RegisterUsedMaterial(orderResult.Id, orderline.MaterialObj, orderline.Quantity);
+                databaseRepo.InsertOrderline(orderResult.Id, orderline);
+            }
         }
     }
 }

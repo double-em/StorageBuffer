@@ -91,11 +91,6 @@ namespace StorageBuffer.Application
         public void UpdateOrder(int orderId, Order order)
         {
             orderRepo.UpdateOrder(orderId, order);
-
-            foreach (Orderline orderline in order.orderlines)
-            {
-                RegisterUsedMaterial(orderId, orderline.MaterialObj, orderline.Quantity);
-            }
         }
 
         public bool CreateOrder(Customer customer, string orderName, string orderDescription, string deadline)

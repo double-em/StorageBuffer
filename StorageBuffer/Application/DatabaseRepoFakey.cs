@@ -65,5 +65,20 @@ namespace StorageBuffer.Application
                 new Order(22, customers[0], Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019")
             };
         }
+
+        public void UpdateOrder(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertOrderline(int orderId, Orderline orderline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveOrderlines(Order order)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
