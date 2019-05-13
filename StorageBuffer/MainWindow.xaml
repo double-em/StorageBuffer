@@ -123,12 +123,12 @@
                     <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbCreateOrderName" Text="f.eks. 6mm. Bordplade m. Vask" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,92,0,0"/>
-                    <ComboBox Name="cbCreateOrder" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,129,0,0" VerticalAlignment="Top" Width="912" Height="50" SelectionChanged="CbChoice_SelectionChanged">
-                        
-                        
+                    <ComboBox Name="cbCreateOrder" BorderThickness="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,129,0,0" VerticalAlignment="Top" Width="922" Height="50" SelectionChanged="CbChoice_SelectionChanged">
+
+
                     </ComboBox>
                     <Label Content="Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,184,0,0"/>
-                    <TextBox Name="tbCreateOrderDeadline" Text="f.eks. 02/02/2019" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="10,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateOrderDeadline" Text="f.eks. 02/02/2019" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Kommentar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,276,0,0"/>
                     <TextBox Name="tbCreateOrderComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
 
