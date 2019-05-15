@@ -93,9 +93,9 @@ namespace StorageBuffer.Application
             orderRepo.UpdateOrder(orderId, order);
         }
 
-        public bool CreateOrder(Customer customer, string orderName, string orderDescription, string deadline)
+        public bool CreateOrder(Customer customer, string orderName, string deadline)
         {
-            return orderRepo.CreateOrder(customer, orderName, orderDescription, deadline);
+            return orderRepo.CreateOrder(customer, orderName, deadline);
         }
     }
 }

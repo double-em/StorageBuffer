@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StorageBuffer.Application;
 using StorageBuffer.Domain;
 
 namespace StorageBuffer.Model
@@ -80,9 +81,18 @@ namespace StorageBuffer.Model
             orders.Find(x => x.Id == orderId).OrderStatus = status;
         }
 
-        public bool CreateOrder(Customer customer, string orderName, string orderDescription, string deadline)
+        public bool CreateOrder(Customer customer, string orderName, string deadline)
         {
-            throw new NotImplementedException();
+            string date = DateTime.Now.ToShortDateString();
+            int id = DatabaseRepo.Instance.CreateOrder(customer.Id, orderName, date, deadline);
+            Order order = new Order(id, customer, Status.Received, orderName, date, deadline);
+            if (order == null)
+            {
+                return false;
+            }
+            orders.Add(order);
+            return true;
+            
         }
 
         public void UpdateOrder(int orderId, Order order)

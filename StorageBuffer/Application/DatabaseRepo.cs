@@ -221,5 +221,26 @@ namespace StorageBuffer.Application
                 }
             }
         }
+
+        public int CreateOrder(int customerId, string name, string date, string deadline)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spInsertOrder", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@CustomerId", SqlDbType.Int).Value = customerId;
+                    cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = Status.Received.ToString();
+                    cmd.Parameters.Add("@OrderName", SqlDbType.NVarChar).Value = name;
+                    cmd.Parameters.Add("@OrderDate", SqlDbType.NChar).Value = date;
+                    cmd.Parameters.Add("@Deadline", SqlDbType.NChar).Value = deadline;
+
+                    connection.Open();
+
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
