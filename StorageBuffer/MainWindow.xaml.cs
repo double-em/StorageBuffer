@@ -104,11 +104,11 @@ namespace StorageBuffer
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
             var listViewItem = (ListViewItem) sender;
-            var item = (IItem)listViewItem;
+            var item = listViewItem.Content;
             var listItem = (DataRowView)sender;
             string type = listItem["Type"].ToString();
 
-            switch (type)
+            switch (item)
             {
                 case "Customer":
                     break;
@@ -119,7 +119,7 @@ namespace StorageBuffer
                 case "Order":
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        OrderWindow orderWindow = new OrderWindow(control, (Order)item);
+                        OrderWindow orderWindow = new OrderWindow(control, (Order)listViewItem.Content);
                         orderWindows.Add(orderWindow);
                         orderWindow.Top = Top;
                         orderWindow.Left = Left;
