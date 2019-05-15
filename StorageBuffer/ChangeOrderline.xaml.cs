@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xaml;
 using StorageBuffer.Domain;
 
 namespace StorageBuffer
@@ -21,21 +23,26 @@ namespace StorageBuffer
     public partial class ChangeOrderline : Window
     {
         public bool delete = false;
-        private Orderline orderline;
-        public ChangeOrderline(Orderline orderline)
+        private PropertyInfo[] props;
+        private int quantity;
+        private int maxQuantity;
+        public ChangeOrderline(object orderline, string materialQuantity)
         {
             InitializeComponent();
-            this.orderline = orderline;
-            tbAmount.Text = orderline.Quantity.ToString();
-            lChange.Content = "Ændre antal(Max " + orderline.MaterialObj.Quantity + "):";
+
+            props = orderline.GetType().GetProperties();
+            int.TryParse(props[2].GetValue(orderline, null).ToString(), out quantity);
+            int.TryParse(materialQuantity, out maxQuantity);
+            tbAmount.Text = quantity.ToString();
+            lChange.Content = "Ændre antal(Max " + maxQuantity + "):";
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(tbAmount.Text, out int amount);
-            if (amount <= orderline.MaterialObj.Quantity && amount > 0)
+            if (amount <= maxQuantity && amount > 0)
             {
-                orderline.Quantity = amount;
+                quantity = amount;
             }
             this.Close();
         }

@@ -31,7 +31,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetAllCustomers()
         {
-            List<IItem> result = control.FindItems("Customers");
+            List<List<string>> result = control.FindItems("Customers");
             int I = 0;
             foreach (Customer customer in customers)
             {
@@ -43,7 +43,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetCustomerByName()
         {
-            List<IItem> result = control.FindItems("Customers", "Brian Mariannesen");
+            List<List<string>> result = control.FindItems("Customers", "Brian Mariannesen");
 
             Assert.AreEqual(customers[0], result[0]);
         }
@@ -51,7 +51,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetCustomerByPartialName()
         {
-            List<IItem> result = control.FindItems("Customers", "rian Mar");
+            List<List<string>> result = control.FindItems("Customers", "rian Mar");
 
             Assert.AreEqual(customers[0], result[0]);
         }
@@ -59,7 +59,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetCustomerByNameLowercaseAndUppercaseMixed()
         {
-            List<IItem> result = control.FindItems("Customers", "bRiAn mArianNesen");
+            List<List<string>> result = control.FindItems("Customers", "bRiAn mArianNesen");
 
             Assert.AreEqual(customers[0], result[0]);
         }
@@ -67,17 +67,17 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetCustomerByPhoneNumber()
         {
-            List<IItem> result = control.FindItems("Customers", "+4512345678");
+            List<List<string>> result = control.FindItems("Customers", "+4512345678");
 
-            Assert.AreEqual(customers[0].Id, result[0].Id);
+            Assert.AreEqual(customers[0].Id, result[0]);
         }
 
         [TestMethod]
         public void GetCustomerByPartialPhoneNumber()
         {
-            List<IItem> result = control.FindItems("Customers", "3456");
+            List<List<string>> result = control.FindItems("Customers", "3456");
 
-            Assert.AreEqual(customers[0].Id, result[0].Id);
+            Assert.AreEqual(customers[0].Id, result[0]);
         }
 
 
@@ -85,7 +85,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetAllMaterials()
         {
-            List<IItem> result = control.FindItems("Materials");
+            List<List<string>> result = control.FindItems("Materials");
 
             int i = 0;
             foreach (Material material in materials)
@@ -98,25 +98,25 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetMaterialByName()
         {
-            List<IItem> result = control.FindItems("Materials", "6mm. Plade");
+            List<List<string>> result = control.FindItems("Materials", "6mm. Plade");
 
-            Assert.AreEqual(materials[1].Id, result[0].Id);
+            Assert.AreEqual(materials[1].Id, result[0]);
         }
 
         [TestMethod]
         public void GetMaterialByPartialName()
         {
-            List<IItem> result = control.FindItems("Materials", "Plade");
+            List<List<string>> result = control.FindItems("Materials", "Plade");
 
-            Assert.AreEqual(materials[1].Id, result[1].Id);
+            Assert.AreEqual(materials[1].Id, result[1]);
         }
 
         [TestMethod]
         public void GetMaterialByNameLowercaseAndUppercaseMixed()
         {
-            List<IItem> result = control.FindItems("Materials", "6MM. plAde");
+            List<List<string>> result = control.FindItems("Materials", "6MM. plAde");
 
-            Assert.AreEqual(materials[1].Id, result[0].Id);
+            Assert.AreEqual(materials[1].Id, result[0]);
         }
 
 
@@ -124,7 +124,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetAllOrders()
         {
-            List<IItem> result = control.FindItems("Orders");
+            List<List<string>> result = control.FindItems("Orders");
 
             int i = 0;
             foreach (Order order in orders)
@@ -137,22 +137,22 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetOrdersByOrderName()
         {
-            List<IItem> result = control.FindItems("Orders", "Komplet Køkken");
+            List<List<string>> result = control.FindItems("Orders", "Komplet Køkken");
 
-            Assert.AreEqual(orders[0].Id, result[0].Id);
+            Assert.AreEqual(orders[0].Id, result[0]);
         }
 
         [TestMethod]
         public void GetOrdersByOrderNamePartialAndMixed()
         {
-            List<IItem> result = control.FindItems("Orders", "hYlde");
+            List<List<string>> result = control.FindItems("Orders", "hYlde");
 
-            Assert.AreEqual(orders[1].Id, result[0].Id);
+            Assert.AreEqual(orders[1].Id, result[0]);
         }
 
         public void GetOrdersByCustomerName()
         {
-            List<IItem> result = control.FindItems("Orders", "Brian Mariannesen");
+            List<List<string>> result = control.FindItems("Orders", "Brian Mariannesen");
 
             int i = 0;
             foreach (Order order in orders)
@@ -165,7 +165,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetOrdersByCustomerPartialName()
         {
-            List<IItem> result = control.FindItems("Orders", "rian Mar");
+            List<List<string>> result = control.FindItems("Orders", "rian Mar");
 
             int i = 0;
             foreach (Order order in orders)
@@ -178,7 +178,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetOrdersByCustomerNameLowercaseAndUppercaseMixed()
         {
-            List<IItem> result = control.FindItems("Orders", "bRiAn mArianNesen");
+            List<List<string>> result = control.FindItems("Orders", "bRiAn mArianNesen");
 
             int i = 0;
             foreach (Order order in orders)
@@ -191,7 +191,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetOrdersByCustomerPhone()
         {
-            List<IItem> result = control.FindItems("Orders", "+4512345678");
+            List<List<string>> result = control.FindItems("Orders", "+4512345678");
 
             int i = 0;
             foreach (Order order in orders)
@@ -204,7 +204,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetOrdersByCustomerPartialPhoneNumber()
         {
-            List<IItem> result = control.FindItems("Orders", "3456");
+            List<List<string>> result = control.FindItems("Orders", "3456");
 
             int i = 0;
             foreach (Order order in orders)
@@ -217,7 +217,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void GetAllItems()
         {
-            List<IItem> result = control.FindItems("All");
+            List<List<string>> result = control.FindItems("All");
 
             Assert.AreEqual(6, result.Count);
         }

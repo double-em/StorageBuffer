@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,9 +44,9 @@ namespace StorageBuffer
 
         private void GetAllItems()
         {
-            foreach (IItem item in control.FindItems("All"))
+            foreach (List<string> item in control.FindItems("All"))
             {
-                lvResult.Items.Add(item);
+                lvResult.Items.Add( new {Type = item[0], Id = item[1], Name = item[2], Data = item[3] });
             }
         }
 
@@ -94,9 +95,9 @@ namespace StorageBuffer
                         break;
                 }
 
-                foreach (IItem item in control.FindItems(criteria, tbSearchBar.Text))
+                foreach (List<string> item in control.FindItems(criteria, tbSearchBar.Text))
                 {
-                    lvResult.Items.Add(item);
+                    lvResult.Items.Add(new { Type = item[0], Id = item[1], Name = item[2], Data = item[3] });
                 }
             }
         }
@@ -105,10 +106,10 @@ namespace StorageBuffer
         {
             var listViewItem = (ListViewItem) sender;
             var item = listViewItem.Content;
-            var listItem = (DataRowView)sender;
-            string type = listItem["Type"].ToString();
 
-            switch (item)
+            PropertyInfo[] props = item.GetType().GetProperties();
+
+            switch (props[0].GetValue(item, null))
             {
                 case "Customer":
                     break;
@@ -119,7 +120,7 @@ namespace StorageBuffer
                 case "Order":
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        OrderWindow orderWindow = new OrderWindow(control, (Order)listViewItem.Content);
+                        OrderWindow orderWindow = new OrderWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
                         orderWindows.Add(orderWindow);
                         orderWindow.Top = Top;
                         orderWindow.Left = Left;

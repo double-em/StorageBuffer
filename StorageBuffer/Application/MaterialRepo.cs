@@ -51,21 +51,26 @@ namespace StorageBuffer.Model
             materials = databaseRepo.GetAllMaterials();
         }
 
-        public List<IItem> GetMaterials(string searchQuery)
+        public List<List<string>> GetMaterials(string searchQuery)
         {
-            List<IItem> result = new List<IItem>();
+            List<List<string>> result = new List<List<string>>();
             foreach (Material material in materials)
             {
                 if (material.Name.ToLower().Contains(searchQuery.ToLower()))
                 {
-                    result.Add(material);
+                    result.Add(material.ToList());
                 }
             }
 
             return result;
         }
 
-        public Material GetMaterial(int MaterialId)
+        public List<string> GetMaterial(int MaterialId)
+        {
+            return materials.Find(x => x.Id == MaterialId).ToList();
+        }
+
+        public Material GetMaterialObj(int MaterialId)
         {
             return materials.Find(x => x.Id == MaterialId);
         }

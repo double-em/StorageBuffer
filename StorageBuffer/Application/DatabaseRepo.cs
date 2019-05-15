@@ -158,7 +158,7 @@ namespace StorageBuffer.Application
                         {
                             int.TryParse(reader["MaterialId"].ToString(), out int MaterialId);
                             int.TryParse(reader["Quantity"].ToString(), out int quantity);
-                            Material material = MaterialRepo.Instance.GetMaterial(MaterialId);
+                            Material material = MaterialRepo.Instance.GetMaterialObj(MaterialId);
 
                             result.Add(new Orderline(material, quantity));
                         }

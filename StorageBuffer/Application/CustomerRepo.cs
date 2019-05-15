@@ -51,15 +51,15 @@ namespace StorageBuffer.Model
             customers = databaseRepo.GetAllCustomers();
         }
 
-        public List<IItem> GetCustomers(string searchQuery)
+        public List<List<string>> GetCustomers(string searchQuery)
         {
-            List<IItem> result = new List<IItem>();
+            List<List<string>> result = new List<List<string>>();
             foreach (Customer customer in customers)
             {
                 if (customer.Name.ToLower().Contains(searchQuery.ToLower()) || 
                     customer.Phone.Contains(searchQuery))
                 {
-                    result.Add(customer);
+                    result.Add(customer.ToList());
                 }
             }
 

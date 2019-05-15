@@ -52,9 +52,9 @@ namespace StorageBuffer.Application
             orderRepo = OrderRepo.Instance;
         }
 
-        public List<IItem> FindItems(string searchCriteria, string searchQuery = "")
+        public List<List<string>> FindItems(string searchCriteria, string searchQuery = "")
         {
-            List<IItem> result = new List<IItem>();
+            List<List<string>> result = new List<List<string>>();
             switch (searchCriteria)
             {
                 case "Customers":
@@ -88,14 +88,29 @@ namespace StorageBuffer.Application
             orderRepo.ChangeStatusOfOrder(orderId, status);
         }
 
-        public void UpdateOrder(int orderId, Order order)
+        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines)
         {
-            orderRepo.UpdateOrder(orderId, order);
+            orderRepo.UpdateOrder(orderId, orderStatus, orderlines);
         }
 
         public bool CreateOrder(Customer customer, string orderName, string deadline)
         {
             return orderRepo.CreateOrder(customer, orderName, deadline);
+        }
+
+        public List<string> GetOrderInfo(int orderId)
+        {
+            return orderRepo.GetOrderInfo(orderId);
+        }
+
+        public List<List<string>> GetOrderlines(int orderId)
+        {
+            return orderRepo.GetOrderlines(orderId);
+        }
+
+        public List<string> GetMaterial(int materialId)
+        {
+            return materialRepo.GetMaterial(materialId);
         }
     }
 }

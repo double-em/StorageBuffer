@@ -60,5 +60,25 @@ namespace StorageBuffer.Domain
                 material.Quantity -= amount;
             }
         }
+
+        public List<string> ToList()
+        {
+            return new List<string>() { Type, Id.ToString(), Name, Data };
+        }
+
+        public List<string> ToLongList()
+        {
+            return new List<string>() { Id.ToString(), Name, Date, Deadline, CustomerObj.Name, OrderStatus.ToString() };
+        }
+
+        public List<List<string>> GetOrderlines()
+        {
+            List<List<string>> result = new List<List<string>>();
+            foreach (Orderline orderline in orderlines)
+            {
+                result.Add(orderline.ToList());
+            }
+            return result;
+        }
     }
 }

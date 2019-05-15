@@ -26,5 +26,14 @@ namespace StorageBuffer.Domain
             Comment = comment;
             Quantity = quantity;
         }
+
+        public List<string> ToList()
+        {
+            return new List<string>() { Type, Id.ToString(), Name, Data };
+        }
+        public List<string> ToLongList()
+        {
+            return new List<string>() { Id.ToString(), Name, Comment, Quantity.ToString() };
+        }
     }
 }

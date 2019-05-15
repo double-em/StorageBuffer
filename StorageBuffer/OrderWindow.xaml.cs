@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,18 +25,18 @@ namespace StorageBuffer
     public partial class OrderWindow : Window
     {
         private Controller control;
-        private Order orderBefore;
-        private Order order;
-        public OrderWindow(Controller control, Order order)
+        private int orderId;
+        private string orderName;
+        private string orderDate;
+        private string orderDeadline;
+        private string customerName;
+        private string orderStatus;
+        private List<List<string>> orderlines;
+
+        public OrderWindow(Controller control, int orderId)
         {
             InitializeComponent();
-
-            this.orderBefore = order;
-            this.order = new Order(order.Id, order.CustomerObj, order.OrderStatus, order.Name, order.Date, order.Deadline);
-            foreach (Orderline orderline in orderBefore.orderlines)
-            {
-                this.order.orderlines.Add(new Orderline(orderline.MaterialObj, orderline.Quantity));
-            }
+            this.orderId = orderId;
             this.control = control;
             Setup();
             this.Show();
@@ -43,40 +44,52 @@ namespace StorageBuffer
 
         private void Setup()
         {
+            GetOrderInfo();
             GetAllOrderlines();
+            orderlines = control.GetOrderlines(orderId);
+        }
 
-            Title = "Ordre - " + order.Id + " : " + order.Name;
-            lOrderNumber.Content = "Ordrenummer: " + order.Id;
-            lOrderDate.Content = "Ordredato: " + order.Date;
-            lDeadline.Content = "Deadline: " + order.Deadline;
-            lCustomerName.Content = "Kunde: " + order.CustomerObj.Name;
+        private void GetOrderInfo()
+        {
+            List<string> orderInfo = control.GetOrderInfo(orderId);
+            orderName = orderInfo[1];
+            orderDate = orderInfo[2];
+            orderDeadline = orderInfo[3];
+            customerName = orderInfo[4];
+            orderStatus = orderInfo[5];
 
-            switch (order.OrderStatus)
+            Title = "Ordre - " + orderId + " : " + orderName;
+            lOrderNumber.Content = "Ordrenummer: " + orderId;
+            lOrderDate.Content = "Ordredato: " + orderDate;
+            lDeadline.Content = "Deadline: " + orderDeadline;
+            lCustomerName.Content = "Kunde: " + customerName;
+
+            switch (orderStatus)
             {
-                case Status.Received:
+                case "Received":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[0];
                     break;
 
-                case Status.InProgress:
+                case "InProgress":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[1];
                     break;
 
-                case Status.Done:
+                case "Done":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[2];
                     break;
 
-                case Status.Shipped:
+                case "Shipped":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[3];
                     break;
 
-                case Status.Billed:
+                case "Billed":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[4];
                     break;
 
-                case Status.Paid:
+                case "Paid":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[5];
                     break;
-                case Status.Canceled:
+                case "Canceled":
                     cbOrderChoice.SelectedItem = cbOrderChoice.Items[6];
                     break;
             }
@@ -99,9 +112,9 @@ namespace StorageBuffer
             if (chooseWindow.DialogResult.Value)
             {
                 bool materialAlreadyAdded = false;
-                foreach (Orderline orderline in order.orderlines)
+                foreach (List<string> orderline in orderlines)
                 {
-                    if (orderline.MaterialId == chooseWindow.ChoosenMaterial.Id)
+                    if (orderline[0] == chooseWindow.ChoosenMaterial.Id.ToString())
                     {
                         materialAlreadyAdded = true;
                         break;
@@ -110,8 +123,8 @@ namespace StorageBuffer
 
                 if (!materialAlreadyAdded)
                 {
-                    Orderline orderlineNew = new Orderline(chooseWindow.ChoosenMaterial, 0);
-                    order.orderlines.Add(orderlineNew);
+                    List<string> orderlineNew = new List<string>() { chooseWindow.ChoosenMaterial.Id.ToString(), chooseWindow.ChoosenMaterial.Name, "0" };
+                    orderlines.Add(orderlineNew);
                     lvResult.Items.Add(orderlineNew);
                 }
             }
@@ -119,10 +132,19 @@ namespace StorageBuffer
 
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
-            var listItem = (ListViewItem)sender;
-            var orderline = (Orderline) listItem.Content;
+            var listViewItem = (ListViewItem)sender;
+            var orderline = listViewItem.Content;
 
-            ChangeOrderline changeOrderline = new ChangeOrderline(orderline);
+            PropertyInfo[] props = orderline.GetType().GetProperties();
+
+            int materialId = int.Parse(props[0].GetValue(orderline, null).ToString());
+
+            List<string> material = control.GetMaterial(materialId);
+
+            /*var listItem = (ListViewItem)sender;
+            var orderline = (Orderline) listItem.Content;*/
+
+            ChangeOrderline changeOrderline = new ChangeOrderline(orderline, material[3]);
             changeOrderline.Owner = this;
             changeOrderline.Top = this.Top;
             changeOrderline.Left = this.Left;
@@ -130,7 +152,7 @@ namespace StorageBuffer
 
             if (changeOrderline.delete)
             {
-                order.orderlines.Remove(orderline);
+                orderlines.Remove(orderlines.Find(x => x[0] == materialId.ToString()));
             }
 
             GetAllOrderlines();
@@ -139,15 +161,15 @@ namespace StorageBuffer
         private void GetAllOrderlines()
         {
             lvResult.Items.Clear();
-            foreach (Orderline orderline in order.orderlines)
+            foreach (List<string> item in control.GetOrderlines(orderId))
             {
-                lvResult.Items.Add(orderline);
+                lvResult.Items.Add(new { MaterialId = item[0], MaterialName = item[1], Quantity = item[2] });
             }
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            control.UpdateOrder(orderBefore.Id, order);
+            control.UpdateOrder(orderId, orderStatus, orderlines);
         }
 
         private void CbOrderChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -155,31 +177,31 @@ namespace StorageBuffer
             switch (cbOrderChoice.SelectedIndex)
             {
                 case 0:
-                    order.OrderStatus = Status.Received;
+                    orderStatus = "Received";
                     break;
 
                 case 1:
-                    order.OrderStatus = Status.InProgress;
+                    orderStatus = "InProgress";
                     break;
 
                 case 2:
-                    order.OrderStatus = Status.Done;
+                    orderStatus = "Done";
                     break;
 
                 case 3:
-                    order.OrderStatus = Status.Shipped;
+                    orderStatus = "Shipped";
                     break;
 
                 case 4:
-                    order.OrderStatus = Status.Billed;
+                    orderStatus = "Billed";
                     break;
 
                 case 5:
-                    order.OrderStatus = Status.Paid;
+                    orderStatus = "Paid";
                     break;
 
                 case 6:
-                    order.OrderStatus = Status.Canceled;
+                    orderStatus = "Canceled";
                     break;
             }
         }

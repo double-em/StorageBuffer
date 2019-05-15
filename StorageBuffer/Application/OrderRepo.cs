@@ -55,16 +55,16 @@ namespace StorageBuffer.Model
             orders = databaseRepo.GetAllOrders();
         }
 
-        public List<IItem> GetOrders(string searchQuery)
+        public List<List<string>> GetOrders(string searchQuery)
         {
-            List<IItem> result = new List<IItem>();
+            List<List<string>> result = new List<List<string>>();
             foreach (Order order in orders)
             {
                 if (order.Name.ToLower().Contains(searchQuery.ToLower()) || 
                     order.CustomerObj.Name.ToLower().Contains(searchQuery.ToLower()) || 
                     order.CustomerObj.Phone.Contains(searchQuery))
                 {
-                    result.Add(order);
+                    result.Add(order.ToList());
                 }
             }
 
@@ -95,21 +95,32 @@ namespace StorageBuffer.Model
             
         }
 
-        public void UpdateOrder(int orderId, Order order)
+        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines)
         {
             Order orderResult = orders.Find(x => x.Id == orderId);
 
-            orderResult.OrderStatus = order.OrderStatus;
+            Status.TryParse(orderStatus, out Status status);
+            orderResult.OrderStatus = status;
 
             orderResult.orderlines = new List<Orderline>();
             databaseRepo.RemoveOrderlines(orderResult);
             databaseRepo.UpdateOrder(orderResult);
 
-            foreach (Orderline orderline in order.orderlines)
+            foreach (List<string> orderline in orderlines)
             {
-                RegisterUsedMaterial(orderResult.Id, orderline.MaterialObj, orderline.Quantity);
-                databaseRepo.InsertOrderline(orderResult.Id, orderline);
+                //RegisterUsedMaterial(orderResult.Id, orderline[0], orderline[2]);
+                //databaseRepo.InsertOrderline(orderResult.Id, orderline);
             }
+        }
+
+        public List<string> GetOrderInfo(int orderId)
+        {
+            return orders.Find(x => x.Id == orderId).ToLongList();
+        }
+
+        public List<List<string>> GetOrderlines(int orderId)
+        {
+            return orders.Find(x => x.Id == orderId).GetOrderlines();
         }
     }
 }

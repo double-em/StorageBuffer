@@ -20,5 +20,10 @@ namespace StorageBuffer.Domain
             MaterialName = MaterialObj.Name;
             Quantity = quantity;
         }
+
+        public List<string> ToList()
+        {
+            return new List<string>() { MaterialId.ToString(), MaterialName, Quantity.ToString() };
+        }
     }
 }

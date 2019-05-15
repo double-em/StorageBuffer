@@ -32,5 +32,10 @@ namespace StorageBuffer.Domain
             Phone = phone;
             Email = email;
         }
+
+        public List<string> ToList()
+        {
+            return new List<string>() {Type, Id.ToString(), Name, Data};
+        }
     }
 }
