@@ -128,7 +128,7 @@ namespace StorageBuffer.Application
                             string date = reader["OrderDate"].ToString();
                             string deadline = reader["Deadline"].ToString();
 
-                            Customer customer = customerRepoCustomers.Find(x => x.Id == id);
+                            Customer customer = customerRepoCustomers.Find(x => x.Id == customerId);
 
                             Order order = new Order(id, customer, status, name, date, deadline);
                             order.orderlines = GetOrderlinesForOrder(order);
