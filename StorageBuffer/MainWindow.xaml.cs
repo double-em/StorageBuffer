@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,10 +103,12 @@ namespace StorageBuffer
 
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
-            var ListItem = (ListViewItem)sender;
-            var item = (IItem)ListItem.Content;
+            var listViewItem = (ListViewItem) sender;
+            var item = (IItem)listViewItem;
+            var listItem = (DataRowView)sender;
+            string type = listItem["Type"].ToString();
 
-            switch (item.Type)
+            switch (type)
             {
                 case "Customer":
                     break;
