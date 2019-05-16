@@ -74,5 +74,10 @@ namespace StorageBuffer.Model
         {
             return materials.Find(x => x.Id == MaterialId);
         }
+
+        public List<string> GetMaterialLong(int materialId)
+        {
+            return materials.Find(x => x.Id == materialId).ToLongList();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace StorageBuffer
     {
         public bool delete = false;
         private PropertyInfo[] props;
-        private int quantity;
+        public int quantity;
         private int maxQuantity;
         public ChangeOrderline(object orderline, string materialQuantity)
         {

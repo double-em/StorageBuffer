@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +23,8 @@ namespace StorageBuffer
     public partial class MaterialChooseWindow : Window
     {
         private Controller control;
-        public Material ChoosenMaterial { get; set; }
+        public int MaterialId { get; set; }
+        public string MaterialName { get; set; }
         public MaterialChooseWindow(Controller control)
         {
             InitializeComponent();
@@ -33,7 +35,12 @@ namespace StorageBuffer
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
             var listItem = (ListViewItem) sender;
-            ChoosenMaterial = (Material)listItem.Content;
+            var ChoosenMaterial = listItem.Content;
+
+            PropertyInfo[] props = ChoosenMaterial.GetType().GetProperties();
+
+            MaterialId = int.Parse(props[0].GetValue(ChoosenMaterial, null).ToString());
+            MaterialName = props[1].GetValue(ChoosenMaterial, null).ToString();
             DialogResult = true;
             this.Close();
 
@@ -59,18 +66,18 @@ namespace StorageBuffer
             if (control != null)
             {
                 lvResult.Items.Clear();
-                foreach (IItem item in control.FindItems("Materials", tbSearchBar.Text))
+                foreach (List<string> item in control.FindItems("Materials", tbSearchBar.Text))
                 {
-                    lvResult.Items.Add(item);
+                    lvResult.Items.Add(new { Id = item[1], Name = item[2], Data = item[3] });
                 }
             }
         }
 
         void GetAllMaterials()
         {
-            foreach (IItem item in control.FindItems("Materials"))
+            foreach (List<string> item in control.FindItems("Materials"))
             {
-                lvResult.Items.Add(item);
+                lvResult.Items.Add(new { Id = item[1], Name = item[2], Data = item[3] });
             }
         }
     }
