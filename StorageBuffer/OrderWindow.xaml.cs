@@ -45,8 +45,8 @@ namespace StorageBuffer
         private void Setup()
         {
             GetOrderInfo();
-            GetAllOrderlines();
             orderlines = control.GetOrderlines(orderId);
+            GetAllOrderlines();
         }
 
         private void GetOrderInfo()
@@ -154,8 +154,10 @@ namespace StorageBuffer
             {
                 orderlines.Remove(orderlines.Find(x => x[0] == materialId.ToString()));
             }
-
-            
+            else
+            {
+                orderlines.Find(x => x[0] == materialId.ToString())[2] = changeOrderline.quantity.ToString();
+            }
 
             GetAllOrderlines();
         }
@@ -163,7 +165,7 @@ namespace StorageBuffer
         private void GetAllOrderlines()
         {
             lvResult.Items.Clear();
-            foreach (List<string> item in control.GetOrderlines(orderId))
+            foreach (List<string> item in orderlines)
             {
                 lvResult.Items.Add(new { MaterialId = item[0], MaterialName = item[1], Quantity = item[2] });
             }

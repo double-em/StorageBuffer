@@ -71,8 +71,9 @@ namespace StorageBuffer.Model
             return result;
         }
 
-        public void RegisterUsedMaterial(int orderId, Material material, int amount)
+        public void RegisterUsedMaterial(int orderId, int materialId, int amount)
         {
+            Material material = MaterialRepo.Instance.GetMaterialObj(materialId);
             orders.Find(x => x.Id == orderId).RegisterUsedMaterial(material, amount);
         }
 
@@ -108,8 +109,10 @@ namespace StorageBuffer.Model
 
             foreach (List<string> orderline in orderlines)
             {
-                //RegisterUsedMaterial(orderResult.Id, orderline[0], orderline[2]);
-                //databaseRepo.InsertOrderline(orderResult.Id, orderline);
+                RegisterUsedMaterial(orderResult.Id, int.Parse(orderline[0]), int.Parse(orderline[2]));
+                int.TryParse(orderline[0], out int materialId);
+                int.TryParse(orderline[2], out int quantity);
+                databaseRepo.InsertOrderline(orderResult.Id, materialId, quantity);
             }
         }
 

@@ -12,7 +12,7 @@ namespace StorageBuffer.Domain
         List<Material> GetAllMaterials();
         List<Order> GetAllOrders();
         void UpdateOrder(Order order);
-        void InsertOrderline(int orderId, Orderline orderline);
+        void InsertOrderline(int orderId, int materialId, int quantity);
         void RemoveOrderlines(Order order);
     }
 }

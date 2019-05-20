@@ -71,7 +71,7 @@ namespace StorageBuffer.Application
             throw new NotImplementedException();
         }
 
-        public void InsertOrderline(int orderId, Orderline orderline)
+        public void InsertOrderline(int orderId, int materialId, int quantity)
         {
             throw new NotImplementedException();
         }

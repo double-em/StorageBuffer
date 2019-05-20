@@ -186,7 +186,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public void InsertOrderline(int orderId, Orderline orderline)
+        public void InsertOrderline(int orderId, int materialId, int quantity)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -195,8 +195,8 @@ namespace StorageBuffer.Application
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
-                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = orderline.MaterialId;
-                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = orderline.Quantity;
+                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = materialId;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
 
                     connection.Open();
 

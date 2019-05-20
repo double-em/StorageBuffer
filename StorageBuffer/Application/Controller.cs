@@ -78,11 +78,6 @@ namespace StorageBuffer.Application
             return result;
         }
 
-        public void RegisterUsedMaterial(int orderId, Material material, int amount)
-        {
-            orderRepo.RegisterUsedMaterial(orderId, material, amount);
-        }
-
         public void ChangeStatusOfOrder(int orderId, Status status)
         {
             orderRepo.ChangeStatusOfOrder(orderId, status);
