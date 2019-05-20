@@ -115,7 +115,15 @@
             </TabItem>
 
             <TabItem Header="Indskriv Vare" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
-                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+                <Grid Background="#FFF" Margin="26,28,30,30">
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCreateMaterialName" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Antal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,0,0,0"/>
+                    <TextBox Name="tbCreateMaterial" Text="0" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,95,0,0"/>
+                    <TextBox Name="tbCreateMaterialComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                </Grid>
+
             </TabItem>
 
             <TabItem Header="Opret Ordre" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
