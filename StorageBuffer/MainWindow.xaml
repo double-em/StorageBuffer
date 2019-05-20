@@ -135,7 +135,20 @@
             </TabItem>
 
             <TabItem Header="Opret Kunde" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
-                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+                <Grid Background="#FFF" Margin="26,28,30,30">
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCreateCustomerAddress" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,92,0,0"/>
+                    <TextBox Name="tbCreateCustomerName" Text="f.eks. Søndergade 18B" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="By" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,188,0,0"/>
+                    <TextBox Name="tbCreateCustomerCity" Text="f.eks. Odense C" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Post nr." HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,188,0,0"/>
+                    <TextBox Name="tbCreateCustomerZip" Text="f.eks. 5000" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,284,0,0"/>
+                    <TextBox Name="tbCreateCustomerComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                </Grid>
+
+
             </TabItem>
 
         </TabControl>
