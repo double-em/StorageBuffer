@@ -149,7 +149,7 @@ namespace StorageBuffer
 
         private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text);
+            control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text, tbOrderComment.Text);
             ClearCreateOrderFields();
         }
 

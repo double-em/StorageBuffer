@@ -127,10 +127,11 @@ namespace StorageBuffer.Application
                             string name = reader["OrderName"].ToString();
                             string date = reader["OrderDate"].ToString();
                             string deadline = reader["Deadline"].ToString();
+                            string description = reader["OrderDescription"].ToString();
 
                             string customerName = CustomerRepo.Instance.GetCustomerName(customerId);
 
-                            Order order = new Order(id, customerId, customerName, status, name, date, deadline);
+                            Order order = new Order(id, customerId, customerName, status, name, date, deadline, description);
                             order.orderlines = GetOrderlinesForOrder(order);
                             result.Add(order);
                         }
@@ -179,6 +180,7 @@ namespace StorageBuffer.Application
 
                     cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
                     cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = order.OrderStatus.ToString();
+                    cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = order.Description;
                     connection.Open();
 
                     cmd.ExecuteNonQuery();
@@ -222,7 +224,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public int CreateOrder(int customerId, string name, string date, string deadline)
+        public int CreateOrder(int customerId, string name, string date, string deadline, string description)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -235,6 +237,7 @@ namespace StorageBuffer.Application
                     cmd.Parameters.Add("@OrderName", SqlDbType.NVarChar).Value = name;
                     cmd.Parameters.Add("@OrderDate", SqlDbType.NChar).Value = date;
                     cmd.Parameters.Add("@Deadline", SqlDbType.NChar).Value = deadline;
+                    cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = description;
 
                     connection.Open();
 

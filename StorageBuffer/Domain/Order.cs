@@ -26,6 +26,7 @@ namespace StorageBuffer.Domain
         public string Deadline { get; set; }
         public List<Orderline> orderlines;
         public string Type { get; } = "Order";
+        public string Description { get; set; }
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
@@ -35,7 +36,7 @@ namespace StorageBuffer.Domain
             get { return $"Deadline: {Deadline}, {CustomerName}"; }
         }
 
-        public Order(int id, int customerId, string customerName, Status orderStatus, string name, string date, string deadline)
+        public Order(int id, int customerId, string customerName, Status orderStatus, string name, string date, string deadline, string description)
         {
             Id = id;
             CustomerId = customerId;
@@ -45,6 +46,7 @@ namespace StorageBuffer.Domain
             Date = date;
             Deadline = deadline;
             orderlines = new List<Orderline>();
+            Description = description;
         }
 
         public void RegisterUsedMaterial(Material material, int amount)
@@ -71,7 +73,7 @@ namespace StorageBuffer.Domain
 
         public List<string> ToLongList()
         {
-            return new List<string>() { Id.ToString(), Name, Date, Deadline, CustomerName, OrderStatus.ToString() };
+            return new List<string>() { Id.ToString(), Name, Date, Deadline, CustomerName, OrderStatus.ToString(), Description };
         }
 
         public List<List<string>> GetOrderlines()

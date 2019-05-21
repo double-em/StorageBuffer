@@ -29,7 +29,7 @@ namespace StorageBufferTest
         public void OrderAddedToOrderList()
         {
             string orderName = "Bordplade med skarpkantet vask";
-            control.CreateOrder(customers[0].Id, orderName, "02/02/2019");
+            control.CreateOrder(customers[0].Id, orderName, "02/02/2019", "ingen");
 
             Assert.IsTrue(orders.Exists(x => x.Name == orderName));
         }
@@ -37,7 +37,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void OrderCreationReturnsTrueIfAdded()
         {
-            bool result = control.CreateOrder(customers[0].Id, "Bordplade med skarpkantet vask", "02/02/2019");
+            bool result = control.CreateOrder(customers[0].Id, "Bordplade med skarpkantet vask", "02/02/2019", "ingen");
 
             Assert.IsTrue(result);
         }

@@ -63,6 +63,7 @@ namespace StorageBuffer
             lOrderDate.Content = "Ordredato: " + orderDate;
             lDeadline.Content = "Deadline: " + orderDeadline;
             lCustomerName.Content = "Kunde: " + customerName;
+            tbOrderDescription.Text = orderInfo[6];
 
             switch (orderStatus)
             {
@@ -173,7 +174,7 @@ namespace StorageBuffer
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            control.UpdateOrder(orderId, orderStatus, orderlines);
+            control.UpdateOrder(orderId, orderStatus, orderlines, tbOrderDescription.Text);
         }
 
         private void CbOrderChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)

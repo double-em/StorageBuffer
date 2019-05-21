@@ -82,10 +82,10 @@ namespace StorageBuffer.Model
             orders.Find(x => x.Id == orderId).OrderStatus = status;
         }
 
-        public bool CreateOrder(int customerId, string orderName, string deadline)
+        public bool CreateOrder(int customerId, string orderName, string deadline, string description)
         {
             string date = DateTime.Now.ToShortDateString();
-            int id = DatabaseRepo.Instance.CreateOrder(customerId, orderName, date, deadline);
+            int id = DatabaseRepo.Instance.CreateOrder(customerId, orderName, date, deadline, description);
             
             if (id == 0)
             {
@@ -93,18 +93,19 @@ namespace StorageBuffer.Model
             }
 
             string customerName = CustomerRepo.Instance.GetCustomerName(customerId);
-            Order order = new Order(id, customerId, customerName, Status.Received, orderName, date, deadline);
+            Order order = new Order(id, customerId, customerName, Status.Received, orderName, date, deadline, description);
             orders.Add(order);
             return true;
             
         }
 
-        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines)
+        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
         {
             Order orderResult = orders.Find(x => x.Id == orderId);
 
             Status.TryParse(orderStatus, out Status status);
             orderResult.OrderStatus = status;
+            orderResult.Description = description;
 
             orderResult.orderlines = new List<Orderline>();
             databaseRepo.RemoveOrderlines(orderResult);

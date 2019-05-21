@@ -88,14 +88,14 @@ namespace StorageBuffer.Application
             orderRepo.ChangeStatusOfOrder(orderId, status);
         }
 
-        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines)
+        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
         {
-            orderRepo.UpdateOrder(orderId, orderStatus, orderlines);
+            orderRepo.UpdateOrder(orderId, orderStatus, orderlines, description);
         }
 
-        public bool CreateOrder(int customerId, string orderName, string deadline)
+        public bool CreateOrder(int customerId, string orderName, string deadline, string description)
         {
-            return orderRepo.CreateOrder(customerId, orderName, deadline);
+            return orderRepo.CreateOrder(customerId, orderName, deadline, description);
         }
 
         public List<string> GetOrderInfo(int orderId)
