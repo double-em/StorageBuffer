@@ -81,11 +81,11 @@ namespace StorageBuffer.Model
             orders.Find(x => x.Id == orderId).OrderStatus = status;
         }
 
-        public bool CreateOrder(Customer customer, string orderName, string deadline)
+        public bool CreateOrder(Customer customer, string orderName, string description, string deadline)
         {
             string date = DateTime.Now.ToShortDateString();
-            int id = DatabaseRepo.Instance.CreateOrder(customer.Id, orderName, date, deadline);
-            Order order = new Order(id, customer, Status.Received, orderName, date, deadline);
+            int id = DatabaseRepo.Instance.CreateOrder(customer.Id, orderName, date, description, deadline);
+            Order order = new Order(id, customer, Status.Received, orderName, date, description, deadline);
             if (order == null)
             {
                 return false;

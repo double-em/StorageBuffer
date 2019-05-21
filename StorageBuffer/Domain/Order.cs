@@ -25,6 +25,7 @@ namespace StorageBuffer.Domain
         public string Name { get; set; }
         public string Date { get; set; }
         public string Deadline { get; set; }
+        public string Description {get; set; }
         public List<Orderline> orderlines;
         public string Type { get; } = "Order";
 
@@ -33,7 +34,7 @@ namespace StorageBuffer.Domain
             get { return $"Deadline: {Deadline}, {CustomerObj.Name}"; }
         }
 
-        public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline)
+        public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline, string Description)
         {
             Id = id;
             CustomerObj = customerObj;
@@ -41,6 +42,7 @@ namespace StorageBuffer.Domain
             Name = name;
             Date = date;
             Deadline = deadline;
+            Description = description;
             orderlines = new List<Orderline>();
         }
 
