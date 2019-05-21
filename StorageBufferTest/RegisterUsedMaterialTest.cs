@@ -33,10 +33,10 @@ namespace StorageBufferTest
             control.orderRepo = null;
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void RegisterUsedMaterialOneItem()
         {
-            control.RegisterUsedMaterial(orders[0].Id, materials[1], 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[1].Id, 1);
 
             Assert.AreEqual(1, orders[0].orderlines.Count);
         }
@@ -44,8 +44,8 @@ namespace StorageBufferTest
         [TestMethod]
         public void RegisterUsedMaterialMultipleItems()
         {
-            control.RegisterUsedMaterial(orders[0].Id, materials[1], 1);
-            control.RegisterUsedMaterial(orders[0].Id, materials[0], 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[1].Id, 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
 
             Assert.AreEqual(2, orders[0].orderlines.Count);
         }
@@ -53,7 +53,7 @@ namespace StorageBufferTest
         [TestMethod]
         public void RegisterUsedMaterialTooManyItems()
         {
-            control.RegisterUsedMaterial(orders[0].Id, materials[1], 2);
+            control.RegisterUsedMaterial(orders[0].Id, materials[1].Id, 2);
 
             Assert.AreEqual(2, orders[0].orderlines.Count);
         }
@@ -61,8 +61,8 @@ namespace StorageBufferTest
         [TestMethod]
         public void RegisterUsedMaterialSameItem()
         {
-            control.RegisterUsedMaterial(orders[0].Id, materials[0], 1);
-            control.RegisterUsedMaterial(orders[0].Id, materials[0], 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
 
             Assert.AreEqual(1, orders[0].orderlines[0].Quantity);
             Assert.AreEqual(2, orders[0].orderlines.Count);
@@ -71,9 +71,9 @@ namespace StorageBufferTest
         [TestMethod]
         public void RegisterUsedMaterialQuantityLowered()
         {
-            control.RegisterUsedMaterial(orders[0].Id, materials[0], 1);
+            control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
 
             Assert.AreEqual(0, materials[0].Quantity);
-        }*/
+        }
     }
 }

@@ -32,11 +32,11 @@ namespace StorageBufferTest
         public void GetAllCustomers()
         {
             List<List<string>> result = control.FindItems("Customers");
-            int I = 0;
+            int i = 0;
             foreach (Customer customer in customers)
             {
-                Assert.AreEqual(customer, result[I]);
-                I++;
+                Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
+                i++;
             }
         }
 
@@ -45,7 +45,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Customers", "Brian Mariannesen");
 
-            Assert.AreEqual(customers[0], result[0]);
+            Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Customers", "rian Mar");
 
-            Assert.AreEqual(customers[0], result[0]);
+            Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Customers", "bRiAn mArianNesen");
 
-            Assert.AreEqual(customers[0], result[0]);
+            Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Customers", "+4512345678");
 
-            Assert.AreEqual(customers[0].Id, result[0]);
+            Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Customers", "3456");
 
-            Assert.AreEqual(customers[0].Id, result[0]);
+            Assert.AreEqual(customers[0].Id.ToString(), result[0][1]);
         }
 
 
@@ -90,7 +90,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Material material in materials)
             {
-                Assert.AreEqual(material, result[i]);
+                Assert.AreEqual(material.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -100,7 +100,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Materials", "6mm. Plade");
 
-            Assert.AreEqual(materials[1].Id, result[0]);
+            Assert.AreEqual(materials[1].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Materials", "Plade");
 
-            Assert.AreEqual(materials[1].Id, result[1]);
+            Assert.AreEqual(materials[1].Id.ToString(), result[1][1]);
         }
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Materials", "6MM. plAde");
 
-            Assert.AreEqual(materials[1].Id, result[0]);
+            Assert.AreEqual(materials[1].Id.ToString(), result[0][1]);
         }
 
 
@@ -129,7 +129,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -139,7 +139,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Orders", "Komplet Køkken");
 
-            Assert.AreEqual(orders[0].Id, result[0]);
+            Assert.AreEqual(orders[0].Id.ToString(), result[0][1]);
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace StorageBufferTest
         {
             List<List<string>> result = control.FindItems("Orders", "hYlde");
 
-            Assert.AreEqual(orders[1].Id, result[0]);
+            Assert.AreEqual(orders[1].Id.ToString(), result[0][1]);
         }
 
         public void GetOrdersByCustomerName()
@@ -157,7 +157,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -170,7 +170,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -183,7 +183,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -196,7 +196,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
@@ -209,7 +209,7 @@ namespace StorageBufferTest
             int i = 0;
             foreach (Order order in orders)
             {
-                Assert.AreEqual(order, result[i]);
+                Assert.AreEqual(order.Id.ToString(), result[i][1]);
                 i++;
             }
         }
