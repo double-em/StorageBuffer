@@ -20,29 +20,30 @@ namespace StorageBuffer.Domain
     public class Order : IItem
     {
         public int Id { get; set; }
-        public Customer CustomerObj { get; set; }
         public Status OrderStatus { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
         public string Deadline { get; set; }
-        public string Description {get; set; }
         public List<Orderline> orderlines;
         public string Type { get; } = "Order";
 
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+
         public string Data
         {
-            get { return $"Deadline: {Deadline}, {CustomerObj.Name}"; }
+            get { return $"Deadline: {Deadline}, {CustomerName}"; }
         }
 
-        public Order(int id, Customer customerObj, Status orderStatus, string name, string date, string deadline, string Description)
+        public Order(int id, int customerId, string customerName, Status orderStatus, string name, string date, string deadline)
         {
             Id = id;
-            CustomerObj = customerObj;
+            CustomerId = customerId;
+            CustomerName = customerName;
             OrderStatus = orderStatus;
             Name = name;
             Date = date;
             Deadline = deadline;
-            Description = description;
             orderlines = new List<Orderline>();
         }
 
@@ -70,7 +71,7 @@ namespace StorageBuffer.Domain
 
         public List<string> ToLongList()
         {
-            return new List<string>() { Id.ToString(), Name, Date, Deadline, CustomerObj.Name, OrderStatus.ToString() };
+            return new List<string>() { Id.ToString(), Name, Date, Deadline, CustomerName, OrderStatus.ToString() };
         }
 
         public List<List<string>> GetOrderlines()

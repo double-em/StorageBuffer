@@ -74,6 +74,13 @@ namespace StorageBuffer
         {
             if (control != null)
             {
+                string searchQuery = tbSearchBar.Text;
+
+                if (tbSearchBar.Foreground != Brushes.Black)
+                {
+                    searchQuery = "";
+                }
+
                 lvResult.Items.Clear();
                 string criteria = "";
                 switch (cbChoice.SelectedIndex)
@@ -95,7 +102,7 @@ namespace StorageBuffer
                         break;
                 }
 
-                foreach (List<string> item in control.FindItems(criteria, tbSearchBar.Text))
+                foreach (List<string> item in control.FindItems(criteria, searchQuery))
                 {
                     lvResult.Items.Add(new { Type = item[0], Id = item[1], Name = item[2], Data = item[3] });
                 }
@@ -135,6 +142,41 @@ namespace StorageBuffer
             foreach (OrderWindow window in orderWindows)
             {
                 window.Close();
+            }
+        }
+
+        private int createOrderCustomerId;
+
+        private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text);
+            ClearCreateOrderFields();
+        }
+
+        private void ClearCreateOrderFields()
+        {
+            tbOrderName.Text = "";
+            lCustomerName.Content = "Ingen Kunde Valgt";
+            tbOrderDeadline.Text = "";
+            tbOrderComment.Text = "";
+        }
+
+        private void BtnChooseCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerChooseWindow customerChooseWindow = new CustomerChooseWindow(control);
+            customerChooseWindow.Owner = this;
+            customerChooseWindow.Top = Top;
+            customerChooseWindow.Left = Left + 8;
+            customerChooseWindow.ShowDialog();
+
+            if (customerChooseWindow.CustomerId == 0)
+            {
+                lCustomerName.Content = "Ingen Kunde Valgt";
+            }
+            else
+            {
+                createOrderCustomerId = customerChooseWindow.CustomerId;
+                lCustomerName.Content = $"{customerChooseWindow.CustomerName} (Kundenummer: {createOrderCustomerId})";
             }
         }
     }

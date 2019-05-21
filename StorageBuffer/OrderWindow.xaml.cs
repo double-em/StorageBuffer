@@ -45,8 +45,8 @@ namespace StorageBuffer
         private void Setup()
         {
             GetOrderInfo();
-            GetAllOrderlines();
             orderlines = control.GetOrderlines(orderId);
+            GetAllOrderlines();
         }
 
         private void GetOrderInfo()
@@ -114,7 +114,7 @@ namespace StorageBuffer
                 bool materialAlreadyAdded = false;
                 foreach (List<string> orderline in orderlines)
                 {
-                    if (orderline[0] == chooseWindow.ChoosenMaterial.Id.ToString())
+                    if (orderline[0] == chooseWindow.MaterialId.ToString())
                     {
                         materialAlreadyAdded = true;
                         break;
@@ -123,9 +123,9 @@ namespace StorageBuffer
 
                 if (!materialAlreadyAdded)
                 {
-                    List<string> orderlineNew = new List<string>() { chooseWindow.ChoosenMaterial.Id.ToString(), chooseWindow.ChoosenMaterial.Name, "0" };
+                    List<string> orderlineNew = new List<string>() { chooseWindow.MaterialId.ToString(), chooseWindow.MaterialName, "0" };
                     orderlines.Add(orderlineNew);
-                    lvResult.Items.Add(orderlineNew);
+                    lvResult.Items.Add(new { MaterialId = orderlineNew[0], MaterialName = orderlineNew[1], Quantity = orderlineNew[2] } );
                 }
             }
         }
@@ -154,6 +154,10 @@ namespace StorageBuffer
             {
                 orderlines.Remove(orderlines.Find(x => x[0] == materialId.ToString()));
             }
+            else
+            {
+                orderlines.Find(x => x[0] == materialId.ToString())[2] = changeOrderline.quantity.ToString();
+            }
 
             GetAllOrderlines();
         }
@@ -161,7 +165,7 @@ namespace StorageBuffer
         private void GetAllOrderlines()
         {
             lvResult.Items.Clear();
-            foreach (List<string> item in control.GetOrderlines(orderId))
+            foreach (List<string> item in orderlines)
             {
                 lvResult.Items.Add(new { MaterialId = item[0], MaterialName = item[1], Quantity = item[2] });
             }

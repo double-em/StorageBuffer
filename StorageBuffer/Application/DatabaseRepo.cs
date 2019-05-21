@@ -128,9 +128,9 @@ namespace StorageBuffer.Application
                             string date = reader["OrderDate"].ToString();
                             string deadline = reader["Deadline"].ToString();
 
-                            Customer customer = customerRepoCustomers.Find(x => x.Id == customerId);
+                            string customerName = CustomerRepo.Instance.GetCustomerName(customerId);
 
-                            Order order = new Order(id, customer, status, name, date, deadline);
+                            Order order = new Order(id, customerId, customerName, status, name, date, deadline);
                             order.orderlines = GetOrderlinesForOrder(order);
                             result.Add(order);
                         }
@@ -186,7 +186,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public void InsertOrderline(int orderId, Orderline orderline)
+        public void InsertOrderline(int orderId, int materialId, int quantity)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -195,8 +195,8 @@ namespace StorageBuffer.Application
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
-                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = orderline.MaterialId;
-                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = orderline.Quantity;
+                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = materialId;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
 
                     connection.Open();
 
@@ -239,7 +239,17 @@ namespace StorageBuffer.Application
 
                     connection.Open();
 
-                    return cmd.ExecuteNonQuery();
+                    int orderId = 0;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            orderId = int.Parse(reader["OrderId"].ToString());
+                        }
+                    }
+
+                    return orderId;
                 }
             }
         }

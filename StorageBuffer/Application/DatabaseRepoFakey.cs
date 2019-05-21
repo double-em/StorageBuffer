@@ -61,8 +61,8 @@ namespace StorageBuffer.Application
             List<Customer> customers = CustomerRepo.Instance.customers;
             return new List<Order>()
             {
-                new Order(21, customers[0], Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"),
-                new Order(22, customers[0], Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019")
+                new Order(21, customers[0].Id, customers[0].Name, Status.Received, "Komplet Køkken", "02/02/2019", "16/02/2019"),
+                new Order(22, customers[0].Id, customers[0].Name, Status.Paid, "Hylde i Rustfri", "02/02/2019", "16/02/2019")
             };
         }
 
@@ -71,7 +71,7 @@ namespace StorageBuffer.Application
             throw new NotImplementedException();
         }
 
-        public void InsertOrderline(int orderId, Orderline orderline)
+        public void InsertOrderline(int orderId, int materialId, int quantity)
         {
             throw new NotImplementedException();
         }

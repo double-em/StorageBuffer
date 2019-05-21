@@ -33,7 +33,7 @@ namespace StorageBufferTest
             control.orderRepo = null;
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void RegisterUsedMaterialOneItem()
         {
             control.RegisterUsedMaterial(orders[0].Id, materials[1], 1);
@@ -74,6 +74,6 @@ namespace StorageBufferTest
             control.RegisterUsedMaterial(orders[0].Id, materials[0], 1);
 
             Assert.AreEqual(0, materials[0].Quantity);
-        }
+        }*/
     }
 }

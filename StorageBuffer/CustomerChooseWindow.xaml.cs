@@ -18,14 +18,14 @@ using StorageBuffer.Domain;
 namespace StorageBuffer
 {
     /// <summary>
-    /// Interaction logic for MaterialChooseWindow.xaml
+    /// Interaction logic for CustomerChooseWindow.xaml
     /// </summary>
-    public partial class MaterialChooseWindow : Window
+    public partial class CustomerChooseWindow : Window
     {
         private Controller control;
-        public int MaterialId { get; set; }
-        public string MaterialName { get; set; }
-        public MaterialChooseWindow(Controller control)
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public CustomerChooseWindow(Controller control)
         {
             InitializeComponent();
             this.control = control;
@@ -35,12 +35,12 @@ namespace StorageBuffer
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
         {
             var listItem = (ListViewItem) sender;
-            var ChoosenMaterial = listItem.Content;
+            var ChoosenCustomer = listItem.Content;
 
-            PropertyInfo[] props = ChoosenMaterial.GetType().GetProperties();
+            PropertyInfo[] props = ChoosenCustomer.GetType().GetProperties();
 
-            MaterialId = int.Parse(props[0].GetValue(ChoosenMaterial, null).ToString());
-            MaterialName = props[1].GetValue(ChoosenMaterial, null).ToString();
+            CustomerId = int.Parse(props[0].GetValue(ChoosenCustomer, null).ToString());
+            CustomerName = props[1].GetValue(ChoosenCustomer, null).ToString();
             DialogResult = true;
             this.Close();
 
@@ -66,7 +66,7 @@ namespace StorageBuffer
             if (control != null)
             {
                 lvResult.Items.Clear();
-                foreach (List<string> item in control.FindItems("Materials", tbSearchBar.Text))
+                foreach (List<string> item in control.FindItems("Customers", tbSearchBar.Text))
                 {
                     lvResult.Items.Add(new { Id = item[1], Name = item[2], Data = item[3] });
                 }
@@ -75,7 +75,7 @@ namespace StorageBuffer
 
         void GetAllMaterials()
         {
-            foreach (List<string> item in control.FindItems("Materials"))
+            foreach (List<string> item in control.FindItems("Customers"))
             {
                 lvResult.Items.Add(new { Id = item[1], Name = item[2], Data = item[3] });
             }
