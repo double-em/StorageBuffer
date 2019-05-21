@@ -128,9 +128,9 @@ namespace StorageBuffer.Application
             customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
         }
 
-        public void CreateMaterial(string materialName, string materialComments, string materialQuantity)
+        public void CreateMaterial(string materialName, string materialComment, string materialQuantity)
         {
-            materialRepo.CreateMaterial(materialName, materialComments, materialQuantity);
+            materialRepo.CreateMaterial(materialName, materialComment, materialQuantity);
         }
 
         public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
