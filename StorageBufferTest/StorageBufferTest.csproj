@@ -54,6 +54,7 @@
     <Compile Include="RegisterUsedMaterialTest.cs" />
     <Compile Include="ChangeStatusTest.cs" />
     <Compile Include="CreateOrderTest.cs" />
+    <Compile Include="UpdateOrderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
