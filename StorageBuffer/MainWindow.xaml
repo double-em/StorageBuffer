@@ -115,85 +115,30 @@
             </TabItem>
 
             <TabItem Header="Indskriv Materiale" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
-                <Grid Background="#FFF" Margin="-4,-2,0,0"/>
+                <Grid Background="#FFF" Margin="26,28,30,30">
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCreateMaterialName" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Antal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,0,0,0"/>
+                    <TextBox Name="tbCreateMaterial" Text="0" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,95,0,0"/>
+                    <TextBox Name="tbCreateMaterialComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                </Grid>
+
             </TabItem>
 
             <TabItem Header="Opret Ordre" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146">
                 <Grid Background="#FFF" Margin="26,28,30,30">
-                    <Label Content="Ordre Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbOrderName" Text="f.eks. 6mm. Bordplade m. Vask" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,104,0,0"/>
-                    <Label Content="Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,196,0,0"/>
-                    <TextBox Name="tbOrderDeadline" Text="f.eks. 02/02/2019" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Label Content="Kommentar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,293,0,0"/>
-                    <TextBox Name="tbOrderComment" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="509" Margin="0,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Label Name="lCustomerName" Content="Ingen Kunde Valgt" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="141,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.257,2.073" Height="50" Width="791"/>
+                    <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCreateOrderName" Text="f.eks. 6mm. Bordplade m. Vask" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Kunde" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,92,0,0"/>
+                    <Label Content="Deadline" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,184,0,0"/>
+                    <TextBox Name="tbCreateOrderDeadline" Text="f.eks. 02/02/2019" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Kommentar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,276,0,0"/>
+                    <TextBox Name="tbCreateOrderComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="176,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.257,2.073" Height="38"/>
 
-                    <Button Name="btnChooseCustomer" FontSize="20" Content="Vælg Kunde" HorizontalAlignment="Right" VerticalAlignment="Top" Width="136" Height="50" Margin="0,141,796,0" Click="BtnChooseCustomer_Click">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter Property="Background" Value="#A8A1A2"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Grid x:Name="Panel">
-                                                <ContentPresenter x:Name="ContentSite"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
-                                                    <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
-                                                </Trigger>
-                                                <Trigger Property="IsMouseOver" Value="False">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
+                    <Button BorderThickness="0" Foreground="White" Background="#A8A1A2" Content="Vælg kunde" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="120" Height="38"/>
 
-                    <Button Name="btnCreateOrder" FontSize="20" Content="Opret Ordre" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0" Click="BtnCreateOrder_Click">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter Property="Background" Value="#A8A1A2"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Grid x:Name="Panel">
-                                                <ContentPresenter x:Name="ContentSite"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
-                                                    <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
-                                                </Trigger>
-                                                <Trigger Property="IsMouseOver" Value="False">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
                 </Grid>
             </TabItem>
 
