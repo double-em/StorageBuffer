@@ -66,9 +66,14 @@ namespace StorageBuffer.Model
             return result;
         }
 
-        public Customer GetCustomer(int customerId)
+        public string GetCustomerName(int customerId)
         {
-            return customers.Find(x => x.Id == customerId);
+            return customers.Find(x => x.Id == customerId).Name;
+        }
+
+        public string GetCustomerPhone(int customerId)
+        {
+            return customers.Find(x => x.Id == customerId).Phone;
         }
     }
 }

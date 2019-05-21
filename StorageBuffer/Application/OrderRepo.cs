@@ -61,8 +61,8 @@ namespace StorageBuffer.Model
             foreach (Order order in orders)
             {
                 if (order.Name.ToLower().Contains(searchQuery.ToLower()) || 
-                    order.CustomerObj.Name.ToLower().Contains(searchQuery.ToLower()) || 
-                    order.CustomerObj.Phone.Contains(searchQuery))
+                    order.CustomerName.ToLower().Contains(searchQuery.ToLower()) || 
+                    CustomerRepo.Instance.GetCustomerPhone(order.CustomerId).Contains(searchQuery))
                 {
                     result.Add(order.ToList());
                 }
@@ -92,8 +92,8 @@ namespace StorageBuffer.Model
                 return false;
             }
 
-            Customer customer = CustomerRepo.Instance.GetCustomer(customerId);
-            Order order = new Order(id, customer, Status.Received, orderName, date, deadline);
+            string customerName = CustomerRepo.Instance.GetCustomerName(customerId);
+            Order order = new Order(id, customerId, customerName, Status.Received, orderName, date, deadline);
             orders.Add(order);
             return true;
             
