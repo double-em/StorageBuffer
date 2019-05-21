@@ -222,7 +222,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public int CreateOrder(int customerId, string name, string date, string deadline)
+        public int CreateOrder(int customerId, string name,)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
