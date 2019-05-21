@@ -68,8 +68,9 @@ namespace StorageBuffer.Application
                             string city = reader["City"].ToString();
                             string phone = reader["Phone"].ToString();
                             string email = reader["Email"].ToString();
+                            string comment = reader["CustomerComment"].ToString();
 
-                            result.Add(new Customer(id, name, address, zip, city, phone, email));
+                            result.Add(new Customer(id, name, address, zip, city, phone, email, comment));
                         }
 
                         return result;
@@ -281,6 +282,29 @@ namespace StorageBuffer.Application
                     }
 
                     return materialId;
+                }
+            }
+        }
+
+        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spUpdateCustomer", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = customerId;
+                    cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
+                    cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
+                    cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
+                    cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
+                    cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
+                    cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
+                    cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

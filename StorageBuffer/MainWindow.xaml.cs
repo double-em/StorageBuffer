@@ -27,6 +27,7 @@ namespace StorageBuffer
     {
         private Controller control;
         private List<OrderWindow> orderWindows;
+        private List<CustomerWindow> customerWindows;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace StorageBuffer
             control = Controller.Instance;
             control.GetAllData(DatabaseRepo.Instance);
             orderWindows = new List<OrderWindow>();
+            customerWindows = new List<CustomerWindow>();
             GetAllItems();
             SetupListener();
         }
@@ -119,6 +121,14 @@ namespace StorageBuffer
             switch (props[0].GetValue(item, null))
             {
                 case "Customer":
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        CustomerWindow customerWindow = new CustomerWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
+                        customerWindows.Add(customerWindow);
+                        customerWindow.Top = Top;
+                        customerWindow.Left = Left;
+                        customerWindow.Show();
+                    }));
                     break;
 
                 case "Material":
@@ -140,6 +150,11 @@ namespace StorageBuffer
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
             foreach (OrderWindow window in orderWindows)
+            {
+                window.Close();
+            }
+
+            foreach (CustomerWindow window in customerWindows)
             {
                 window.Close();
             }

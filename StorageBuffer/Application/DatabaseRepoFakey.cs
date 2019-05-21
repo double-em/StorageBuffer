@@ -41,9 +41,9 @@ namespace StorageBuffer.Application
             return new List<Customer>()
             {
                 new Customer(1, "Brian Mariannesen", "Odensevej 24", 5000,
-                    "Odense C", "+4512345678", "brian.mariannesen@gmail.com"),
+                    "Odense C", "+4512345678", "brian.mariannesen@gmail.com", "ingen"),
                 new Customer(2, "Torben Sørensen", "Hjallesevej 14", 5000,
-                    "Odense S", "+4556905690", "torben.sørensen@gmail.com")
+                    "Odense S", "+4556905690", "torben.sørensen@gmail.com", "ingen")
             };
         }
 
@@ -89,6 +89,11 @@ namespace StorageBuffer.Application
         public int CreateMaterial(string materialName, string materialComments, int quantity)
         {
             return 1;
+        }
+
+        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            
         }
     }
 }

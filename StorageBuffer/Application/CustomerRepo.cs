@@ -78,12 +78,32 @@ namespace StorageBuffer.Model
             return customers.Find(x => x.Id == customerId).Phone;
         }
 
+        public List<string> GetCustomer(int customerId)
+        {
+            return customers.Find(x => x.Id == customerId).ToLongList();
+        }
+
         public void CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
         {
             int.TryParse(customerZip, out int zip);
             int id = databaseRepo.CreateCustomer(customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
             
-            customers.Add(new Customer(id, customerName, customerAddress, zip, customerCity, customerPhone, customerEmail));
+            customers.Add(new Customer(id, customerName, customerAddress, zip, customerCity, customerPhone, customerEmail, customerComment));
+        }
+
+        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+
+            Customer customer = customers.Find(x => x.Id == customerId);
+
+            customer.Name = customerName;
+            customer.Address = customerAddress;
+            customer.City = customerCity;
+            customer.Zip = customerZip;
+            customer.Phone = customerPhone;
+            customer.Email = customerEmail;
+            customer.Comment = customerComment;
         }
     }
 }
