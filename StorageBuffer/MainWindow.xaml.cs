@@ -137,5 +137,33 @@ namespace StorageBuffer
                 window.Close();
             }
         }
+
+        private int createOrderCustomerId;
+
+        private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text);
+            ClearCreateOrderFields();
+        }
+
+        private void ClearCreateOrderFields()
+        {
+            tbOrderName.Text = "";
+            lCustomerName.Content = "Ingen Kunde Valgt";
+            tbOrderDeadline.Text = "";
+            tbOrderComment.Text = "";
+        }
+
+        private void BtnChooseCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerChooseWindow customerChooseWindow = new CustomerChooseWindow(control);
+            customerChooseWindow.Owner = this;
+            customerChooseWindow.Top = Top;
+            customerChooseWindow.Left = Left + 8;
+            customerChooseWindow.ShowDialog();
+
+            createOrderCustomerId = customerChooseWindow.CustomerId;
+            lCustomerName.Content = $"{customerChooseWindow.CustomerName} (Kundenummer: {createOrderCustomerId})";
+        }
     }
 }

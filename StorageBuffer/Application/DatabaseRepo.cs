@@ -238,7 +238,17 @@ namespace StorageBuffer.Application
 
                     connection.Open();
 
-                    return cmd.ExecuteNonQuery();
+                    int orderId = 0;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            orderId = int.Parse(reader["OrderId"].ToString());
+                        }
+                    }
+
+                    return orderId;
                 }
             }
         }
