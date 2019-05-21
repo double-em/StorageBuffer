@@ -222,7 +222,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public int CreateOrder(int customerId, string name, string date, string deadline)
+        public int CreateOrder(int customerId, string name, string date, string description, string deadline)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
@@ -235,6 +235,7 @@ namespace StorageBuffer.Application
                     cmd.Parameters.Add("@OrderName", SqlDbType.NVarChar).Value = name;
                     cmd.Parameters.Add("@OrderDate", SqlDbType.NChar).Value = date;
                     cmd.Parameters.Add("@Deadline", SqlDbType.NChar).Value = deadline;
+                    cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = description;
 
                     connection.Open();
 
