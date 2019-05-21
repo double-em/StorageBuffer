@@ -179,5 +179,34 @@ namespace StorageBuffer
                 lCustomerName.Content = $"{customerChooseWindow.CustomerName} (Kundenummer: {createOrderCustomerId})";
             }
         }
+
+        private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            control.CreateCustomer(
+                tbCreateCustomerName.Text, 
+                tbCreateCustomerAddress.Text, 
+                tbCreateCustomerCity.Text, 
+                tbCreateCustomerZip.Text, 
+                tbCreateCustomerPhone.Text, 
+                tbCreateCustomerEmail.Text,
+                tbCreateCustomerComment.Text);
+
+            tbCreateCustomerName.Text = "";
+            tbCreateCustomerAddress.Text = "";
+            tbCreateCustomerCity.Text = "";
+            tbCreateCustomerZip.Text = "";
+            tbCreateCustomerPhone.Text = "";
+            tbCreateCustomerEmail.Text = "";
+            tbCreateCustomerComment.Text = "";
+        }
+
+        private void BtnCreateMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            control.CreateMaterial(tbCreateMaterialName.Text, tbCreateMaterialComments.Text, tbCreateMaterialQuantity.Text);
+
+            tbCreateMaterialName.Text = "";
+            tbCreateMaterialComments.Text = "";
+            tbCreateMaterialQuantity.Text = "";
+        }
     }
 }

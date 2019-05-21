@@ -45,9 +45,11 @@ namespace StorageBuffer.Model
         }
 
         public List<Material> materials;
+        private IPersistable databaseRepo;
 
         MaterialRepo(IPersistable databaseRepo)
         {
+            this.databaseRepo = databaseRepo;
             materials = databaseRepo.GetAllMaterials();
         }
 
@@ -78,6 +80,14 @@ namespace StorageBuffer.Model
         public List<string> GetMaterialLong(int materialId)
         {
             return materials.Find(x => x.Id == materialId).ToLongList();
+        }
+
+        public void CreateMaterial(string materialName, string materialComments, string materialQuantity)
+        {
+            int.TryParse(materialQuantity, out int quantity);
+            int id = databaseRepo.CreateMaterial(materialName, materialComments, quantity);
+
+            materials.Add(new Material(id, materialName, materialComments, quantity));
         }
     }
 }

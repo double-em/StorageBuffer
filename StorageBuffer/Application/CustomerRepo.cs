@@ -45,9 +45,11 @@ namespace StorageBuffer.Model
         }
 
         public List<Customer> customers;
+        private IPersistable databaseRepo;
 
         CustomerRepo(IPersistable databaseRepo)
         {
+            this.databaseRepo = databaseRepo;
             customers = databaseRepo.GetAllCustomers();
         }
 
@@ -74,6 +76,14 @@ namespace StorageBuffer.Model
         public string GetCustomerPhone(int customerId)
         {
             return customers.Find(x => x.Id == customerId).Phone;
+        }
+
+        public void CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            int.TryParse(customerZip, out int zip);
+            int id = databaseRepo.CreateCustomer(customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
+            
+            customers.Add(new Customer(id, customerName, customerAddress, zip, customerCity, customerPhone, customerEmail));
         }
     }
 }

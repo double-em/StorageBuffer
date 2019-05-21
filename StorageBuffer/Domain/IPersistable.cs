@@ -14,5 +14,7 @@ namespace StorageBuffer.Domain
         void UpdateOrder(Order order);
         void InsertOrderline(int orderId, int materialId, int quantity);
         void RemoveOrderlines(Order order);
+        int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
+        int CreateMaterial(string materialName, string materialComments, int quantity);
     }
 }

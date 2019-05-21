@@ -80,5 +80,15 @@ namespace StorageBuffer.Application
         {
             
         }
+
+        public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            return 1;
+        }
+
+        public int CreateMaterial(string materialName, string materialComments, int quantity)
+        {
+            return 1;
+        }
     }
 }

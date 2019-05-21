@@ -224,6 +224,67 @@ namespace StorageBuffer.Application
             }
         }
 
+        public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spInsertCustomer", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
+                    cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
+                    cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
+                    cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
+                    cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
+                    cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
+                    cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+
+                    connection.Open();
+
+                    int customerId = 0;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            customerId = int.Parse(reader["CustomerId"].ToString());
+                        }
+                    }
+
+                    return customerId;
+                }
+            }
+        }
+
+        public int CreateMaterial(string materialName, string materialComments, int quantity)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spInsertMaterial", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
+                    cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComments;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.NChar).Value = quantity;
+                    connection.Open();
+
+                    int materialId = 0;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            materialId = int.Parse(reader["MaterialId"].ToString());
+                        }
+                    }
+
+                    return materialId;
+                }
+            }
+        }
+
         public int CreateOrder(int customerId, string name, string date, string deadline, string description)
         {
             using (SqlConnection connection = GetDatabaseConnection())

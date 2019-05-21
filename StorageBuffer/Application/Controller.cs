@@ -112,5 +112,15 @@ namespace StorageBuffer.Application
         {
             return materialRepo.GetMaterial(materialId);
         }
+
+        public void CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        {
+            customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+        }
+
+        public void CreateMaterial(string materialName, string materialComments, string materialQuantity)
+        {
+            materialRepo.CreateMaterial(materialName, materialComments, materialQuantity);
+        }
     }
 }

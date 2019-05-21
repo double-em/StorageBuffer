@@ -123,10 +123,10 @@
                     <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbCreateMaterialName" Text="f.eks. Bordplade i rustfast" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Antal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,0,0,0"/>
-                    <TextBox Name="tbCreateMaterial" Text="0" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateMaterialQuantity" Text="0" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,95,0,0"/>
                     <TextBox Name="tbCreateMaterialComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="706" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Button Name="btnCreateMateriale" FontSize="20" Content="Opret Materiale" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0">
+                    <Button Name="btnCreateMaterial" FontSize="20" Content="Opret Materiale" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0" Click="BtnCreateMaterial_Click">
                         <Button.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Foreground" Value="White" />
@@ -244,18 +244,18 @@
             <TabItem Header="Opret Kunde" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
                 <Grid Background="#FFF" Margin="26,28,30,30">
                     <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbCreateCustomerAddress" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateCustomerName" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Adresse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,92,0,0"/>
-                    <TextBox Name="tbCreateCustomerName" Text="f.eks. Søndergade 18B" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateCustomerAddress" Text="f.eks. Søndergade 18B" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="By" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,188,0,0"/>
                     <TextBox Name="tbCreateCustomerCity" Text="f.eks. Odense C" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Post nr." HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="723,188,0,0"/>
                     <TextBox Name="tbCreateCustomerZip" Text="f.eks. 5000" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="723,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,284,0,0"/>
-                    <TextBox Name="tbCreateCustomerComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="517" Margin="0,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,381,0,0"/>
+                    <TextBox Name="tbCreateCustomerComment" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="425" Margin="0,418,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Telefon nr." HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="723,92,0,0"/>
                     <TextBox Name="tbCreateCustomerPhone" Text="f.eks. 12345678" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="723,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
-                    <Button Name="btnCreateCustomer" FontSize="20" Content="Opret Kunde" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0">
+                    <Button Name="btnCreateCustomer" FontSize="20" Content="Opret Kunde" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0" Click="BtnCreateCustomer_Click">
                         <Button.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Foreground" Value="White" />
@@ -287,6 +287,8 @@
                             </Style>
                         </Button.Resources>
                     </Button>
+                    <Label Content="By" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,289,0,0"/>
+                    <TextBox x:Name="tbCreateCustomerEmail" Text="f.eks. eksempel@eksempl.dk" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                 </Grid>
 
 
