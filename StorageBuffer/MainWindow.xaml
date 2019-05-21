@@ -9,10 +9,14 @@
         Closing="MainWindow_OnClosing"
         Title="Storage Buffer" Height="989" Width="1280" ResizeMode="NoResize">
     <Grid>
-        <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280"/>
-        <Image Width="221" Margin="30,10,1023,819" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="306*"/>
+            <RowDefinition Height="655*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280" Grid.RowSpan="2"/>
+        <Image Width="221" Margin="30,10,1023,164.5" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
 
-        <TabControl BorderThickness="0" Height="960" Width="1274" TabStripPlacement="Left">
+        <TabControl BorderThickness="0" Height="960" Width="1274" TabStripPlacement="Left" Grid.RowSpan="2">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -117,11 +121,43 @@
             <TabItem Header="Indskriv Materiale" Foreground="White" Width="280" Height="50"  FontSize="20" BorderThickness="0" Margin="-2,146,2,-146" >
                 <Grid Background="#FFF" Margin="26,28,30,30">
                     <Label Content="Navn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbCreateMaterialName" Text="f.eks. Lars Larsen" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateMaterialName" Text="f.eks. Bordplade i rustfast" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="750" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Antal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,0,0,0"/>
                     <TextBox Name="tbCreateMaterial" Text="0" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,95,0,0"/>
-                    <TextBox Name="tbCreateMaterialComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateMaterialComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="694" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Button Name="btnCreateMateriale" FontSize="20" Content="Opret Materiale" HorizontalAlignment="Right" Width="280" Margin="0,848,0,0" Click="BtnCreateOrder_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="#A8A1A2"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid x:Name="Panel">
+                                                <ContentPresenter x:Name="ContentSite"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                                    <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="False">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
 
             </TabItem>
@@ -216,7 +252,39 @@
                     <Label Content="Post nr." HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,188,0,0"/>
                     <TextBox Name="tbCreateCustomerZip" Text="f.eks. 5000" Foreground="#A8A1A2" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
                     <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,284,0,0"/>
-                    <TextBox Name="tbCreateCustomerComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="571" Margin="0,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <TextBox Name="tbCreateCustomerComments" Text="" Foreground="#A8A1A2" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="525" Margin="0,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="922" PreviewMouseDown="tbInactive_OnMouseDown" TextChanged="TbSearchBar_TextChanged"/>
+                    <Button Name="btnCreateCustomer" FontSize="20" Content="Opret Kunde" HorizontalAlignment="Right" Width="280" Margin="0,856,0,-8" Click="BtnCreateOrder_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Background" Value="#A8A1A2"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid x:Name="Panel">
+                                                <ContentPresenter x:Name="ContentSite"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                                    <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="False">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
 
 
