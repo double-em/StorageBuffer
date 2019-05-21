@@ -113,6 +113,11 @@ namespace StorageBuffer.Application
             return materialRepo.GetMaterial(materialId);
         }
 
+        public List<string> GetMaterialLong(int materialId)
+        {
+            return materialRepo.GetMaterialLong(materialId);
+        }
+
         public List<string> GetCustomer(int customerId)
         {
             return customerRepo.GetCustomer(customerId);
@@ -132,6 +137,12 @@ namespace StorageBuffer.Application
         {
             int.TryParse(customerZip, out int zip);
             customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
+        }
+
+        public void UpdateMaterial(int materialId, string materialName, string materialComment, string materialQuantity)
+        {
+            int.TryParse(materialQuantity, out int quantity);
+            materialRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
         }
     }
 }

@@ -17,5 +17,6 @@ namespace StorageBuffer.Domain
         int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
         int CreateMaterial(string materialName, string materialComments, int quantity);
         void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
+        void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity);
     }
 }

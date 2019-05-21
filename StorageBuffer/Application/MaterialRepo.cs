@@ -89,5 +89,19 @@ namespace StorageBuffer.Model
 
             materials.Add(new Material(id, materialName, materialComments, quantity));
         }
+
+        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        {
+            Material material = materials.Find(x => x.Id == materialId);
+
+            if (material != null)
+            {
+                databaseRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
+
+                material.Name = materialName;
+                material.Comment = materialComment;
+                material.Quantity = quantity;
+            }
+        }
     }
 }

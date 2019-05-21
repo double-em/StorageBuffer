@@ -309,6 +309,25 @@ namespace StorageBuffer.Application
             }
         }
 
+        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("spUpdateMaterial", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = materialId;
+                    cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
+                    cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComment;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public int CreateOrder(int customerId, string name, string date, string deadline, string description)
         {
             using (SqlConnection connection = GetDatabaseConnection())

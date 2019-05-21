@@ -95,5 +95,10 @@ namespace StorageBuffer.Application
         {
             
         }
+
+        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        {
+            
+        }
     }
 }

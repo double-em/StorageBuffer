@@ -93,17 +93,21 @@ namespace StorageBuffer.Model
 
         public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
 
             Customer customer = customers.Find(x => x.Id == customerId);
 
-            customer.Name = customerName;
-            customer.Address = customerAddress;
-            customer.City = customerCity;
-            customer.Zip = customerZip;
-            customer.Phone = customerPhone;
-            customer.Email = customerEmail;
-            customer.Comment = customerComment;
+            if (customer != null)
+            {
+                databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+
+                customer.Name = customerName;
+                customer.Address = customerAddress;
+                customer.City = customerCity;
+                customer.Zip = customerZip;
+                customer.Phone = customerPhone;
+                customer.Email = customerEmail;
+                customer.Comment = customerComment;
+            }
         }
     }
 }

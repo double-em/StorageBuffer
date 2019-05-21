@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MaterialWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,9 @@
     <Compile Include="Application\OrderRepo.cs" />
     <Compile Include="ChangeOrderline.xaml.cs">
       <DependentUpon>ChangeOrderline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialWindow.xaml.cs">
+      <DependentUpon>MaterialWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\IItem.cs" />

@@ -28,6 +28,7 @@ namespace StorageBuffer
         private Controller control;
         private List<OrderWindow> orderWindows;
         private List<CustomerWindow> customerWindows;
+        private List<MaterialWindow> materialWindows;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace StorageBuffer
             control.GetAllData(DatabaseRepo.Instance);
             orderWindows = new List<OrderWindow>();
             customerWindows = new List<CustomerWindow>();
+            materialWindows = new List<MaterialWindow>();
             GetAllItems();
             SetupListener();
         }
@@ -132,6 +134,14 @@ namespace StorageBuffer
                     break;
 
                 case "Material":
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        MaterialWindow mustomerWindow = new MaterialWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
+                        materialWindows.Add(mustomerWindow);
+                        mustomerWindow.Top = Top;
+                        mustomerWindow.Left = Left;
+                        mustomerWindow.Show();
+                    }));
                     break;
 
                 case "Order":
