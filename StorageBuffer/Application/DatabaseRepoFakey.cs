@@ -81,9 +81,10 @@ namespace StorageBuffer.Application
             
         }
 
+        private int customerId = 3;
         public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            return 1;
+            return customerId++;
         }
 
         public int CreateMaterial(string materialName, string materialComments, int quantity)
