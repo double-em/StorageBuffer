@@ -66,19 +66,19 @@ namespace StorageBuffer.Application
             };
         }
 
-        public void UpdateOrder(Order order)
+        public bool UpdateOrder(Order order)
         {
-            
+            return true;
         }
 
-        public void InsertOrderline(int orderId, int materialId, int quantity)
+        public bool InsertOrderline(int orderId, int materialId, int quantity)
         {
-            
+            return true;
         }
 
-        public void RemoveOrderlines(Order order)
+        public bool RemoveOrderlines(Order order)
         {
-            
+            return true;
         }
 
         private int customerId = 3;
@@ -93,14 +93,14 @@ namespace StorageBuffer.Application
             return materialId++;
         }
 
-        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            
+            return true;
         }
 
-        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
         {
-            
+            return true;
         }
     }
 }
