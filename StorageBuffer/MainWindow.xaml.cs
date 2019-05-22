@@ -43,7 +43,7 @@ namespace StorageBuffer
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"Kunne ikke oprette forbindelse til Databasen.\n\nTeknisk info:\n{e.Message}");
+                    throw new Exception($"Kunne ikke oprette forbindelse til Databasen.\nTjek at computeren har adgang til internettet.\n\nTeknisk info:\n{e.Message}");
                 }
 
                 orderWindows = new List<OrderWindow>();
