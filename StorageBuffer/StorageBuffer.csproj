@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ConfirmationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ChangeOrderline.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +85,9 @@
     <Compile Include="Application\DatabaseRepoFakey.cs" />
     <Compile Include="Application\MaterialRepo.cs" />
     <Compile Include="Application\OrderRepo.cs" />
+    <Compile Include="ConfirmationWindow.xaml.cs">
+      <DependentUpon>ConfirmationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChangeOrderline.xaml.cs">
       <DependentUpon>ChangeOrderline.xaml</DependentUpon>
     </Compile>
