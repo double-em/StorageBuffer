@@ -39,7 +39,7 @@ namespace StorageBufferTest
         {
             string name = "Vask af 1mm. Rustfast";
             control.CreateMaterial(name, "ingen", "3");
-            List<string> material = control.GetMaterial(13);
+            List<string> material = control.GetMaterial(14);
             Assert.IsTrue(material[2] == name);
         }
     }
