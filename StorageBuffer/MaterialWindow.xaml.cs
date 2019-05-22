@@ -61,7 +61,21 @@ namespace StorageBuffer
 
         private void SaveMaterial()
         {
-            control.UpdateMaterial(materialId, tbMaterialName.Text, tbMaterialComment.Text, tbMaterialQuantity.Text);
+            string messsage = "";
+            if (control.UpdateMaterial(materialId, tbMaterialName.Text, tbMaterialComment.Text, tbMaterialQuantity.Text))
+            {
+                messsage = "Materialet blev gemt.";
+            }
+            else
+            {
+                messsage = "Materialet kunne IKKE gemmes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
 
         private void MaterialWindow_OnClosing(object sender, CancelEventArgs e)

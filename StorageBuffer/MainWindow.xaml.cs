@@ -31,19 +31,31 @@ namespace StorageBuffer
         private List<MaterialWindow> materialWindows;
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            control = Controller.Instance;
-            control.GetAllData(DatabaseRepo.Instance);
-            orderWindows = new List<OrderWindow>();
-            customerWindows = new List<CustomerWindow>();
-            materialWindows = new List<MaterialWindow>();
-            GetAllItems();
-            SetupListener();
-        }
+                control = Controller.Instance;
 
-        private void SetupListener()
-        {
+                try
+                {
+                    control.GetAllData(DatabaseRepo.Instance);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Kunne ikke oprette forbindelse til Databasen.\n\nTeknisk info:\n{e.Message}");
+                }
+
+                orderWindows = new List<OrderWindow>();
+                customerWindows = new List<CustomerWindow>();
+                materialWindows = new List<MaterialWindow>();
+                GetAllItems();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Programmet kunne ikke starte grundet følgende fejl:\n\n{e.Message}", "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
 
         private void GetAllItems()
@@ -159,14 +171,22 @@ namespace StorageBuffer
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            foreach (OrderWindow window in orderWindows)
+            if (orderWindows != null && customerWindows != null && materialWindows != null)
             {
-                window.Close();
-            }
+                foreach (OrderWindow window in orderWindows)
+                {
+                    window.Close();
+                }
 
-            foreach (CustomerWindow window in customerWindows)
-            {
-                window.Close();
+                foreach (CustomerWindow window in customerWindows)
+                {
+                    window.Close();
+                }
+
+                foreach (MaterialWindow window in materialWindows)
+                {
+                    window.Close();
+                }
             }
         }
 
@@ -174,16 +194,27 @@ namespace StorageBuffer
 
         private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
-            control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text, tbOrderComment.Text);
-            ClearCreateOrderFields();
-        }
+            string messsage = "";
+            if (control.CreateOrder(createOrderCustomerId, tbOrderName.Text, tbOrderDeadline.Text, tbOrderComment.Text))
+            {
+                messsage = "Ordren blev oprettet.";
 
-        private void ClearCreateOrderFields()
-        {
-            tbOrderName.Text = "";
-            lCustomerName.Content = "Ingen Kunde Valgt";
-            tbOrderDeadline.Text = "";
-            tbOrderComment.Text = "";
+                createOrderCustomerId = 0;
+                tbOrderName.Text = "";
+                lCustomerName.Content = "Ingen Kunde Valgt";
+                tbOrderDeadline.Text = "";
+                tbOrderComment.Text = "";
+            }
+            else
+            {
+                messsage = "Ordren kunne IKKE oprettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
 
         private void BtnChooseCustomer_Click(object sender, RoutedEventArgs e)
@@ -207,31 +238,59 @@ namespace StorageBuffer
 
         private void BtnCreateCustomer_Click(object sender, RoutedEventArgs e)
         {
-            control.CreateCustomer(
-                tbCreateCustomerName.Text, 
-                tbCreateCustomerAddress.Text, 
-                tbCreateCustomerCity.Text, 
-                tbCreateCustomerZip.Text, 
-                tbCreateCustomerPhone.Text, 
+            string messsage = "";
+            if (control.CreateCustomer(
+                tbCreateCustomerName.Text,
+                tbCreateCustomerAddress.Text,
+                tbCreateCustomerCity.Text,
+                tbCreateCustomerZip.Text,
+                tbCreateCustomerPhone.Text,
                 tbCreateCustomerEmail.Text,
-                tbCreateCustomerComment.Text);
+                tbCreateCustomerComment.Text))
+            {
+                messsage = "Kunden blev oprettet.";
 
-            tbCreateCustomerName.Text = "";
-            tbCreateCustomerAddress.Text = "";
-            tbCreateCustomerCity.Text = "";
-            tbCreateCustomerZip.Text = "";
-            tbCreateCustomerPhone.Text = "";
-            tbCreateCustomerEmail.Text = "";
-            tbCreateCustomerComment.Text = "";
+                tbCreateCustomerName.Text = "";
+                tbCreateCustomerAddress.Text = "";
+                tbCreateCustomerCity.Text = "";
+                tbCreateCustomerZip.Text = "";
+                tbCreateCustomerPhone.Text = "";
+                tbCreateCustomerEmail.Text = "";
+                tbCreateCustomerComment.Text = "";
+            }
+            else
+            {
+                messsage = "Kunden kunne IKKE oprettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
 
         private void BtnCreateMaterial_Click(object sender, RoutedEventArgs e)
         {
-            control.CreateMaterial(tbCreateMaterialName.Text, tbCreateMaterialComments.Text, tbCreateMaterialQuantity.Text);
+            string messsage = "";
+            if (control.CreateMaterial(tbCreateMaterialName.Text, tbCreateMaterialComments.Text, tbCreateMaterialQuantity.Text))
+            {
+                messsage = "Materialet blev oprettet.";
 
-            tbCreateMaterialName.Text = "";
-            tbCreateMaterialComments.Text = "";
-            tbCreateMaterialQuantity.Text = "";
+                tbCreateMaterialName.Text = "";
+                tbCreateMaterialComments.Text = "";
+                tbCreateMaterialQuantity.Text = "";
+            }
+            else
+            {
+                messsage = "Materialet kunne IKKE oprettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
     }
 }

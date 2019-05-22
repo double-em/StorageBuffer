@@ -66,7 +66,8 @@ namespace StorageBuffer
 
         void SaveCustomer()
         {
-            control.UpdateCustomer(
+            string messsage = "";
+            if (control.UpdateCustomer(
                 customerId,
                 tbCustomerName.Text,
                 tbCustomerAddress.Text,
@@ -74,7 +75,20 @@ namespace StorageBuffer
                 tbCustomerZip.Text,
                 tbCustomerPhone.Text,
                 tbCustomerEmail.Text,
-                tbCustomerComment.Text);
+                tbCustomerComment.Text))
+            {
+                messsage = "Kunden blev gemt.";
+            }
+            else
+            {
+                messsage = "Kunden kunne IKKE gemmes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
 
         private void CustomerWindow_OnClosing(object sender, CancelEventArgs e)

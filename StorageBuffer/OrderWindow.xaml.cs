@@ -180,7 +180,21 @@ namespace StorageBuffer
 
         private void SaveOrder()
         {
-            control.UpdateOrder(orderId, orderStatus, orderlines, tbOrderDescription.Text);
+            string messsage = "";
+            if (control.UpdateOrder(orderId, orderStatus, orderlines, tbOrderDescription.Text))
+            {
+                messsage = "Ordren blev gemt.";
+            }
+            else
+            {
+                messsage = "Ordren kunne IKKE gemmes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
         }
 
         private void CbOrderChoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
