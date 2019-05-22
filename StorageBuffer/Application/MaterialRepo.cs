@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using StorageBuffer.Domain;
 
 namespace StorageBuffer.Model
@@ -82,26 +83,34 @@ namespace StorageBuffer.Model
             return materials.Find(x => x.Id == materialId).ToLongList();
         }
 
-        public void CreateMaterial(string materialName, string materialComment, string materialQuantity)
+        public bool CreateMaterial(string materialName, string materialComment, string materialQuantity)
         {
             int.TryParse(materialQuantity, out int quantity);
             int id = databaseRepo.CreateMaterial(materialName, materialComment, quantity);
 
+            if (id <= 0)
+            {
+                return false;
+            }
+
             materials.Add(new Material(id, materialName, materialComment, quantity));
+            return true;
         }
 
-        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
         {
             Material material = materials.Find(x => x.Id == materialId);
 
             if (material != null)
             {
-                databaseRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
+                if(!databaseRepo.UpdateMaterial(materialId, materialName, materialComment, quantity)) return false;
 
                 material.Name = materialName;
                 material.Comment = materialComment;
                 material.Quantity = quantity;
+                return true;
             }
+            return false;
         }
     }
 }

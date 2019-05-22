@@ -11,12 +11,12 @@ namespace StorageBuffer.Domain
         List<Customer> GetAllCustomers();
         List<Material> GetAllMaterials();
         List<Order> GetAllOrders();
-        void UpdateOrder(Order order);
-        void InsertOrderline(int orderId, int materialId, int quantity);
-        void RemoveOrderlines(Order order);
+        bool UpdateOrder(Order order);
+        bool InsertOrderline(int orderId, int materialId, int quantity);
+        bool RemoveOrderlines(Order order);
         int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
         int CreateMaterial(string materialName, string materialComments, int quantity);
-        void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
-        void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity);
+        bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
+        bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity);
     }
 }

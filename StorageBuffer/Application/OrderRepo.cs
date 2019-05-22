@@ -99,7 +99,7 @@ namespace StorageBuffer.Model
             
         }
 
-        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
+        public bool UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
         {
             Order orderResult = orders.Find(x => x.Id == orderId);
 
@@ -108,16 +108,18 @@ namespace StorageBuffer.Model
             orderResult.Description = description;
 
             orderResult.orderlines = new List<Orderline>();
-            databaseRepo.RemoveOrderlines(orderResult);
-            databaseRepo.UpdateOrder(orderResult);
+            if(!databaseRepo.RemoveOrderlines(orderResult)) return false;
+            if(!databaseRepo.UpdateOrder(orderResult)) return false;
 
             foreach (List<string> orderline in orderlines)
             {
                 RegisterUsedMaterial(orderResult.Id, int.Parse(orderline[0]), int.Parse(orderline[2]));
                 int.TryParse(orderline[0], out int materialId);
                 int.TryParse(orderline[2], out int quantity);
-                databaseRepo.InsertOrderline(orderResult.Id, materialId, quantity);
+                if(!databaseRepo.InsertOrderline(orderResult.Id, materialId, quantity)) return false;
             }
+
+            return true;
         }
 
         public List<string> GetOrderInfo(int orderId)

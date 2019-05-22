@@ -83,22 +83,28 @@ namespace StorageBuffer.Model
             return customers.Find(x => x.Id == customerId).ToLongList();
         }
 
-        public void CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
         {
             int.TryParse(customerZip, out int zip);
             int id = databaseRepo.CreateCustomer(customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
-            
+
+            if (id <= 0)
+            {
+                return false;
+            }
+
             customers.Add(new Customer(id, customerName, customerAddress, zip, customerCity, customerPhone, customerEmail, customerComment));
+            return true;
         }
 
-        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
 
             Customer customer = customers.Find(x => x.Id == customerId);
 
             if (customer != null)
             {
-                databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+                if(!databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment)) return false;
 
                 customer.Name = customerName;
                 customer.Address = customerAddress;
@@ -107,7 +113,10 @@ namespace StorageBuffer.Model
                 customer.Phone = customerPhone;
                 customer.Email = customerEmail;
                 customer.Comment = customerComment;
+                return true;
             }
+
+            return false;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using StorageBuffer.Domain;
 using StorageBuffer.Model;
 
@@ -171,192 +172,248 @@ namespace StorageBuffer.Application
             }
         }
 
-        public void UpdateOrder(Order order)
+        public bool UpdateOrder(Order order)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spUpdateOrder", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("spUpdateOrder", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
-                    cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = order.OrderStatus.ToString();
-                    cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = order.Description;
-                    connection.Open();
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                        cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = order.OrderStatus.ToString();
+                        cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = order.Description;
+                        connection.Open();
 
-                    cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void InsertOrderline(int orderId, int materialId, int quantity)
+        public bool InsertOrderline(int orderId, int materialId, int quantity)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spInsertOrderline", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("spInsertOrderline", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
-                    cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = materialId;
-                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
+                        cmd.Parameters.Add("@MaterialId", SqlDbType.Int).Value = materialId;
+                        cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
 
-                    connection.Open();
+                        connection.Open();
 
-                    cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void RemoveOrderlines(Order order)
+        public bool RemoveOrderlines(Order order)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spRemoveOrderline", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("spRemoveOrderline", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
 
-                    connection.Open();
+                        connection.Open();
 
-                    cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
         public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spInsertCustomer", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
-                    cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
-                    cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
-                    cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
-                    cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
-                    cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
-                    cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
-
-                    connection.Open();
-
-                    int customerId = 0;
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("spInsertCustomer", connection))
                     {
-                        while (reader.Read())
-                        {
-                            customerId = int.Parse(reader["CustomerId"].ToString());
-                        }
-                    }
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    return customerId;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
+                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
+                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
+                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
+                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
+                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+
+                        connection.Open();
+
+                        int customerId = 0;
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                customerId = int.Parse(reader["CustomerId"].ToString());
+                            }
+                        }
+
+                        return customerId;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
         public int CreateMaterial(string materialName, string materialComments, int quantity)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spInsertMaterial", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
-                    cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComments;
-                    cmd.Parameters.Add("@Quantity", SqlDbType.NChar).Value = quantity;
-                    connection.Open();
-
-                    int materialId = 0;
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("spInsertMaterial", connection))
                     {
-                        while (reader.Read())
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
+                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComments;
+                        cmd.Parameters.Add("@Quantity", SqlDbType.NChar).Value = quantity;
+                        connection.Open();
+
+                        int materialId = 0;
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            materialId = int.Parse(reader["MaterialId"].ToString());
+                            while (reader.Read())
+                            {
+                                materialId = int.Parse(reader["MaterialId"].ToString());
+                            }
                         }
+
+                        return materialId;
                     }
-
-                    return materialId;
                 }
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
-        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spUpdateCustomer", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("spUpdateCustomer", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = customerId;
-                    cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
-                    cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
-                    cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
-                    cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
-                    cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
-                    cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
-                    cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
-                    connection.Open();
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = customerId;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
+                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
+                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
+                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
+                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
+                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+                        connection.Open();
 
-                    cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spUpdateMaterial", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("spUpdateMaterial", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = materialId;
-                    cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
-                    cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComment;
-                    cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
-                    connection.Open();
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = materialId;
+                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
+                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComment;
+                        cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
+                        connection.Open();
 
-                    cmd.ExecuteNonQuery();
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
         public int CreateOrder(int customerId, string name, string date, string deadline, string description)
         {
-            using (SqlConnection connection = GetDatabaseConnection())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("spInsertOrder", connection))
+                using (SqlConnection connection = GetDatabaseConnection())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@CustomerId", SqlDbType.Int).Value = customerId;
-                    cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = Status.Received.ToString();
-                    cmd.Parameters.Add("@OrderName", SqlDbType.NVarChar).Value = name;
-                    cmd.Parameters.Add("@OrderDate", SqlDbType.NChar).Value = date;
-                    cmd.Parameters.Add("@Deadline", SqlDbType.NChar).Value = deadline;
-                    cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = description;
-
-                    connection.Open();
-
-                    int orderId = 0;
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand("spInsertOrder", connection))
                     {
-                        while (reader.Read())
-                        {
-                            orderId = int.Parse(reader["OrderId"].ToString());
-                        }
-                    }
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    return orderId;
+                        cmd.Parameters.Add("@CustomerId", SqlDbType.Int).Value = customerId;
+                        cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = Status.Received.ToString();
+                        cmd.Parameters.Add("@OrderName", SqlDbType.NVarChar).Value = name;
+                        cmd.Parameters.Add("@OrderDate", SqlDbType.NChar).Value = date;
+                        cmd.Parameters.Add("@Deadline", SqlDbType.NChar).Value = deadline;
+                        cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = description;
+
+                        connection.Open();
+
+                        int orderId = 0;
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                orderId = int.Parse(reader["OrderId"].ToString());
+                            }
+                        }
+
+                        return orderId;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
     }

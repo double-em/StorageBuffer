@@ -88,9 +88,9 @@ namespace StorageBuffer.Application
             orderRepo.ChangeStatusOfOrder(orderId, status);
         }
 
-        public void UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
+        public bool UpdateOrder(int orderId, string orderStatus, List<List<string>> orderlines, string description)
         {
-            orderRepo.UpdateOrder(orderId, orderStatus, orderlines, description);
+            return orderRepo.UpdateOrder(orderId, orderStatus, orderlines, description);
         }
 
         public bool CreateOrder(int customerId, string orderName, string deadline, string description)
@@ -123,26 +123,26 @@ namespace StorageBuffer.Application
             return customerRepo.GetCustomer(customerId);
         }
 
-        public void CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
         {
-            customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+            return customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
         }
 
-        public void CreateMaterial(string materialName, string materialComment, string materialQuantity)
+        public bool CreateMaterial(string materialName, string materialComment, string materialQuantity)
         {
-            materialRepo.CreateMaterial(materialName, materialComment, materialQuantity);
+            return materialRepo.CreateMaterial(materialName, materialComment, materialQuantity);
         }
 
-        public void UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
         {
             int.TryParse(customerZip, out int zip);
-            customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
+            return customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
         }
 
-        public void UpdateMaterial(int materialId, string materialName, string materialComment, string materialQuantity)
+        public bool UpdateMaterial(int materialId, string materialName, string materialComment, string materialQuantity)
         {
             int.TryParse(materialQuantity, out int quantity);
-            materialRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
+            return materialRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
         }
     }
 }
