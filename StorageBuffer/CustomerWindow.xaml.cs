@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -60,15 +61,34 @@ namespace StorageBuffer
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            SaveCustomer();
+        }
+
+        void SaveCustomer()
+        {
             control.UpdateCustomer(
                 customerId,
-                tbCustomerName.Text, 
-                tbCustomerAddress.Text, 
-                tbCustomerCity.Text, 
-                tbCustomerZip.Text, 
-                tbCustomerPhone.Text, 
-                tbCustomerEmail.Text, 
+                tbCustomerName.Text,
+                tbCustomerAddress.Text,
+                tbCustomerCity.Text,
+                tbCustomerZip.Text,
+                tbCustomerPhone.Text,
+                tbCustomerEmail.Text,
                 tbCustomerComment.Text);
+        }
+
+        private void CustomerWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            confirmationWindow.Owner = this;
+            confirmationWindow.Top = this.Top;
+            confirmationWindow.Left = this.Left + 8;
+            confirmationWindow.ShowDialog();
+
+            if ((bool)confirmationWindow.DialogResult)
+            {
+                SaveCustomer();
+            }
         }
     }
 }

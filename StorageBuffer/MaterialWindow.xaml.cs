@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -55,7 +56,26 @@ namespace StorageBuffer
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            SaveMaterial();
+        }
+
+        private void SaveMaterial()
+        {
             control.UpdateMaterial(materialId, tbMaterialName.Text, tbMaterialComment.Text, tbMaterialQuantity.Text);
+        }
+
+        private void MaterialWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            confirmationWindow.Owner = this;
+            confirmationWindow.Top = this.Top;
+            confirmationWindow.Left = this.Left + 8;
+            confirmationWindow.ShowDialog();
+
+            if ((bool)confirmationWindow.DialogResult)
+            {
+                SaveMaterial();
+            }
         }
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageBuffer"
         mc:Ignorable="d"
-        Title="Kunde" Height="989" Width="1280" ResizeMode="NoResize" FontSize="20">
+        Closing="MaterialWindow_OnClosing"
+        Title="Matriale" Height="989" Width="1280" ResizeMode="NoResize" FontSize="20">
     <Grid>
         <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280"/>
         <Image Width="221" Margin="30,10,1023,819" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>

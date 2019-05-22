@@ -8,12 +8,12 @@
         AllowsTransparency="True"
         Background="{DynamicResource WindowBackGroundTransparent}"
         WindowStyle="None"
-        Title="Vælg Materiale" Height="981" Width="1272">
+        Title="Vælg Materiale" Height="982" Width="1264">
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackGroundTransparent" Color="#2F2F2F" Opacity="0.5" />
     </Window.Resources>
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="134" VerticalAlignment="Top" Width="590" Background="White" Margin="342,394,0,0">
+        <Grid HorizontalAlignment="Left" Height="134" VerticalAlignment="Top" Width="590" Background="White" Margin="337,424,0,0">
             <TextBox x:Name="tbAmount" Text="1111" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="228,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" />
             <Label Name="lChange" Content="Ændre antal(Max 1234):" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="218" Margin="10,10,0,0" Height="50"/>
             

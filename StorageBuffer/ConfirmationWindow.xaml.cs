@@ -31,13 +31,13 @@ namespace StorageBuffer
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Close();
+            this.Close();
         }
 
         private void BtnDeny_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            Close();
+            this.Close();
         }
     }
 }

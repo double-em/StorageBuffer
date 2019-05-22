@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageBuffer"
         mc:Ignorable="d"
+        Closing="OrderWindow_OnClosing"
         Title="Ordre" Height="989" Width="1280" ResizeMode="NoResize">
     <Grid>
         <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280"/>

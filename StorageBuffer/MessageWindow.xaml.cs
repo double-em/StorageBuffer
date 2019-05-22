@@ -30,7 +30,7 @@ namespace StorageBuffer
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }

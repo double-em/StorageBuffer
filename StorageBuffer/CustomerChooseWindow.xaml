@@ -8,7 +8,7 @@
         AllowsTransparency="True"
         Background="{DynamicResource WindowBackGroundTransparent}"
         WindowStyle="None"
-        Title="Vælg Materiale" Height="981" Width="1264">
+        Title="Vælg Materiale" Height="982" Width="1264">
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackGroundTransparent" Color="#2F2F2F" Opacity="0.5" />
     </Window.Resources>

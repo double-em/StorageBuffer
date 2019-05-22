@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -148,7 +149,7 @@ namespace StorageBuffer
             ChangeOrderline changeOrderline = new ChangeOrderline(orderline, material[3]);
             changeOrderline.Owner = this;
             changeOrderline.Top = this.Top;
-            changeOrderline.Left = this.Left;
+            changeOrderline.Left = this.Left + 8;
             changeOrderline.ShowDialog();
 
             if (changeOrderline.delete)
@@ -173,6 +174,11 @@ namespace StorageBuffer
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveOrder();
+        }
+
+        private void SaveOrder()
         {
             control.UpdateOrder(orderId, orderStatus, orderlines, tbOrderDescription.Text);
         }
@@ -208,6 +214,20 @@ namespace StorageBuffer
                 case 6:
                     orderStatus = "Canceled";
                     break;
+            }
+        }
+
+        private void OrderWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            confirmationWindow.Owner = this;
+            confirmationWindow.Top = this.Top;
+            confirmationWindow.Left = this.Left + 8;
+            confirmationWindow.ShowDialog();
+
+            if ((bool)confirmationWindow.DialogResult)
+            {
+                SaveOrder();
             }
         }
     }
