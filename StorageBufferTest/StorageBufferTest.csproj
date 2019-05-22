@@ -56,6 +56,7 @@
     <Compile Include="CreateOrderTest.cs" />
     <Compile Include="CreateCustomerTest.cs" />
     <Compile Include="CreateMaterial.cs" />
+    <Compile Include="UpdateMaterialTest.cs" />
     <Compile Include="UpdateOrderTest.cs" />
   </ItemGroup>
   <ItemGroup>
