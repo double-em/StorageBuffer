@@ -117,5 +117,11 @@ namespace StorageBuffer.Application
         {
             return true;
         }
+
+        private int orderId = 23;
+        public int CreateOrder(int customerId, string orderName, string date, string deadline, string description)
+        {
+            return orderId++;
+        }
     }
 }

@@ -90,7 +90,7 @@ namespace StorageBuffer.Model
         public bool CreateOrder(int customerId, string orderName, string deadline, string description)
         {
             string date = DateTime.Now.ToShortDateString();
-            int id = DatabaseRepo.Instance.CreateOrder(customerId, orderName, date, deadline, description);
+            int id = databaseRepo.CreateOrder(customerId, orderName, date, deadline, description);
             
             if (id == 0)
             {

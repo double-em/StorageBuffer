@@ -21,5 +21,6 @@ namespace StorageBuffer.Domain
         bool RemoveMaterial(int materialId);
         bool RemoveCustomer(int customerId);
         bool RemoveOrder(int orderId);
+        int CreateOrder(int customerId, string orderName, string date, string deadline, string description);
     }
 }
