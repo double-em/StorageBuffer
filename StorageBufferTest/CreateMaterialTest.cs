@@ -7,7 +7,7 @@ using StorageBuffer.Domain;
 namespace StorageBufferTest
 {
     [TestClass]
-    public class CreateMaterial
+    public class CreateMaterialTest
     {
         private Controller control;
         private List<Customer> customers;

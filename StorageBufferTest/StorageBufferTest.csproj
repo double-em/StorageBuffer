@@ -55,7 +55,7 @@
     <Compile Include="ChangeStatusTest.cs" />
     <Compile Include="CreateOrderTest.cs" />
     <Compile Include="CreateCustomerTest.cs" />
-    <Compile Include="CreateMaterial.cs" />
+    <Compile Include="CreateMaterialTest.cs" />
     <Compile Include="RemoveCustomerTest.cs" />
     <Compile Include="RemoveMaterialTest.cs" />
     <Compile Include="RemoveOrderTest.cs" />
