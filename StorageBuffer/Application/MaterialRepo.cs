@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
@@ -111,6 +112,20 @@ namespace StorageBuffer.Model
                 return true;
             }
             return false;
+        }
+
+        public bool RemoveMaterial(int materialId)
+        {
+            Material material = materials.Find(x => x.Id == materialId);
+
+            if (material == null)
+            {
+                return false;
+            }
+
+            if (!databaseRepo.RemoveMaterial(materialId)) return false;
+            if (!materials.Remove(material)) return false;
+            return true;
         }
     }
 }

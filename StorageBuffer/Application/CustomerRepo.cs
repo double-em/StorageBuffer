@@ -118,5 +118,24 @@ namespace StorageBuffer.Model
 
             return false;
         }
+
+        public bool RemoveCustomer(int customerId)
+        {
+            Customer customer = customers.Find(x => x.Id == customerId);
+
+            if (customer == null)
+            {
+                return false;
+            }
+
+            if (!databaseRepo.RemoveCustomer(customerId)) return false;
+            if (!customers.Remove(customer)) return false;
+            return true;
+        }
+
+        public bool CustomerExist(int customerId)
+        {
+            return customers.Find(x => x.Id == customerId) != null;
+        }
     }
 }

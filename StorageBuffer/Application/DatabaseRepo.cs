@@ -131,7 +131,11 @@ namespace StorageBuffer.Application
                             string deadline = reader["Deadline"].ToString();
                             string description = reader["OrderDescription"].ToString();
 
-                            string customerName = CustomerRepo.Instance.GetCustomerName(customerId);
+                            string customerName = "IKKE FUNDET";
+                            if (CustomerRepo.Instance.CustomerExist(customerId))
+                            {
+                                customerName = CustomerRepo.Instance.GetCustomerName(customerId);
+                            }
 
                             Order order = new Order(id, customerId, customerName, status, name, date, deadline, description);
                             order.orderlines = GetOrderlinesForOrder(order);
@@ -237,7 +241,7 @@ namespace StorageBuffer.Application
 
                         connection.Open();
 
-                        return cmd.ExecuteNonQuery() > 0;
+                        return cmd.ExecuteNonQuery() >= 0;
                     }
                 }
             }
@@ -366,6 +370,75 @@ namespace StorageBuffer.Application
                         cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
                         cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComment;
                         cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
+                        connection.Open();
+
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveMaterial(int materialId)
+        {
+            try
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand("spRemoveMaterial", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = materialId;
+                        connection.Open();
+
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveCustomer(int customerId)
+        {
+            try
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand("spRemoveCustomer", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = customerId;
+                        connection.Open();
+
+                        return cmd.ExecuteNonQuery() == 1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveOrder(int orderId)
+        {
+            try
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand("spRemoveOrder", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
                         connection.Open();
 
                         return cmd.ExecuteNonQuery() == 1;

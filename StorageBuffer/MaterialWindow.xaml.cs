@@ -26,6 +26,8 @@ namespace StorageBuffer
         private Controller control;
         private int materialId;
 
+        private bool removeMaterial = false;
+
         public MaterialWindow(Controller control, int materialId)
         {
             InitializeComponent();
@@ -80,7 +82,24 @@ namespace StorageBuffer
 
         private void MaterialWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            if (!removeMaterial)
+            {
+                ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+                confirmationWindow.Owner = this;
+                confirmationWindow.Top = this.Top;
+                confirmationWindow.Left = this.Left + 8;
+                confirmationWindow.ShowDialog();
+
+                if ((bool)confirmationWindow.DialogResult)
+                {
+                    SaveMaterial();
+                }
+            }
+        }
+
+        private void BtnDeleteMaterial_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Er du sikker på du vil SLETTE materialet?");
             confirmationWindow.Owner = this;
             confirmationWindow.Top = this.Top;
             confirmationWindow.Left = this.Left + 8;
@@ -88,7 +107,34 @@ namespace StorageBuffer
 
             if ((bool)confirmationWindow.DialogResult)
             {
-                SaveMaterial();
+                RemoveMaterial();
+            }
+        }
+
+        private void RemoveMaterial()
+        {
+            string messsage = "";
+            bool removed = false;
+            if (control.RemoveMaterial(materialId))
+            {
+                messsage = "Materialet blev slettet.";
+                removed = true;
+            }
+            else
+            {
+                messsage = "Materialet kunne IKKE slettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
+
+            if (removed)
+            {
+                removeMaterial = true;
+                this.Close();
             }
         }
     }

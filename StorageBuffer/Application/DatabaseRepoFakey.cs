@@ -102,5 +102,20 @@ namespace StorageBuffer.Application
         {
             return true;
         }
+
+        public bool RemoveMaterial(int materialId)
+        {
+            return true;
+        }
+
+        public bool RemoveCustomer(int customerId)
+        {
+            return true;
+        }
+
+        public bool RemoveOrder(int orderId)
+        {
+            return true;
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace StorageBuffer
         private Controller control;
         private int customerId;
 
+        private bool removeCustomer = false;
+
         public CustomerWindow(Controller control, int customerId)
         {
             InitializeComponent();
@@ -93,7 +95,24 @@ namespace StorageBuffer
 
         private void CustomerWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            if (!removeCustomer)
+            {
+                ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+                confirmationWindow.Owner = this;
+                confirmationWindow.Top = this.Top;
+                confirmationWindow.Left = this.Left + 8;
+                confirmationWindow.ShowDialog();
+
+                if ((bool)confirmationWindow.DialogResult)
+                {
+                    SaveCustomer();
+                }
+            }
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Er du sikker på du vil SLETTE kunden?");
             confirmationWindow.Owner = this;
             confirmationWindow.Top = this.Top;
             confirmationWindow.Left = this.Left + 8;
@@ -101,7 +120,34 @@ namespace StorageBuffer
 
             if ((bool)confirmationWindow.DialogResult)
             {
-                SaveCustomer();
+                RemoveCustomer();
+            }
+        }
+
+        private void RemoveCustomer()
+        {
+            string messsage = "";
+            bool removed = false;
+            if (control.RemoveCustomer(customerId))
+            {
+                messsage = "Kunden blev slettet.";
+                removed = true;
+            }
+            else
+            {
+                messsage = "Kunden kunne IKKE slettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
+
+            if (removed)
+            {
+                removeCustomer = true;
+                this.Close();
             }
         }
     }

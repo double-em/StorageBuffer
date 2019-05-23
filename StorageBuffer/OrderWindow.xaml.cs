@@ -34,6 +34,8 @@ namespace StorageBuffer
         private string orderStatus;
         private List<List<string>> orderlines;
 
+        private bool removeOrder = false;
+
         public OrderWindow(Controller control, int orderId)
         {
             InitializeComponent();
@@ -233,7 +235,24 @@ namespace StorageBuffer
 
         private void OrderWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+            if (!removeOrder)
+            {
+                ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
+                confirmationWindow.Owner = this;
+                confirmationWindow.Top = this.Top;
+                confirmationWindow.Left = this.Left + 8;
+                confirmationWindow.ShowDialog();
+
+                if ((bool)confirmationWindow.DialogResult)
+                {
+                    SaveOrder();
+                }
+            }
+        }
+
+        private void BtnDeleteOrder_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmationWindow confirmationWindow = new ConfirmationWindow("Er du sikker på du vil SLETTE ordren?");
             confirmationWindow.Owner = this;
             confirmationWindow.Top = this.Top;
             confirmationWindow.Left = this.Left + 8;
@@ -241,7 +260,34 @@ namespace StorageBuffer
 
             if ((bool)confirmationWindow.DialogResult)
             {
-                SaveOrder();
+                RemoveOrder();
+            }
+        }
+
+        private void RemoveOrder()
+        {
+            string messsage = "";
+            bool removed = false;
+            if (control.RemoveOrder(orderId))
+            {
+                messsage = "Ordren blev slettet.";
+                removed = true;
+            }
+            else
+            {
+                messsage = "Ordren kunne IKKE slettes.";
+            }
+
+            MessageWindow messageWindow = new MessageWindow(messsage);
+            messageWindow.Owner = this;
+            messageWindow.Top = this.Top;
+            messageWindow.Left = this.Left + 8;
+            messageWindow.ShowDialog();
+
+            if (removed)
+            {
+                removeOrder = true;
+                this.Close();
             }
         }
     }

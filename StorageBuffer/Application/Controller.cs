@@ -144,5 +144,20 @@ namespace StorageBuffer.Application
             int.TryParse(materialQuantity, out int quantity);
             return materialRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
         }
+
+        public bool RemoveOrder(int orderId)
+        {
+            return orderRepo.RemoveOrder(orderId);
+        }
+
+        public bool RemoveCustomer(int customerId)
+        {
+            return customerRepo.RemoveCustomer(customerId);
+        }
+
+        public bool RemoveMaterial(int materialId)
+        {
+            return materialRepo.RemoveMaterial(materialId);
+        }
     }
 }

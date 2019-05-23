@@ -18,5 +18,8 @@ namespace StorageBuffer.Domain
         int CreateMaterial(string materialName, string materialComments, int quantity);
         bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
         bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity);
+        bool RemoveMaterial(int materialId);
+        bool RemoveCustomer(int customerId);
+        bool RemoveOrder(int orderId);
     }
 }

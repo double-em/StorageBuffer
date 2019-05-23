@@ -131,5 +131,20 @@ namespace StorageBuffer.Model
         {
             return orders.Find(x => x.Id == orderId).GetOrderlines();
         }
+
+        public bool RemoveOrder(int orderId)
+        {
+            Order order = orders.Find(x => x.Id == orderId);
+
+            if (order == null)
+            {
+                return false;
+            }
+
+            if (!databaseRepo.RemoveOrderlines(order)) return false;
+            if (!databaseRepo.RemoveOrder(orderId)) return false;
+            if (!orders.Remove(order)) return false;
+            return true;
+        }
     }
 }

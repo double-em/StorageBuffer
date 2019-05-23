@@ -86,7 +86,39 @@
                 <Label Content="Antal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="768,0,0,0"/>
                 <TextBox x:Name="tbMaterialQuantity" Text="" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="768,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" />
                 <Label Content="Bemærkning" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,95,0,0"/>
-                <TextBox x:Name="tbMaterialComment" Text="" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="763" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" />
+                <TextBox x:Name="tbMaterialComment" Text="" VerticalContentAlignment="Top" HorizontalAlignment="Left" Height="708" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" />
+                <Button x:Name="btnDeleteMaterial" FontSize="20" Content="Slet Ordren" HorizontalAlignment="Right" Margin="0,850,654,0" VerticalAlignment="Top" Width="280" Height="50" Click="BtnDeleteMaterial_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Background" Value="#A8A1A2"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid x:Name="Panel">
+                                            <ContentPresenter x:Name="ContentSite"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                                <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </Grid>
         </Grid>
     </Grid>
