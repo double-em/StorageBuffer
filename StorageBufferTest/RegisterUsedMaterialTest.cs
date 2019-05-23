@@ -26,11 +26,9 @@ namespace StorageBufferTest
         }
 
         [TestCleanup]
-        public void CleanupTest()
+        public void CleanUpTest()
         {
-            control.customerRepo = null;
-            control.materialRepo = null;
-            control.orderRepo = null;
+            control.PullAllData();
         }
 
         [TestMethod]

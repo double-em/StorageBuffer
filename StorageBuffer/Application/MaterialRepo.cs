@@ -52,6 +52,11 @@ namespace StorageBuffer.Model
         MaterialRepo(IPersistable databaseRepo)
         {
             this.databaseRepo = databaseRepo;
+            PullAllMaterials();
+        }
+
+        public void PullAllMaterials()
+        {
             materials = databaseRepo.GetAllMaterials();
         }
 

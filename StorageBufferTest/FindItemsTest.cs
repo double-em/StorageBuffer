@@ -26,8 +26,6 @@ namespace StorageBufferTest
             orders = control.orderRepo.orders;
         }
 
-
-
         [TestMethod]
         public void GetAllCustomers()
         {

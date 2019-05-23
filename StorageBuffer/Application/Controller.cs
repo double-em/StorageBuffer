@@ -52,6 +52,13 @@ namespace StorageBuffer.Application
             orderRepo = OrderRepo.Instance;
         }
 
+        public void PullAllData()
+        {
+            customerRepo.PullAllCustomers();
+            materialRepo.PullAllMaterials();
+            orderRepo.PullAllOrders();
+        }
+
         public List<List<string>> FindItems(string searchCriteria, string searchQuery = "")
         {
             List<List<string>> result = new List<List<string>>();
@@ -75,6 +82,7 @@ namespace StorageBuffer.Application
                     result.AddRange(orderRepo.GetOrders(searchQuery));
                     break;
             }
+
             return result;
         }
 
@@ -123,9 +131,11 @@ namespace StorageBuffer.Application
             return customerRepo.GetCustomer(customerId);
         }
 
-        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip,
+            string customerPhone, string customerEmail, string customerComment)
         {
-            return customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment);
+            return customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone,
+                customerEmail, customerComment);
         }
 
         public bool CreateMaterial(string materialName, string materialComment, string materialQuantity)
@@ -133,10 +143,12 @@ namespace StorageBuffer.Application
             return materialRepo.CreateMaterial(materialName, materialComment, materialQuantity);
         }
 
-        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity,
+            string customerZip, string customerPhone, string customerEmail, string customerComment)
         {
             int.TryParse(customerZip, out int zip);
-            return customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
+            return customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip,
+                customerPhone, customerEmail, customerComment);
         }
 
         public bool UpdateMaterial(int materialId, string materialName, string materialComment, string materialQuantity)
@@ -168,6 +180,11 @@ namespace StorageBuffer.Application
         public bool MaterialExist(int materialId)
         {
             return materialRepo.MaterialExist(materialId);
+        }
+
+        public bool OrderExists(int orderId)
+        {
+            return orderRepo.OrderExists(orderId);
         }
     }
 }

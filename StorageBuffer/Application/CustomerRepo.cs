@@ -50,6 +50,11 @@ namespace StorageBuffer.Model
         CustomerRepo(IPersistable databaseRepo)
         {
             this.databaseRepo = databaseRepo;
+            PullAllCustomers();
+        }
+
+        public void PullAllCustomers()
+        {
             customers = databaseRepo.GetAllCustomers();
         }
 

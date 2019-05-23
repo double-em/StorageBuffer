@@ -25,6 +25,12 @@ namespace StorageBufferTest
             orders = control.orderRepo.orders;
         }
 
+        [TestCleanup]
+        public void CleanUpTest()
+        {
+            control.PullAllData();
+        }
+
         [TestMethod]
         public void OrderAddedToOrderList()
         {

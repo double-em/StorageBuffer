@@ -52,6 +52,11 @@ namespace StorageBuffer.Model
         OrderRepo(IPersistable databaseRepo)
         {
             this.databaseRepo = databaseRepo;
+            PullAllOrders();
+        }
+
+        public void PullAllOrders()
+        {
             orders = databaseRepo.GetAllOrders();
         }
 
@@ -145,6 +150,11 @@ namespace StorageBuffer.Model
             if (!databaseRepo.RemoveOrder(orderId)) return false;
             if (!orders.Remove(order)) return false;
             return true;
+        }
+
+        public bool OrderExists(int orderId)
+        {
+            return orders.Exists(x => x.Id == orderId);
         }
     }
 }

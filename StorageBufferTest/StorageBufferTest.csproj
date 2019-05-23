@@ -58,6 +58,7 @@
     <Compile Include="CreateMaterial.cs" />
     <Compile Include="RemoveCustomerTest.cs" />
     <Compile Include="RemoveMaterialTest.cs" />
+    <Compile Include="RemoveOrderTest.cs" />
     <Compile Include="UpdateCustomerTest.cs" />
     <Compile Include="UpdateMaterialTest.cs" />
     <Compile Include="UpdateOrderTest.cs" />
