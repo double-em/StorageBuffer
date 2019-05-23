@@ -16,8 +16,6 @@ using System.Windows.Shapes;
 using StorageBuffer.Application;
 using StorageBuffer.Domain;
 
-public delegate void OrderChanged(Order order);
-
 namespace StorageBuffer
 {
     /// <summary>
@@ -33,6 +31,8 @@ namespace StorageBuffer
         private string customerName;
         private string orderStatus;
         private List<List<string>> orderlines;
+
+        private event NotifyItemChanged notifyItemChanged;
 
         private bool removeOrder = false;
 
@@ -246,8 +246,10 @@ namespace StorageBuffer
                 if ((bool)confirmationWindow.DialogResult)
                 {
                     SaveOrder();
-                }
+                } 
             }
+
+            Notify();
         }
 
         private void BtnDeleteOrder_Click(object sender, RoutedEventArgs e)
@@ -289,6 +291,24 @@ namespace StorageBuffer
                 removeOrder = true;
                 this.Close();
             }
+        }
+
+        private void Notify()
+        {
+            if (notifyItemChanged != null)
+            {
+                notifyItemChanged();
+            }
+        }
+
+        public void AddObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged += listener;
+        }
+
+        public void RemoveObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged -= listener;
         }
     }
 }

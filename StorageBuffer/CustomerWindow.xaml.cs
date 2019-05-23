@@ -26,6 +26,8 @@ namespace StorageBuffer
         private Controller control;
         private int customerId;
 
+        private event NotifyItemChanged notifyItemChanged;
+
         private bool removeCustomer = false;
 
         public CustomerWindow(Controller control, int customerId)
@@ -108,6 +110,8 @@ namespace StorageBuffer
                     SaveCustomer();
                 }
             }
+
+            Notify();
         }
 
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
@@ -149,6 +153,24 @@ namespace StorageBuffer
                 removeCustomer = true;
                 this.Close();
             }
+        }
+
+        private void Notify()
+        {
+            if (notifyItemChanged != null)
+            {
+                notifyItemChanged();
+            }
+        }
+
+        public void AddObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged += listener;
+        }
+
+        public void RemoveObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged -= listener;
         }
     }
 }

@@ -23,12 +23,16 @@ namespace StorageBuffer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+    public delegate void NotifyItemChanged();
     public partial class MainWindow : Window
     {
         private Controller control;
         private List<OrderWindow> orderWindows;
         private List<CustomerWindow> customerWindows;
         private List<MaterialWindow> materialWindows;
+
+        
         public MainWindow()
         {
             try
@@ -141,6 +145,7 @@ namespace StorageBuffer
                         customerWindows.Add(customerWindow);
                         customerWindow.Top = Top;
                         customerWindow.Left = Left;
+                        customerWindow.AddObserver(GetItemChanged);
                         customerWindow.Show();
                     }));
                     break;
@@ -148,11 +153,12 @@ namespace StorageBuffer
                 case "Material":
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        MaterialWindow mustomerWindow = new MaterialWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
-                        materialWindows.Add(mustomerWindow);
-                        mustomerWindow.Top = Top;
-                        mustomerWindow.Left = Left;
-                        mustomerWindow.Show();
+                        MaterialWindow materialWindow = new MaterialWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
+                        materialWindows.Add(materialWindow);
+                        materialWindow.Top = Top;
+                        materialWindow.Left = Left;
+                        materialWindow.AddObserver(GetItemChanged);
+                        materialWindow.Show();
                     }));
                     break;
 
@@ -163,6 +169,7 @@ namespace StorageBuffer
                         orderWindows.Add(orderWindow);
                         orderWindow.Top = Top;
                         orderWindow.Left = Left;
+                        orderWindow.AddObserver(GetItemChanged);
                         orderWindow.Show();
                     }));
                     break;
@@ -291,6 +298,11 @@ namespace StorageBuffer
             messageWindow.Top = this.Top;
             messageWindow.Left = this.Left + 8;
             messageWindow.ShowDialog();
+        }
+
+        public void GetItemChanged()
+        {
+            Search();
         }
     }
 }

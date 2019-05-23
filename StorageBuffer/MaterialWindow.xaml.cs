@@ -26,6 +26,8 @@ namespace StorageBuffer
         private Controller control;
         private int materialId;
 
+        private event NotifyItemChanged notifyItemChanged;
+
         private bool removeMaterial = false;
 
         public MaterialWindow(Controller control, int materialId)
@@ -95,6 +97,8 @@ namespace StorageBuffer
                     SaveMaterial();
                 }
             }
+
+            Notify();
         }
 
         private void BtnDeleteMaterial_Click(object sender, RoutedEventArgs e)
@@ -136,6 +140,24 @@ namespace StorageBuffer
                 removeMaterial = true;
                 this.Close();
             }
+        }
+
+        private void Notify()
+        {
+            if (notifyItemChanged != null)
+            {
+                notifyItemChanged();
+            }
+        }
+
+        public void AddObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged += listener;
+        }
+
+        public void RemoveObserver(NotifyItemChanged listener)
+        {
+            notifyItemChanged -= listener;
         }
     }
 }
