@@ -127,5 +127,10 @@ namespace StorageBuffer.Model
             if (!materials.Remove(material)) return false;
             return true;
         }
+
+        public bool MaterialExist(int materialId)
+        {
+            return materials.Exists(x => x.Id == materialId);
+        }
     }
 }

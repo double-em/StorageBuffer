@@ -135,7 +135,7 @@ namespace StorageBuffer.Model
 
         public bool CustomerExist(int customerId)
         {
-            return customers.Find(x => x.Id == customerId) != null;
+            return customers.Exists(x => x.Id == customerId);
         }
     }
 }

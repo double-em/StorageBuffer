@@ -7,7 +7,7 @@ using StorageBuffer.Domain;
 namespace StorageBufferTest
 {
     [TestClass]
-    public class RemoveCustomerTest
+    public class RemoveMaterialTest
     {
         private Controller control;
         private List<Customer> customers;
@@ -26,25 +26,25 @@ namespace StorageBufferTest
         }
 
         [TestMethod]
-        public void RemoveCustomerReturnsTrueOnSuccess()
+        public void RemoveMaterialReturnsTrueOnSuccess()
         {
-            bool succeeded = control.RemoveCustomer(2);
+            bool succeeded = control.RemoveMaterial(11);
 
             Assert.IsTrue(succeeded);
         }
 
         [TestMethod]
-        public void RemoveCustomer_CustomerRemoved()
+        public void RemoveMaterial_MaterialRemoved()
         {
-            control.RemoveCustomer(1);
+            control.RemoveMaterial(12);
 
-            Assert.IsFalse(control.CustomerExist(1));
+            Assert.IsFalse(control.MaterialExist(12));
         }
 
         [TestMethod]
-        public void RemoveCustomer_CustomerDosentExists()
+        public void RemoveMaterial_MaterialDosentExists()
         {
-            bool succeeded = control.RemoveCustomer(14);
+            bool succeeded = control.RemoveMaterial(14);
 
             Assert.IsFalse(succeeded);
         }

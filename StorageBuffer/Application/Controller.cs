@@ -164,5 +164,10 @@ namespace StorageBuffer.Application
         {
             return customerRepo.CustomerExist(customerId);
         }
+
+        public bool MaterialExist(int materialId)
+        {
+            return materialRepo.MaterialExist(materialId);
+        }
     }
 }
