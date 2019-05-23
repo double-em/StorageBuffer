@@ -53,7 +53,7 @@ namespace StorageBufferTest
         {
             control.RegisterUsedMaterial(orders[0].Id, materials[1].Id, 2);
 
-            Assert.AreEqual(2, orders[0].orderlines.Count);
+            Assert.AreEqual(0, orders[0].orderlines.Count);
         }
 
         [TestMethod]
@@ -62,8 +62,8 @@ namespace StorageBufferTest
             control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
             control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
 
-            Assert.AreEqual(1, orders[0].orderlines[0].Quantity);
-            Assert.AreEqual(2, orders[0].orderlines.Count);
+            Assert.AreEqual(2, orders[0].orderlines[0].Quantity);
+            Assert.AreEqual(1, orders[0].orderlines.Count);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace StorageBufferTest
         {
             control.RegisterUsedMaterial(orders[0].Id, materials[0].Id, 1);
 
-            Assert.AreEqual(0, materials[0].Quantity);
+            Assert.AreEqual(1, materials[0].Quantity);
         }
     }
 }
