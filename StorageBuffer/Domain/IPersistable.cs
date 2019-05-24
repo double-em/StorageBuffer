@@ -11,9 +11,9 @@ namespace StorageBuffer.Domain
         List<Customer> GetAllCustomers();
         List<Material> GetAllMaterials();
         List<Order> GetAllOrders();
-        bool UpdateOrder(Order order);
+        bool UpdateOrder(int orderId, string orderStatus, string description);
         bool InsertOrderline(int orderId, int materialId, int quantity);
-        bool RemoveOrderlines(Order order);
+        bool RemoveOrderlines(int orderId);
         int CreateCustomer(string name, string address, string city, int zip, string phone, string email, string comment);
         int CreateMaterial(string name, string comment, int quantity);
         bool UpdateCustomer(int id, string name, string address, string city, int zip, string phone, string email, string comment);

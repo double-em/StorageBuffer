@@ -113,8 +113,8 @@ namespace StorageBuffer.Model
             orderResult.Description = description;
 
             orderResult.orderlines = new List<Orderline>();
-            if(!databaseRepo.RemoveOrderlines(orderResult)) return false;
-            if(!databaseRepo.UpdateOrder(orderResult)) return false;
+            if(!databaseRepo.RemoveOrderlines(orderResult.Id)) return false;
+            if(!databaseRepo.UpdateOrder(orderResult.Id, orderResult.OrderStatus.ToString(), orderResult.Description)) return false;
 
             foreach (List<string> orderline in orderlines)
             {
@@ -146,7 +146,7 @@ namespace StorageBuffer.Model
                 return false;
             }
 
-            if (!databaseRepo.RemoveOrderlines(order)) return false;
+            if (!databaseRepo.RemoveOrderlines(order.Id)) return false;
             if (!databaseRepo.RemoveOrder(orderId)) return false;
             if (!orders.Remove(order)) return false;
             return true;

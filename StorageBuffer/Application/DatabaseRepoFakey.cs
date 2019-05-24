@@ -66,7 +66,7 @@ namespace StorageBuffer.Application
             };
         }
 
-        public bool UpdateOrder(Order order)
+        public bool UpdateOrder(int orderId, string orderStatus, string description)
         {
             return true;
         }
@@ -76,7 +76,7 @@ namespace StorageBuffer.Application
             return true;
         }
 
-        public bool RemoveOrderlines(Order order)
+        public bool RemoveOrderlines(int orderId)
         {
             return true;
         }

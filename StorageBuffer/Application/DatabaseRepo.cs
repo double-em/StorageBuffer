@@ -138,7 +138,7 @@ namespace StorageBuffer.Application
                             }
 
                             Order order = new Order(id, customerId, customerName, status, name, date, deadline, description);
-                            order.orderlines = GetOrderlinesForOrder(order);
+                            order.orderlines = GetOrderlinesForOrder(order.Id);
                             result.Add(order);
                         }
 
@@ -148,14 +148,14 @@ namespace StorageBuffer.Application
             }
         }
 
-        private List<Orderline> GetOrderlinesForOrder(Order order)
+        private List<Orderline> GetOrderlinesForOrder(int orderId)
         {
             using (SqlConnection connection = GetDatabaseConnection())
             {
                 using (SqlCommand cmd = new SqlCommand("spGetOrderlinesForOrder", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
                     connection.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -176,7 +176,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public bool UpdateOrder(Order order)
+        public bool UpdateOrder(int orderId, string orderStatus, string description)
         {
             try
             {
@@ -186,9 +186,9 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
-                        cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = order.OrderStatus.ToString();
-                        cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = order.Description;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
+                        cmd.Parameters.Add("@OrderStatus", SqlDbType.NChar).Value = orderStatus;
+                        cmd.Parameters.Add("@OrderDescription", SqlDbType.NChar).Value = description;
                         connection.Open();
 
                         return cmd.ExecuteNonQuery() == 1;
@@ -227,7 +227,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public bool RemoveOrderlines(Order order)
+        public bool RemoveOrderlines(int orderId)
         {
             try
             {
@@ -237,7 +237,7 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = order.Id;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = orderId;
 
                         connection.Open();
 
