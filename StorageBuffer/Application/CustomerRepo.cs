@@ -88,36 +88,36 @@ namespace StorageBuffer.Model
             return customers.Find(x => x.Id == customerId).ToLongList();
         }
 
-        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool CreateCustomer(string name, string address, string city, string zip, string phone, string email, string comment)
         {
-            int.TryParse(customerZip, out int zip);
-            int id = databaseRepo.CreateCustomer(customerName, customerAddress, customerCity, zip, customerPhone, customerEmail, customerComment);
+            int.TryParse(zip, out int zipConvert);
+            int id = databaseRepo.CreateCustomer(name, address, city, zipConvert, phone, email, comment);
 
             if (id <= 0)
             {
                 return false;
             }
 
-            customers.Add(new Customer(id, customerName, customerAddress, zip, customerCity, customerPhone, customerEmail, customerComment));
+            customers.Add(new Customer(id, name, address, zipConvert, city, phone, email, comment));
             return true;
         }
 
-        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int id, string name, string address, string city, int zip, string phone, string email, string comment)
         {
 
-            Customer customer = customers.Find(x => x.Id == customerId);
+            Customer customer = customers.Find(x => x.Id == id);
 
             if (customer != null)
             {
-                if(!databaseRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, customerZip, customerPhone, customerEmail, customerComment)) return false;
+                if(!databaseRepo.UpdateCustomer(id, name, address, city, zip, phone, email, comment)) return false;
 
-                customer.Name = customerName;
-                customer.Address = customerAddress;
-                customer.City = customerCity;
-                customer.Zip = customerZip;
-                customer.Phone = customerPhone;
-                customer.Email = customerEmail;
-                customer.Comment = customerComment;
+                customer.Name = name;
+                customer.Address = address;
+                customer.City = city;
+                customer.Zip = zip;
+                customer.Phone = phone;
+                customer.Email = email;
+                customer.Comment = comment;
                 return true;
             }
 

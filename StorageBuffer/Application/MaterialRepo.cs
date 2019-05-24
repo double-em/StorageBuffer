@@ -89,30 +89,30 @@ namespace StorageBuffer.Model
             return materials.Find(x => x.Id == materialId).ToLongList();
         }
 
-        public bool CreateMaterial(string materialName, string materialComment, string materialQuantity)
+        public bool CreateMaterial(string name, string comment, string materialQuantity)
         {
             int.TryParse(materialQuantity, out int quantity);
-            int id = databaseRepo.CreateMaterial(materialName, materialComment, quantity);
+            int id = databaseRepo.CreateMaterial(name, comment, quantity);
 
             if (id <= 0)
             {
                 return false;
             }
 
-            materials.Add(new Material(id, materialName, materialComment, quantity));
+            materials.Add(new Material(id, name, comment, quantity));
             return true;
         }
 
-        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int id, string name, string comment, int quantity)
         {
-            Material material = materials.Find(x => x.Id == materialId);
+            Material material = materials.Find(x => x.Id == id);
 
             if (material != null)
             {
-                if(!databaseRepo.UpdateMaterial(materialId, materialName, materialComment, quantity)) return false;
+                if(!databaseRepo.UpdateMaterial(id, name, comment, quantity)) return false;
 
-                material.Name = materialName;
-                material.Comment = materialComment;
+                material.Name = name;
+                material.Comment = comment;
                 material.Quantity = quantity;
                 return true;
             }

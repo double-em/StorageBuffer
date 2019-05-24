@@ -82,23 +82,23 @@ namespace StorageBuffer.Application
         }
 
         private int customerId = 3;
-        public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public int CreateCustomer(string name, string address, string city, int zip, string phone, string email, string comment)
         {
             return customerId++;
         }
 
         private int materialId = 13;
-        public int CreateMaterial(string materialName, string materialComments, int quantity)
+        public int CreateMaterial(string name, string comment, int quantity)
         {
             return materialId++;
         }
 
-        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int id, string name, string address, string city, int zip, string phone, string email, string comment)
         {
             return true;
         }
 
-        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int id, string name, string comment, int quantity)
         {
             return true;
         }
@@ -119,7 +119,7 @@ namespace StorageBuffer.Application
         }
 
         private int orderId = 23;
-        public int CreateOrder(int customerId, string orderName, string date, string deadline, string description)
+        public int CreateOrder(int customerId, string name, string date, string deadline, string description)
         {
             return orderId++;
         }

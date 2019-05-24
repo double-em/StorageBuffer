@@ -14,13 +14,13 @@ namespace StorageBuffer.Domain
         bool UpdateOrder(Order order);
         bool InsertOrderline(int orderId, int materialId, int quantity);
         bool RemoveOrderlines(Order order);
-        int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
-        int CreateMaterial(string materialName, string materialComments, int quantity);
-        bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment);
-        bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity);
+        int CreateCustomer(string name, string address, string city, int zip, string phone, string email, string comment);
+        int CreateMaterial(string name, string comment, int quantity);
+        bool UpdateCustomer(int id, string name, string address, string city, int zip, string phone, string email, string comment);
+        bool UpdateMaterial(int id, string name, string comment, int quantity);
         bool RemoveMaterial(int materialId);
         bool RemoveCustomer(int customerId);
         bool RemoveOrder(int orderId);
-        int CreateOrder(int customerId, string orderName, string date, string deadline, string description);
+        int CreateOrder(int customerId, string name, string date, string deadline, string description);
     }
 }

@@ -131,11 +131,9 @@ namespace StorageBuffer.Application
             return customerRepo.GetCustomer(customerId);
         }
 
-        public bool CreateCustomer(string customerName, string customerAddress, string customerCity, string customerZip,
-            string customerPhone, string customerEmail, string customerComment)
+        public bool CreateCustomer(string name, string address, string city, string zip, string phone, string email, string comment)
         {
-            return customerRepo.CreateCustomer(customerName, customerAddress, customerCity, customerZip, customerPhone,
-                customerEmail, customerComment);
+            return customerRepo.CreateCustomer(name, address, city, zip, phone, email, comment);
         }
 
         public bool CreateMaterial(string materialName, string materialComment, string materialQuantity)

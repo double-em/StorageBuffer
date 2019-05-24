@@ -251,7 +251,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public int CreateCustomer(string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public int CreateCustomer(string name, string address, string city, int zip, string phone, string email, string comment)
         {
             try
             {
@@ -261,13 +261,13 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
-                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
-                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
-                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
-                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
-                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
-                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = name;
+                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = address;
+                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = city;
+                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = zip;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = phone;
+                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = email;
+                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = comment;
 
                         connection.Open();
 
@@ -291,7 +291,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public int CreateMaterial(string materialName, string materialComments, int quantity)
+        public int CreateMaterial(string name, string comment, int quantity)
         {
             try
             {
@@ -301,8 +301,8 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
-                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComments;
+                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = name;
+                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = comment;
                         cmd.Parameters.Add("@Quantity", SqlDbType.NChar).Value = quantity;
                         connection.Open();
 
@@ -326,7 +326,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity, int customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int id, string name, string address, string city, int zip, string phone, string email, string comment)
         {
             try
             {
@@ -336,14 +336,14 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = customerId;
-                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = customerName;
-                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = customerAddress;
-                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = customerZip;
-                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = customerCity;
-                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = customerPhone;
-                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = customerEmail;
-                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = customerComment;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NChar).Value = name;
+                        cmd.Parameters.Add("@CustomerAddress", SqlDbType.NChar).Value = address;
+                        cmd.Parameters.Add("@ZIP", SqlDbType.Int).Value = zip;
+                        cmd.Parameters.Add("@City", SqlDbType.NChar).Value = city;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NChar).Value = phone;
+                        cmd.Parameters.Add("@Email", SqlDbType.NChar).Value = email;
+                        cmd.Parameters.Add("@CustomerComment", SqlDbType.NChar).Value = comment;
                         connection.Open();
 
                         return cmd.ExecuteNonQuery() == 1;
@@ -356,7 +356,7 @@ namespace StorageBuffer.Application
             }
         }
 
-        public bool UpdateMaterial(int materialId, string materialName, string materialComment, int quantity)
+        public bool UpdateMaterial(int id, string name, string comment, int quantity)
         {
             try
             {
@@ -366,9 +366,9 @@ namespace StorageBuffer.Application
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = materialId;
-                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = materialName;
-                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = materialComment;
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                        cmd.Parameters.Add("@MaterialName", SqlDbType.NChar).Value = name;
+                        cmd.Parameters.Add("@Comment", SqlDbType.NChar).Value = comment;
                         cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value = quantity;
                         connection.Open();
 
