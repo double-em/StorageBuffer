@@ -141,18 +141,16 @@ namespace StorageBuffer.Application
             return materialRepo.CreateMaterial(materialName, materialComment, materialQuantity);
         }
 
-        public bool UpdateCustomer(int customerId, string customerName, string customerAddress, string customerCity,
-            string customerZip, string customerPhone, string customerEmail, string customerComment)
+        public bool UpdateCustomer(int id, string name, string address, string city, string zip, string phone, string email, string comment)
         {
-            int.TryParse(customerZip, out int zip);
-            return customerRepo.UpdateCustomer(customerId, customerName, customerAddress, customerCity, zip,
-                customerPhone, customerEmail, customerComment);
+            int.TryParse(zip, out int zipConverted);
+            return customerRepo.UpdateCustomer(id, name, address, city, zipConverted, phone, email, comment);
         }
 
-        public bool UpdateMaterial(int materialId, string materialName, string materialComment, string materialQuantity)
+        public bool UpdateMaterial(int id, string name, string comment, string quantity)
         {
-            int.TryParse(materialQuantity, out int quantity);
-            return materialRepo.UpdateMaterial(materialId, materialName, materialComment, quantity);
+            int.TryParse(quantity, out int quantityConverted);
+            return materialRepo.UpdateMaterial(id, name, comment, quantityConverted);
         }
 
         public bool RemoveOrder(int orderId)
