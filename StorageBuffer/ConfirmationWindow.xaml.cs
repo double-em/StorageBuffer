@@ -17,9 +17,6 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
-    /// <summary>
-    /// Interaction logic for ChangeOrderline.xaml
-    /// </summary>
     public partial class ConfirmationWindow : Window
     {
         public ConfirmationWindow(string message)

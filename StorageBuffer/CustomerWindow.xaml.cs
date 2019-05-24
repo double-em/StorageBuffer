@@ -18,9 +18,6 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
-    /// <summary>
-    /// Interaction logic for OrderWindow.xaml
-    /// </summary>
     public partial class CustomerWindow : Window
     {
         private Controller control;

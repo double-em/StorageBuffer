@@ -18,9 +18,6 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
-    /// <summary>
-    /// Interaction logic for OrderWindow.xaml
-    /// </summary>
     public partial class OrderWindow : Window
     {
         private Controller control;
@@ -144,9 +141,6 @@ namespace StorageBuffer
             int materialId = int.Parse(props[0].GetValue(orderline, null).ToString());
 
             List<string> material = control.GetMaterial(materialId);
-
-            /*var listItem = (ListViewItem)sender;
-            var orderline = (Orderline) listItem.Content;*/
 
             ChangeOrderline changeOrderline = new ChangeOrderline(orderline, material[3]);
             changeOrderline.Owner = this;

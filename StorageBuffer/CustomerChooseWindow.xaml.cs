@@ -17,9 +17,6 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
-    /// <summary>
-    /// Interaction logic for CustomerChooseWindow.xaml
-    /// </summary>
     public partial class CustomerChooseWindow : Window
     {
         private Controller control;

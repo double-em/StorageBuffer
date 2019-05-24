@@ -20,10 +20,6 @@ using StorageBuffer.Domain;
 
 namespace StorageBuffer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-
     public delegate void NotifyItemChanged();
     public partial class MainWindow : Window
     {
