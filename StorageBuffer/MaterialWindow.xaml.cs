@@ -33,7 +33,6 @@ namespace StorageBuffer
             this.materialId = materialId;
             this.control = control;
             Setup();
-            this.Show();
         }
 
         private void Setup()

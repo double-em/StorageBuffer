@@ -39,7 +39,6 @@ namespace StorageBuffer
             this.orderId = orderId;
             this.control = control;
             Setup();
-            this.Show();
         }
 
         private void Setup()

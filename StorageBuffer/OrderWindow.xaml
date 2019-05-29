@@ -111,7 +111,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button Name="AddMaterial" FontSize="20" Content="Tilføj" HorizontalAlignment="Right" Margin="0,850,0,0" VerticalAlignment="Top" Width="280" Height="50" Click="AddMaterial_Click">
+                <Button Name="AddMaterial" FontSize="20" Content="Tilføj Materiale" HorizontalAlignment="Right" Margin="0,850,0,0" VerticalAlignment="Top" Width="280" Height="50" Click="AddMaterial_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Foreground" Value="White" />
