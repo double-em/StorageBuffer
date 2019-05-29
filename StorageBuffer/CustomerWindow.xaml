@@ -125,6 +125,39 @@
                         </Style>
                     </Button.Resources>
                 </Button>
+                <Button x:Name="btnCreateOrder" FontSize="20" Content="Opret Ordre" HorizontalAlignment="Right" Margin="0,850,0,0" VerticalAlignment="Top" Width="280" Height="50" Click="BtnCreateOrder_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Background" Value="#A8A1A2"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid x:Name="Panel">
+                                            <ContentPresenter x:Name="ContentSite"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Panel" Property="Background" Value="#887e80"/>
+                                                <Setter TargetName="Panel" Property="Cursor" Value="Hand"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter TargetName="Panel" Property="Background" Value="#A8A1A2"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Panel" Property="Background" Value="#2F2F2F"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Label Content="Post nr." HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="723,191,0,0"/>
             </Grid>
         </Grid>
     </Grid>

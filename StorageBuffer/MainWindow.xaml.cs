@@ -139,10 +139,18 @@ namespace StorageBuffer
                     {
                         CustomerWindow customerWindow = new CustomerWindow(control, int.Parse(props[1].GetValue(item, null).ToString()));
                         customerWindows.Add(customerWindow);
+                        customerWindow.Owner = this;
                         customerWindow.Top = Top;
                         customerWindow.Left = Left;
                         customerWindow.AddObserver(GetItemChanged);
-                        customerWindow.Show();
+                        customerWindow.ShowDialog();
+
+                        if (customerWindow.gotoCreateOrder)
+                        {
+                            tabControl.SelectedIndex = 2;
+                            createOrderCustomerId = customerWindow.customerId;
+                            lCustomerName.Content = $"{customerWindow.customerName} (Kundenummer: {createOrderCustomerId})";
+                        }
                     }));
                     break;
 
@@ -154,7 +162,7 @@ namespace StorageBuffer
                         materialWindow.Top = Top;
                         materialWindow.Left = Left;
                         materialWindow.AddObserver(GetItemChanged);
-                        materialWindow.Show();
+                        materialWindow.ShowDialog();
                     }));
                     break;
 
@@ -166,7 +174,7 @@ namespace StorageBuffer
                         orderWindow.Top = Top;
                         orderWindow.Left = Left;
                         orderWindow.AddObserver(GetItemChanged);
-                        orderWindow.Show();
+                        orderWindow.ShowDialog();
                     }));
                     break;
             }

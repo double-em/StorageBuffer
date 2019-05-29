@@ -21,7 +21,9 @@ namespace StorageBuffer
     public partial class CustomerWindow : Window
     {
         private Controller control;
-        private int customerId;
+        public int customerId;
+        public string customerName;
+        public bool gotoCreateOrder = false;
 
         private event NotifyItemChanged notifyItemChanged;
 
@@ -33,7 +35,6 @@ namespace StorageBuffer
             this.customerId = customerId;
             this.control = control;
             Setup();
-            this.Show();
         }
 
         private void Setup()
@@ -46,7 +47,9 @@ namespace StorageBuffer
         {
             List<string> customer = control.GetCustomer(customerId);
 
-            tbCustomerName.Text = customer[1];
+            customerName = customer[1];
+
+            tbCustomerName.Text = customerName;
             tbCustomerAddress.Text = customer[2];
             tbCustomerCity.Text = customer[3];
             tbCustomerZip.Text = customer[4];
@@ -94,7 +97,7 @@ namespace StorageBuffer
 
         private void CustomerWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            if (!removeCustomer)
+            if (!removeCustomer && !gotoCreateOrder)
             {
                 ConfirmationWindow confirmationWindow = new ConfirmationWindow("Vil du gemme ændringerne?");
                 confirmationWindow.Owner = this;
@@ -168,6 +171,12 @@ namespace StorageBuffer
         public void RemoveObserver(NotifyItemChanged listener)
         {
             notifyItemChanged -= listener;
+        }
+
+        private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            gotoCreateOrder = true;
+            this.Close();
         }
     }
 }

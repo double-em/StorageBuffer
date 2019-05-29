@@ -16,7 +16,7 @@
         <Rectangle Fill="#A8A1A2" HorizontalAlignment="Left" Height="960" VerticalAlignment="Top" Width="280" Grid.RowSpan="2"/>
         <Image Width="221" Margin="30,10,1023,164.5" Source="StorageBufferLogoTextAllWhite.png" Stretch="Uniform"/>
 
-        <TabControl BorderThickness="0" Height="960" Width="1274" TabStripPlacement="Left" Grid.RowSpan="2">
+        <TabControl Name="tabControl" BorderThickness="0" Height="960" Width="1274" TabStripPlacement="Left" Grid.RowSpan="2">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
