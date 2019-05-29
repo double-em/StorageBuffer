@@ -93,7 +93,7 @@
                 <TextBox x:Name="tbCustomerPhone" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="723,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" />
                 <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="0,289,0,0"/>
                 <TextBox x:Name="tbCustomerEmail" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Margin="0,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="932" />
-                <Button x:Name="btnDeleteCustomer" FontSize="20" Content="Slet Ordren" HorizontalAlignment="Right" Margin="0,850,654,0" VerticalAlignment="Top" Width="280" Height="50" Click="BtnDeleteCustomer_Click">
+                <Button x:Name="btnDeleteCustomer" FontSize="20" Content="Slet Kunden" HorizontalAlignment="Right" Margin="0,850,654,0" VerticalAlignment="Top" Width="280" Height="50" Click="BtnDeleteCustomer_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Foreground" Value="White" />
